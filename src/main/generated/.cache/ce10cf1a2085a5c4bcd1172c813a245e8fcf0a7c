@@ -1,0 +1,9 @@
+// 1.20.6	2024-05-09T11:42:11.5703759	Sheep Armor/Recipes
+1a037b2b296b351910f9b36dc626b802af666ef6 data\sheep_armor\recipes\cactus_sheep_armor.json
+d11e656ceff2ea25e2e4358ccaed732811b08971 data\sheep_armor\recipes\shulker_sheep_armor.json
+126d75e734b92ed8d114a8ea4d6837099e5ed16f data\sheep_armor\advancements\recipes\combat\shulker_sheep_armor.json
+846ad32d7d4318fa32435f4d395bdc00efa2aff0 data\sheep_armor\advancements\recipes\combat\copper_sheep_armor.json
+6388bf558c991bf57efade4dcbdcee941960eccd data\sheep_armor\advancements\recipes\combat\cactus_sheep_armor.json
+813770aafa98f653f9b8a67a59d2ea6819d7d774 data\sheep_armor\recipes\amethyst_sheep_armor.json
+33d5bd7ad981cbf3dfa8755f15496f7a13904adf data\sheep_armor\recipes\copper_sheep_armor.json
+5a75cd43a9c3397dd44f7f462c83dc753d6bc167 data\sheep_armor\advancements\recipes\combat\amethyst_sheep_armor.json

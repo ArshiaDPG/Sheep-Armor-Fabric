@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "W": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CWC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "sheep_armor:copper_sheep_armor"
+  }
+}

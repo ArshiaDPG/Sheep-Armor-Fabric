@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:shulker_shell"
+    },
+    "W": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CWC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "sheep_armor:shulker_sheep_armor"
+  }
+}

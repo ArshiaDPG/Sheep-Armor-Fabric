@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "sheep_armor",
+  "version": "${version}",
+
+  "name": "Sheep Armor",
+  "description": "",
+  "authors": [
+    "DigitalPear",
+    "Tirdul"
+  ],
+  "contact": {},
+
+  "license": "Apache-2.0",
+  "icon": "assets/sheep_armor/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+        "fabric-datagen": [
+        "net.digitalpear.sheep_armor.SheepArmorDataGenerator"
+        ],
+        "main":[
+            "net.digitalpear.sheep_armor.SheepArmor"
+        ],
+        "client":[
+            "net.digitalpear.sheep_armor.client.SheepArmorClient"
+        ]
+  },
+
+      "mixins": [
+        "sheep_armor.mixins.json"
+      ],
+
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+        "fabric": "*",
+    "minecraft": ">=${minecraft_version}"
+  }
+}

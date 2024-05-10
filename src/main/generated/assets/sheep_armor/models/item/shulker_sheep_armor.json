@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "sheep_armor:item/shulker_sheep_armor"
+  }
+}
