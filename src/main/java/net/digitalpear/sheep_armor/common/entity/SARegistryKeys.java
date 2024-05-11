@@ -9,7 +9,6 @@ import net.minecraft.util.Identifier;
 public class SARegistryKeys {
 
     public static final RegistryKey<Registry<SheepVariant>> SHEEP_VARIANT = of("sheep_variant");
-    public static final RegistryKey<Registry<SheepVariant>> SHEEP_BIOME_COLORS = of("sheep_biome_colors");
 
     private static <T> RegistryKey<Registry<T>> of(String id) {
         return RegistryKey.ofRegistry(new Identifier(SheepArmor.MOD_ID,id));
