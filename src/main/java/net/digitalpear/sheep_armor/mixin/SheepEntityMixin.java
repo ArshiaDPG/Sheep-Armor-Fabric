@@ -3,8 +3,8 @@ package net.digitalpear.sheep_armor.mixin;
 
 import net.digitalpear.sheep_armor.SheepArmor;
 import net.digitalpear.sheep_armor.common.access.SheepArmorAccess;
+import net.digitalpear.sheep_armor.common.entity.SARegistryKeys;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
-import net.digitalpear.sheep_armor.common.entity.SheepVariantRegistry;
 import net.digitalpear.sheep_armor.init.SAEnchantments;
 import net.digitalpear.sheep_armor.init.SAItems;
 import net.digitalpear.sheep_armor.init.SheepVariants;
@@ -34,6 +34,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,7 +45,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.List;
 import java.util.Map;
 
 @Mixin(SheepEntity.class)
@@ -60,14 +60,12 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
 
     @Inject(at = @At("HEAD"), method = "readCustomDataFromNbt")
     public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
-        SheepVariant sheepVariant = SheepVariantRegistry.SHEEP_VARIANT.get(Identifier.tryParse(nbt.getString("variant")));
-        if (sheepVariant != null) {
-            this.setVariant(SheepVariantRegistry.SHEEP_VARIANT.getEntry(sheepVariant));
-        }
+        RegistryEntry<SheepVariant> sheepVariant = this.getRegistryManager().get(SARegistryKeys.SHEEP_VARIANT).getEntry(Identifier.tryParse(nbt.getString("variant"))).get();
+        this.setVariant(sheepVariant);
     }
     @Inject(at = @At("HEAD"), method = "initDataTracker")
     private void addData(DataTracker.Builder builder, CallbackInfo ci){
-        builder.add(VARIANT, SheepVariants.PALE.getRegistryEntry());
+        builder.add(VARIANT, this.getRegistryManager().get(SARegistryKeys.SHEEP_VARIANT).entryOf(SheepVariants.PALE));
     }
     @Unique
     public RegistryEntry<SheepVariant> getVariant(){
@@ -79,19 +77,9 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
     }
     @Inject(at = @At("HEAD"), method = "initialize")
     private void addVariantStuff(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, CallbackInfoReturnable<EntityData> cir){
-        if (spawnReason != SpawnReason.BREEDING){
-            this.setVariant(checkVariantConditions(new SheepVariant.Context(this.getBlockPos(), this.getWorld())));
-        }
-    }
-    public RegistryEntry<SheepVariant> checkVariantConditions(SheepVariant.Context context){
-        List<SheepVariant> list = SheepVariantRegistry.SHEEP_VARIANT.stream().filter(sheepVariant -> sheepVariant.getPredicates().stream()
-                .anyMatch(contextPredicate -> contextPredicate.test((context))) && sheepVariant != SheepVariants.PALE).toList();
-
-        if (!list.isEmpty()){
-            return list.get(getRandom().nextInt(list.size())).getRegistryEntry();
-
-        }
-        return SheepVariants.PALE.getRegistryEntry();
+        RegistryEntry<Biome> biomeEntry = world.getBiome(this.getBlockPos());
+        RegistryEntry compatibleBiome = SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry);
+        this.setVariant(compatibleBiome);
     }
 
     @Shadow protected abstract DyeColor getChildColor(AnimalEntity firstParent, AnimalEntity secondParent);
@@ -179,7 +167,8 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
                 ((SheepArmorAccess)sheepEntity).setVariant(((SheepArmorAccess) entity).getVariant());
             }
             else{
-                ((SheepArmorAccess)sheepEntity).setVariant(checkVariantConditions(new SheepVariant.Context(this.getBlockPos(), this.getWorld())));
+                RegistryEntry<Biome> biomeEntry = world.getBiome(this.getBlockPos());
+                ((SheepArmorAccess)sheepEntity).setVariant(SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry));
             }
 
         }

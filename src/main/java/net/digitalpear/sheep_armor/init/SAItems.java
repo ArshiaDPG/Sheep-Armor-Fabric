@@ -28,11 +28,11 @@ import java.util.stream.IntStream;
 public class SAItems {
     public static Map<Item, Item> SHEEP_ARMOR_MAP = new HashMap<>();
 
-    public static Item createItem(String name, Item item){
+    private static Item createItem(String name, Item item){
         return Registry.register(Registries.ITEM, new Identifier(SheepArmor.MOD_ID, name), item);
     }
 
-    public static Item createSheepArmorItem(String materialName, RegistryEntry<ArmorMaterial> material, Item ingredient, int durability){
+    private static Item createSheepArmorItem(String materialName, RegistryEntry<ArmorMaterial> material, Item ingredient, int durability){
         Item item = createItem(materialName + "_sheep_armor", new SheepArmorItem(material, new Item.Settings().maxDamage(durability).maxCount(1)));
         SHEEP_ARMOR_MAP.put(item, ingredient);
         return item;

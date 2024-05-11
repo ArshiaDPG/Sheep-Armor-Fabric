@@ -1,0 +1,5 @@
+{
+  "biomes": "#minecraft:is_overworld",
+  "has_custom_wool": false,
+  "texture": "sheep_armor:pale"
+}
