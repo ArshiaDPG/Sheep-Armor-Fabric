@@ -1,7 +1,6 @@
 package net.digitalpear.sheep_armor.common.datagens.tags;
 
-import net.digitalpear.sheep_armor.common.items.SheepArmorItem;
-import net.digitalpear.sheep_armor.init.SAItemTags;
+import net.digitalpear.sheep_armor.init.SATags;
 import net.digitalpear.sheep_armor.init.SAItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -28,11 +27,11 @@ public class SheepArmorItemTagProvider extends FabricTagProvider<Item> {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         SAItems.SHEEP_ARMOR_MAP.forEach((item, item2) -> {
-            getOrCreateTagBuilder(SAItemTags.SHEEP_ARMORS).add(item);
+            getOrCreateTagBuilder(SATags.SAItemTags.SHEEP_ARMORS).add(item);
         });
 
 
-        getOrCreateTagBuilder(ItemTags.VANISHING_ENCHANTABLE).addOptionalTag(SAItemTags.SHEEP_ARMORS);
-        getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE).addOptionalTag(SAItemTags.SHEEP_ARMORS);
+        getOrCreateTagBuilder(ItemTags.VANISHING_ENCHANTABLE).addOptionalTag(SATags.SAItemTags.SHEEP_ARMORS);
+        getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE).addOptionalTag(SATags.SAItemTags.SHEEP_ARMORS);
     }
 }

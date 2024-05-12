@@ -2,7 +2,7 @@ package net.digitalpear.sheep_armor.common.items;
 
 import net.digitalpear.sheep_armor.SheepArmor;
 import net.digitalpear.sheep_armor.common.access.SheepArmorAccess;
-import net.digitalpear.sheep_armor.init.SAItemTags;
+import net.digitalpear.sheep_armor.init.SATags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -62,7 +62,7 @@ public class SheepArmorItem extends ArmorItem {
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         World world = user.getWorld();
         if (entity instanceof SheepEntity sheep) {
-            if (stack.isIn(SAItemTags.SHEEP_ARMORS) && !sheep.isSheared() && !((SheepArmorAccess) sheep).hasArmor() && !sheep.isBaby()){
+            if (stack.isIn(SATags.SAItemTags.SHEEP_ARMORS) && !sheep.isSheared() && !((SheepArmorAccess) sheep).hasArmor() && !sheep.isBaby()){
                 if (!world.isClient()) {
                     sheep.equipBodyArmor(stack.copyWithCount(1));
                     stack.decrementUnlessCreative(1, user);

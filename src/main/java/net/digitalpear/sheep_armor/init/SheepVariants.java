@@ -28,12 +28,12 @@ public class SheepVariants {
 
     public static void bootstrap(Registerable<SheepVariant> registry) {
         register(registry, PALE, BiomeTags.IS_OVERWORLD);
-        register(registry, LONG_NOSED, SABiomeTags.LONG_NOSED_BIOMES);
-        register(registry, FUZZY, SABiomeTags.FUZZY_BIOMES);
-        register(registry, PATCHED, SABiomeTags.PATCHED_BIOMES);
-        register(registry, ROCKY, SABiomeTags.ROCKY_BIOMES);
-        register(registry, INKY, SABiomeTags.INKY_BIOMES);
-        register(registry, FLECKED, SABiomeTags.FLECKED_BIOMES);
+        register(registry, LONG_NOSED, SATags.SABiomeTags.LONG_NOSED_BIOMES);
+        register(registry, FUZZY, SATags.SABiomeTags.FUZZY_BIOMES);
+        register(registry, PATCHED, SATags.SABiomeTags.PATCHED_BIOMES);
+        register(registry, ROCKY, SATags.SABiomeTags.ROCKY_BIOMES);
+        register(registry, INKY, SATags.SABiomeTags.INKY_BIOMES);
+        register(registry, FLECKED, SATags.SABiomeTags.FLECKED_BIOMES);
     }
     public static RegistryEntry<SheepVariant> fromBiome(DynamicRegistryManager dynamicRegistryManager, RegistryEntry<Biome> biome) {
         Registry<SheepVariant> registry = dynamicRegistryManager.get(SARegistryKeys.SHEEP_VARIANT);

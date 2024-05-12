@@ -4,20 +4,12 @@ import net.digitalpear.sheep_armor.SheepArmor;
 import net.digitalpear.sheep_armor.common.items.SheepArmorItem;
 import net.digitalpear.sheep_armor.common.items.SheepArmorMaterials;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ItemEnchantmentsComponent;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.resource.featuretoggle.FeatureFlags;
-import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
@@ -49,7 +41,7 @@ public class SAItems {
             entries.addAfter(Items.WOLF_ARMOR, CACTUS_SHEEP_ARMOR, AMETHYST_SHEEP_ARMOR, COPPER_SHEEP_ARMOR, SHULKER_SHEEP_ARMOR);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-            Set<TagKey<Item>> set = Set.of(SAItemTags.SHEEP_ARMORS);
+            Set<TagKey<Item>> set = Set.of(SATags.SAItemTags.SHEEP_ARMORS);
 
             addMaxLevelEnchantedBooks(entries, set, ItemGroup.StackVisibility.PARENT_TAB_ONLY);
             addAllLevelEnchantedBooks(entries, set, ItemGroup.StackVisibility.SEARCH_TAB_ONLY);

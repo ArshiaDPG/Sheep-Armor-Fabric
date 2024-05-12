@@ -1,8 +1,8 @@
 {
   "values": [
-    "sheep_armor:shulker_sheep_armor",
-    "sheep_armor:amethyst_sheep_armor",
     "sheep_armor:cactus_sheep_armor",
+    "sheep_armor:amethyst_sheep_armor",
+    "sheep_armor:shulker_sheep_armor",
     "sheep_armor:copper_sheep_armor"
   ]
 }

@@ -8,12 +8,9 @@ import net.digitalpear.sheep_armor.init.SAItems;
 import net.digitalpear.sheep_armor.init.SheepVariants;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
-import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.RegistryLoader;
 import net.minecraft.registry.entry.RegistryEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,5 +53,6 @@ public class SheepArmor implements ModInitializer {
         SAData.init();
         SAEnchantments.init();
         SheepVariants.init();
+
     }
 }
