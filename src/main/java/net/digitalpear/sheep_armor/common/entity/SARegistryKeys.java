@@ -10,7 +10,7 @@ public class SARegistryKeys {
     public static final RegistryKey<Registry<SheepVariant>> SHEEP_VARIANT = of("sheep_variant");
 
     private static <T> RegistryKey<Registry<T>> of(String id) {
-        return RegistryKey.ofRegistry(new Identifier(id));
+        return RegistryKey.ofRegistry(Identifier.ofVanilla(id));
     }
 
     public static void init() {

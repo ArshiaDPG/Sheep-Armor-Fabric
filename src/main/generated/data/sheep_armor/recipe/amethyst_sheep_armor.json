@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "minecraft:amethyst_shard"
-    },
-    "W": {
-      "item": "minecraft:leather"
-    }
+    "C": "minecraft:amethyst_shard",
+    "W": "minecraft:leather"
   },
   "pattern": [
     "CCC",

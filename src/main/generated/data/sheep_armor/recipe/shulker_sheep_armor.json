@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "minecraft:shulker_shell"
-    },
-    "W": {
-      "item": "minecraft:leather"
-    }
+    "C": "minecraft:shulker_shell",
+    "W": "minecraft:leather"
   },
   "pattern": [
     "CCC",

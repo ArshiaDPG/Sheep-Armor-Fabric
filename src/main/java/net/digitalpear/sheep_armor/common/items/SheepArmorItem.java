@@ -7,10 +7,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -27,13 +27,13 @@ public class SheepArmorItem extends ArmorItem {
 
     private String path = "textures/entity/sheep/armor/";
 
-    public SheepArmorItem(RegistryEntry<ArmorMaterial> material, Item.Settings settings) {
-        super(material, ArmorItem.Type.BODY, settings);
-        Identifier identifier = new Identifier(SheepArmor.MOD_ID, path + material.getIdAsString().split(":")[1]);
+    public SheepArmorItem(String materialName, ArmorMaterial material, Item.Settings settings) {
+        super(material, EquipmentType.BODY, settings);
+        Identifier identifier = SheepArmor.id(path + materialName);
         this.entityTexture = identifier.withSuffixedPath(".png");
         this.woolTexture = identifier.withSuffixedPath("_fur.png");
         this.overlayTexture = null;
-        //this.overlayTexture = hasOverlay ? identifier.withSuffixedPath("_overlay.png") : null;
+//        this.overlayTexture = hasOverlay ? identifier.withSuffixedPath("_overlay.png") : null;
     }
 
     public Identifier getEntityTexture() {
@@ -62,13 +62,13 @@ public class SheepArmorItem extends ArmorItem {
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         World world = user.getWorld();
         if (entity instanceof SheepEntity sheep) {
-            if (stack.isIn(SATags.SAItemTags.SHEEP_ARMORS) && !sheep.isSheared() && !((SheepArmorAccess) sheep).hasArmor() && !sheep.isBaby()){
+            if (stack.isIn(SATags.SAItemTags.SHEEP_ARMORS) && !sheep.isSheared() && !((SheepArmorAccess) sheep).sheep_Armor_Fabric$hasArmor() && !sheep.isBaby()){
                 if (!world.isClient()) {
                     sheep.equipBodyArmor(stack.copyWithCount(1));
                     stack.decrementUnlessCreative(1, user);
                 }
                 else{
-                    return ActionResult.success(world.isClient());
+                    return ActionResult.SUCCESS.withNewHandStack(stack);
                 }
             }
 

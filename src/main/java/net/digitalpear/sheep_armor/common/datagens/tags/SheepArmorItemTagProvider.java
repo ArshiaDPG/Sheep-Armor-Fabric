@@ -5,6 +5,7 @@ import net.digitalpear.sheep_armor.init.SAItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
@@ -26,10 +27,13 @@ public class SheepArmorItemTagProvider extends FabricTagProvider<Item> {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        SAItems.SHEEP_ARMOR_MAP.forEach((item, item2) -> {
-            getOrCreateTagBuilder(SATags.SAItemTags.SHEEP_ARMORS).add(item);
-        });
+        SAItems.SHEEP_ARMOR_MAP.forEach((armor, item2) -> getOrCreateTagBuilder(SATags.SAItemTags.SHEEP_ARMORS).add(armor));
 
+
+        getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_CACTUS_EQUIPMENT).add(Items.CACTUS);
+        getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_COPPER_EQUIPMENT).add(Items.COPPER_INGOT);
+        getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_AMETHYST_EQUIPMENT).add(Items.AMETHYST_SHARD);
+        getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_SHULKER_EQUIPMENT).add(Items.SHULKER_SHELL);
 
         getOrCreateTagBuilder(ItemTags.VANISHING_ENCHANTABLE).addOptionalTag(SATags.SAItemTags.SHEEP_ARMORS);
         getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE).addOptionalTag(SATags.SAItemTags.SHEEP_ARMORS);

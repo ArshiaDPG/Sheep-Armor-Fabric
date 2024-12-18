@@ -20,7 +20,7 @@ public class SheepArmorLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(SAItems.AMETHYST_SHEEP_ARMOR, "Amethyst Sheep Armor");
         translationBuilder.add(SAItems.SHULKER_SHEEP_ARMOR, "Shulker Sheep Armor");
 
-        translationBuilder.add(SAEnchantments.TRIMMING, "Trimming");
-        translationBuilder.add(SAEnchantments.WOOLSPLOSION, "Woolsplosion");
+        translationBuilder.add("enchantment." + SAEnchantments.TRIMMING.getValue().toTranslationKey(), "Trimming");
+        translationBuilder.add("enchantment." + SAEnchantments.WOOLSPLOSION.getValue().toTranslationKey(), "Woolsplosion");
     }
 }

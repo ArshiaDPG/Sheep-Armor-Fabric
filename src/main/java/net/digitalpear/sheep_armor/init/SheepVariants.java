@@ -27,7 +27,7 @@ public class SheepVariants {
     public static final RegistryKey<SheepVariant> FLECKED = of("flecked");
 
     public static void bootstrap(Registerable<SheepVariant> registry) {
-        register(registry, PALE, BiomeTags.IS_OVERWORLD);
+        register(registry, PALE);
         register(registry, LONG_NOSED, SATags.SABiomeTags.LONG_NOSED_BIOMES);
         register(registry, FUZZY, SATags.SABiomeTags.FUZZY_BIOMES);
         register(registry, PATCHED, SATags.SABiomeTags.PATCHED_BIOMES);
@@ -35,25 +35,27 @@ public class SheepVariants {
         register(registry, INKY, SATags.SABiomeTags.INKY_BIOMES);
         register(registry, FLECKED, SATags.SABiomeTags.FLECKED_BIOMES);
     }
+
+
     public static RegistryEntry<SheepVariant> fromBiome(DynamicRegistryManager dynamicRegistryManager, RegistryEntry<Biome> biome) {
-        Registry<SheepVariant> registry = dynamicRegistryManager.get(SARegistryKeys.SHEEP_VARIANT);
-        return registry.streamEntries().filter((entry) -> entry.value().getBiomes().contains(biome)).findFirst().orElse(registry.entryOf(PALE));
+        Registry<SheepVariant> registry = dynamicRegistryManager.getOrThrow(SARegistryKeys.SHEEP_VARIANT);
+        return registry.streamEntries().filter((entry) -> entry.value().getBiomes().contains(biome)).findFirst().orElse(registry.getOrThrow(PALE));
     }
     private static RegistryKey<SheepVariant> of(String id) {
-        RegistryKey<SheepVariant> variant = RegistryKey.of(SARegistryKeys.SHEEP_VARIANT, new Identifier(SheepArmor.MOD_ID, id));
+        RegistryKey<SheepVariant> variant = RegistryKey.of(SARegistryKeys.SHEEP_VARIANT, SheepArmor.id(id));
         variants.add(variant);
         return variant;
     }
 
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, RegistryKey<Biome> biome) {
-        register(registry, key, key.getValue(), RegistryEntryList.of(registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biome)));
-    }
 
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key) {
+        register(registry, key, key.getValue(), registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(BiomeTags.IS_OVERWORLD));
+    }
     static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, TagKey<Biome> biomeTag) {
         register(registry, key, key.getValue(), registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
     }
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier variantName, RegistryEntryList<Biome> biomes) {
-        registry.register(key, new SheepVariant(variantName, false, biomes));
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, RegistryEntryList<Biome> biomes) {
+        registry.register(key, new SheepVariant(texturePath, false, biomes));
     }
 
 

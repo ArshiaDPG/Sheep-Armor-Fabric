@@ -17,13 +17,11 @@ public class SheepArmorSheepVariantProvider extends FabricDynamicRegistryProvide
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
-        SheepVariants.variants.forEach(sheepVariantRegistryKey -> {
-            add(registries, entries, sheepVariantRegistryKey);
-        });
+        SheepVariants.variants.forEach(sheepVariantRegistryKey -> add(registries, entries, sheepVariantRegistryKey));
     }
 
     private void add(RegistryWrapper.WrapperLookup registries, Entries entries, RegistryKey<SheepVariant> resourceKey) {
-        RegistryWrapper.Impl<SheepVariant> configuredFeatureRegistryLookup = registries.getWrapperOrThrow(SARegistryKeys.SHEEP_VARIANT);
+        RegistryWrapper.Impl<SheepVariant> configuredFeatureRegistryLookup = registries.getOrThrow(SARegistryKeys.SHEEP_VARIANT);
 
         entries.add(resourceKey, configuredFeatureRegistryLookup.getOrThrow(resourceKey).value());
     }

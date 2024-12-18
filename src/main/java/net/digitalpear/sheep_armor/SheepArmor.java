@@ -12,6 +12,7 @@ import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +28,10 @@ public class SheepArmor implements ModInitializer {
     public static final TrackedDataHandler<RegistryEntry<SheepVariant>> SHEEP_VARIANT = TrackedDataHandler.create(PacketCodecs.registryEntry(SARegistryKeys.SHEEP_VARIANT));
     public static final String MOD_ID = "sheep_armor";
 
+    public static Identifier id(String name){
+        return Identifier.of(MOD_ID, name);
+    }
+
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     /*
@@ -40,6 +45,9 @@ public class SheepArmor implements ModInitializer {
             -It is now possible to add new sheep variants using datapacks.
             -As a side effect, the sheep variant predicate system has been replaced by specifying which biomes you want, like how it is done with wolves.
             -It is now possible to give sheep variants custom wool textures as well.
+        SNAPSHOT 4 CHANGELOG:
+            -Updated to 1.21.4.
+            -Datagens currently broken.
      */
 
     @Override
@@ -53,6 +61,5 @@ public class SheepArmor implements ModInitializer {
         SAData.init();
         SAEnchantments.init();
         SheepVariants.init();
-
     }
 }

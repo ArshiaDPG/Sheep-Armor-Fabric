@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "minecraft:cactus"
-    },
-    "W": {
-      "item": "minecraft:leather"
-    }
+    "C": "minecraft:copper_ingot",
+    "W": "minecraft:leather"
   },
   "pattern": [
     "CCC",
@@ -15,6 +11,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "sheep_armor:cactus_sheep_armor"
+    "id": "sheep_armor:copper_sheep_armor"
   }
 }
