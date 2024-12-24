@@ -3,7 +3,6 @@ package net.digitalpear.sheep_armor.mixin;
 
 import net.digitalpear.sheep_armor.common.access.SheepRendererAccess;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
-import net.digitalpear.sheep_armor.init.SheepVariants;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.SheepWoolFeatureRenderer;
 import net.minecraft.client.render.entity.state.SheepEntityRenderState;
@@ -17,8 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Objects;
-
 @Mixin(SheepWoolFeatureRenderer.class)
 public class SheepWoolFeatureRendererMixin {
 
@@ -26,10 +23,10 @@ public class SheepWoolFeatureRendererMixin {
     @Shadow @Final private static Identifier SKIN;
 
     @Inject(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/state/SheepEntityRenderState;FF)V", at = @At("HEAD"))
-    private void newTexture(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, SheepEntityRenderState sheepEntityRenderState, float f, float g, CallbackInfo ci){
+    private void newTexture(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, SheepEntityRenderState sheepEntityRenderState, float f, float g, CallbackInfo ci){
         SheepVariant variant = ((SheepRendererAccess) sheepEntityRenderState).getVariant();
-        if (variant != null && variant.hasCustomWool() && !Objects.equals(variant.getName(), SheepVariants.PALE.getValue())){
-            SKIN = variant.getTexturePath().withPath("_fur.png");
+        if (variant != null){
+            SKIN = variant.getWoolTexturePath().withSuffixedPath(".png");
         }
     }
 }

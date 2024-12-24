@@ -18,6 +18,7 @@ public class SAEnchantments {
 
     public static final RegistryKey<Enchantment> TRIMMING = of("trimming");
     public static final RegistryKey<Enchantment> WOOLSPLOSION = of("woolsplosion");
+//    public static final RegistryKey<Enchantment> LIGHTNESS = of("lightness");
 
     private static RegistryKey<Enchantment> of(String id) {
         RegistryKey<Enchantment> enchantment = RegistryKey.of(RegistryKeys.ENCHANTMENT, SheepArmor.id(id));
@@ -27,15 +28,19 @@ public class SAEnchantments {
 
     public static void bootstrap(Registerable<Enchantment> registry) {
         RegistryEntryLookup<Item> itemLookup = registry.getRegistryLookup(RegistryKeys.ITEM);
-        register(registry, TRIMMING, sheepEnchantmentProperties(itemLookup, 7, 3, Enchantment.leveledCost(1, 11), Enchantment.leveledCost(12, 11), 4));
+        register(registry, TRIMMING, sheepEnchantmentProperties(itemLookup, 2, 3, Enchantment.leveledCost(1, 11), Enchantment.leveledCost(12, 11), 4));
         register(registry, WOOLSPLOSION, sheepEnchantmentProperties(itemLookup, 3, 1, Enchantment.leveledCost(1, 11), Enchantment.leveledCost(18, 11), 6));
     }
+
     private static void register(Registerable<Enchantment> registry, RegistryKey<Enchantment> key, Enchantment.Builder builder) {
         registry.register(key, builder.build(key.getValue()));
     }
+
+    private static Enchantment.Builder sheepEnchantmentProperties(RegistryEntryLookup<Item> itemLookup, int weight, int maxLevel, Enchantment.Cost minCost, Enchantment.Cost maxCost, int anvilCost, AttributeModifierSlot... slots){
+        return Enchantment.builder(Enchantment.definition(itemLookup.getOrThrow(SATags.SAItemTags.SHEEP_ARMORS), weight, maxLevel, minCost, maxCost, anvilCost, slots));
+    }
     private static Enchantment.Builder sheepEnchantmentProperties(RegistryEntryLookup<Item> itemLookup, int weight, int maxLevel, Enchantment.Cost minCost, Enchantment.Cost maxCost, int anvilCost){
-//        return Enchantment.properties(SATags.SAItemTags.SHEEP_ARMORS, weight, maxLevel, minCost, maxCost, anvilCost, EquipmentSlot.BODY);
-        return Enchantment.builder(Enchantment.definition(itemLookup.getOrThrow(SATags.SAItemTags.SHEEP_ARMORS), weight, maxLevel, minCost, maxCost, anvilCost, AttributeModifierSlot.BODY));
+        return sheepEnchantmentProperties(itemLookup, weight, maxLevel, minCost, maxCost, anvilCost, AttributeModifierSlot.BODY);
     }
 
     public static void init(){}

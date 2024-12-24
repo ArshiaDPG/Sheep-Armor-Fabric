@@ -45,16 +45,23 @@ public class SheepArmor implements ModInitializer {
             -It is now possible to add new sheep variants using datapacks.
             -As a side effect, the sheep variant predicate system has been replaced by specifying which biomes you want, like how it is done with wolves.
             -It is now possible to give sheep variants custom wool textures as well.
+
         SNAPSHOT 4 CHANGELOG:
             -Updated to 1.21.4.
-            -Datagens currently broken.
+            -Textures are now set by assigning the paths to them. Leaving them empty will default to the vanilla texture.
+            -Amethyst armor now has less durability than copper armor. Copper also has less durability than before.
+            -Sheep armor model is now slightly inflated like other armors.
+            -Scrapped MCE sheep variants in favor of variants that better visually fit the vanilla game.
+            -Sheep armor can now have an enchant glint.
      */
+
 
     @Override
     public void onInitialize() {
         TrackedDataHandlerRegistry.register(SHEEP_VARIANT);
 
         DynamicRegistries.registerSynced(SARegistryKeys.SHEEP_VARIANT, SheepVariant.CODEC);
+
 
         SARegistryKeys.init();
         SAItems.init();

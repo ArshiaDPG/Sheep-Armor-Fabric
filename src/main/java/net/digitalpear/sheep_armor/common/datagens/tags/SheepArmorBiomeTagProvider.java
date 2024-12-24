@@ -26,28 +26,17 @@ public class SheepArmorBiomeTagProvider extends FabricTagProvider<Biome> {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-
-        getOrCreateTagBuilder(SATags.SABiomeTags.LONG_NOSED_BIOMES)
-                .addOptionalTag(BiomeTags.IS_FOREST);
-
-        getOrCreateTagBuilder(SATags.SABiomeTags.FUZZY_BIOMES)
-                .addOptionalTag(BiomeTags.IS_TAIGA)
-                .add(BiomeKeys.WINDSWEPT_HILLS)
-                .add(BiomeKeys.WINDSWEPT_GRAVELLY_HILLS);
-
-        getOrCreateTagBuilder(SATags.SABiomeTags.PATCHED_BIOMES)
-                .addOptionalTag(BiomeTags.SPAWNS_SNOW_FOXES);
-
-        getOrCreateTagBuilder(SATags.SABiomeTags.ROCKY_BIOMES)
-                .addOptionalTag(BiomeTags.IS_MOUNTAIN)
+        getOrCreateTagBuilder(SATags.SABiomeTags.MOUNTAIN_SHEEP_BIOMES)
+                .forceAddTag(BiomeTags.IS_MOUNTAIN)
                 .add(BiomeKeys.STONY_SHORE);
 
-        getOrCreateTagBuilder(SATags.SABiomeTags.INKY_BIOMES)
-                .addOptionalTag(BiomeTags.IS_JUNGLE);
+        getOrCreateTagBuilder(SATags.SABiomeTags.REGAL_SHEEP_BIOMES)
+                .add(BiomeKeys.FLOWER_FOREST)
+                .add(BiomeKeys.CHERRY_GROVE)
+                .add(BiomeKeys.SUNFLOWER_PLAINS)
+                .add(BiomeKeys.MEADOW);
 
-        getOrCreateTagBuilder(SATags.SABiomeTags.FLECKED_BIOMES)
-                .add(BiomeKeys.PLAINS).add(BiomeKeys.SUNFLOWER_PLAINS);
-
-
+        getOrCreateTagBuilder(SATags.SABiomeTags.SOOT_SHEEP_BIOMES)
+                .forceAddTag(BiomeTags.IS_NETHER);
     }
 }

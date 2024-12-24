@@ -20,8 +20,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class SheepArmorItem extends ArmorItem {
-    private final Identifier entityTexture;
-    private final Identifier woolTexture;
+    private final Identifier armorTexture;
+    private final Identifier woolarmorTexture;
     @Nullable
     private final Identifier overlayTexture;
 
@@ -30,17 +30,17 @@ public class SheepArmorItem extends ArmorItem {
     public SheepArmorItem(String materialName, ArmorMaterial material, Item.Settings settings) {
         super(material, EquipmentType.BODY, settings);
         Identifier identifier = SheepArmor.id(path + materialName);
-        this.entityTexture = identifier.withSuffixedPath(".png");
-        this.woolTexture = identifier.withSuffixedPath("_fur.png");
+        this.armorTexture = identifier.withSuffixedPath(".png");
+        this.woolarmorTexture = identifier.withSuffixedPath("_fur.png");
         this.overlayTexture = null;
 //        this.overlayTexture = hasOverlay ? identifier.withSuffixedPath("_overlay.png") : null;
     }
 
-    public Identifier getEntityTexture() {
-        return this.entityTexture;
+    public Identifier getArmorTexture() {
+        return this.armorTexture;
     }
-    public Identifier getWoolTexture() {
-        return this.woolTexture;
+    public Identifier getWoolarmorTexture() {
+        return this.woolarmorTexture;
     }
 
     @Nullable
@@ -62,7 +62,7 @@ public class SheepArmorItem extends ArmorItem {
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         World world = user.getWorld();
         if (entity instanceof SheepEntity sheep) {
-            if (stack.isIn(SATags.SAItemTags.SHEEP_ARMORS) && !sheep.isSheared() && !((SheepArmorAccess) sheep).sheep_Armor_Fabric$hasArmor() && !sheep.isBaby()){
+            if (stack.isIn(SATags.SAItemTags.SHEEP_ARMORS) && !sheep.isSheared() && !((SheepArmorAccess) sheep).hasArmor() && !sheep.isBaby()){
                 if (!world.isClient()) {
                     sheep.equipBodyArmor(stack.copyWithCount(1));
                     stack.decrementUnlessCreative(1, user);

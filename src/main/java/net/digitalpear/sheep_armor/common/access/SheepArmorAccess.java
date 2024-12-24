@@ -6,11 +6,11 @@ import net.minecraft.registry.entry.RegistryEntry;
 
 public interface SheepArmorAccess {
 
-    boolean sheep_Armor_Fabric$hasArmor();
+    boolean hasArmor();
 
-    boolean sheep_Armor_Fabric$shouldArmorAbsorbDamage(DamageSource source);
+    boolean shouldArmorAbsorbDamage(DamageSource source);
 
-    RegistryEntry<SheepVariant> sheep_Armor_Fabric$getVariant();
+    RegistryEntry<SheepVariant> getVariant();
 
-    void sheep_Armor_Fabric$setVariant(RegistryEntry<SheepVariant> variant);
+    void setVariant(RegistryEntry<SheepVariant> variant);
 }

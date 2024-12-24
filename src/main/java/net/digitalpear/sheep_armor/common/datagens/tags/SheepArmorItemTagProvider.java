@@ -29,7 +29,6 @@ public class SheepArmorItemTagProvider extends FabricTagProvider<Item> {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         SAItems.SHEEP_ARMOR_MAP.forEach((armor, item2) -> getOrCreateTagBuilder(SATags.SAItemTags.SHEEP_ARMORS).add(armor));
 
-
         getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_CACTUS_EQUIPMENT).add(Items.CACTUS);
         getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_COPPER_EQUIPMENT).add(Items.COPPER_INGOT);
         getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_AMETHYST_EQUIPMENT).add(Items.AMETHYST_SHARD);

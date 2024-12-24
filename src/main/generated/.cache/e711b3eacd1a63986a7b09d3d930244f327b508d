@@ -1,8 +1,5 @@
 // 1.21.4	-999999999-01-01T00:00:00	Sheep Armor/sheep_variant
-39d3afae08ed83ba2951e19e95300ebb02cabb0c data/sheep_armor/sheep_variant/flecked.json
-ec9d8fd76666e5ecd904f3cc04497c3fc3ec83c1 data/sheep_armor/sheep_variant/fuzzy.json
-908badd4e9aea08b360f91cb127e2bf35be2ebdc data/sheep_armor/sheep_variant/inky.json
-01ea2b050d386ba21298af06dcaff3bb42d548fd data/sheep_armor/sheep_variant/long_nosed.json
-750f877d83fc7ed5801f27f8e92dc12fb0945ccf data/sheep_armor/sheep_variant/pale.json
-035e2e4ce976c67eca020bbde8501636cfa4d8d7 data/sheep_armor/sheep_variant/patched.json
-a2a44e0c856553541e91243b856be645ddae512a data/sheep_armor/sheep_variant/rocky.json
+6295ccdb17609fbbdf97c219581a2550610fcd59 data/sheep_armor/sheep_variant/barn.json
+8fec6759617fcbd7b68d9be06da7716fc454c7d3 data/sheep_armor/sheep_variant/mountain.json
+c3e91b7efa2479a7c0a3d0d5886123609a2084dd data/sheep_armor/sheep_variant/regal.json
+e754de63e155085ddb9a6f8c6d57383a4597b57d data/sheep_armor/sheep_variant/soot.json

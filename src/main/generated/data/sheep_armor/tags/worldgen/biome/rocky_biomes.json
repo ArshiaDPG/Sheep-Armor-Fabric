@@ -1,9 +1,0 @@
-{
-  "values": [
-    {
-      "id": "#minecraft:is_mountain",
-      "required": false
-    },
-    "minecraft:stony_shore"
-  ]
-}

@@ -53,31 +53,31 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
 
     @Inject(at = @At("HEAD"), method = "writeCustomDataToNbt")
     public void writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
-        nbt.putString("variant", this.sheep_Armor_Fabric$getVariant().getKey().get().getValue().toString());
+        nbt.putString("variant", this.getVariant().getKey().get().getValue().toString());
     }
 
     @Inject(at = @At("HEAD"), method = "readCustomDataFromNbt")
     public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
         RegistryEntry<SheepVariant> sheepVariant = this.getRegistryManager().getOrThrow(SARegistryKeys.SHEEP_VARIANT).getEntry(Identifier.tryParse(nbt.getString("variant"))).get();
-        this.sheep_Armor_Fabric$setVariant(sheepVariant);
+        this.setVariant(sheepVariant);
     }
     @Inject(at = @At("HEAD"), method = "initDataTracker")
     private void addData(DataTracker.Builder builder, CallbackInfo ci){
-        builder.add(VARIANT, this.getRegistryManager().getOrThrow(SARegistryKeys.SHEEP_VARIANT).getEntry(SheepVariants.PALE.getValue()).get());
+        builder.add(VARIANT, this.getRegistryManager().getOrThrow(SARegistryKeys.SHEEP_VARIANT).getEntry(SheepVariants.BARN.getValue()).get());
     }
     @Unique
-    public RegistryEntry<SheepVariant> sheep_Armor_Fabric$getVariant(){
+    public RegistryEntry<SheepVariant> getVariant(){
         return this.dataTracker.get(VARIANT);
     }
     @Unique
-    public void sheep_Armor_Fabric$setVariant(RegistryEntry<SheepVariant> value){
+    public void setVariant(RegistryEntry<SheepVariant> value){
         this.dataTracker.set(VARIANT, value);
     }
     @Inject(at = @At("HEAD"), method = "initialize")
     private void addVariantStuff(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, CallbackInfoReturnable<EntityData> cir){
         RegistryEntry<Biome> biomeEntry = world.getBiome(this.getBlockPos());
-        RegistryEntry<SheepVariant> compatibleBiome = SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry);
-        this.sheep_Armor_Fabric$setVariant(compatibleBiome);
+        RegistryEntry<SheepVariant> compatibleBiome = SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry, world.getRandom());
+        this.setVariant(compatibleBiome);
     }
 
     @Shadow public abstract DyeColor getColor();
@@ -91,18 +91,18 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
         return stack.isIn(ItemTags.SHEEP_FOOD);
     }
 
-    public boolean sheep_Armor_Fabric$hasArmor() {
+    public boolean hasArmor() {
         return !this.getBodyArmor().isEmpty();
     }
 
-    public boolean sheep_Armor_Fabric$shouldArmorAbsorbDamage(DamageSource source) {
-        return this.sheep_Armor_Fabric$hasArmor() && !source.isIn(DamageTypeTags.BYPASSES_WOLF_ARMOR);
+    public boolean shouldArmorAbsorbDamage(DamageSource source) {
+        return this.hasArmor() && !source.isIn(DamageTypeTags.BYPASSES_WOLF_ARMOR);
     }
 
     @Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
     private void armorInteractions(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir){
         ItemStack stack = player.getStackInHand(hand);
-        if (sheep_Armor_Fabric$hasArmor() && stack.isOf(Items.SHEARS)) {
+        if (hasArmor() && stack.isOf(Items.SHEARS)) {
             if (getWorld() instanceof ServerWorld){
                 dropStack((ServerWorld) getWorld(), getBodyArmor());
             }
@@ -116,7 +116,7 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
 
     @Inject(method = "sheared", at = @At("HEAD"))
     private void removeArmorOnSheard(ServerWorld world, SoundCategory shearedSoundCategory, ItemStack shears, CallbackInfo ci) {
-        if (sheep_Armor_Fabric$hasArmor()){
+        if (hasArmor()){
             dropStack(world, getBodyArmor());
             equipBodyArmor(ItemStack.EMPTY);
         }
@@ -124,7 +124,7 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
 
     @Override
     protected void applyDamage(ServerWorld world, DamageSource source, float amount) {
-        if (this.sheep_Armor_Fabric$shouldArmorAbsorbDamage(source)){
+        if (this.shouldArmorAbsorbDamage(source)){
             ItemStack itemStack = this.getBodyArmor();
 
             //Cactus armor thorns effect
@@ -159,18 +159,16 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
             sheepEntity.setColor(DyeColor.mixColors(world, dyeColor, dyeColor2));
 
             if (random.nextFloat() > 0.5f){
-                ((SheepArmorAccess)sheepEntity).sheep_Armor_Fabric$setVariant(this.sheep_Armor_Fabric$getVariant());
+                ((SheepArmorAccess)sheepEntity).setVariant(this.getVariant());
             }
             else if (entity instanceof SheepEntity && random.nextFloat() > 0.5f){
-                ((SheepArmorAccess)sheepEntity).sheep_Armor_Fabric$setVariant(((SheepArmorAccess) entity).sheep_Armor_Fabric$getVariant());
+                ((SheepArmorAccess)sheepEntity).setVariant(((SheepArmorAccess) entity).getVariant());
             }
             else{
                 RegistryEntry<Biome> biomeEntry = world.getBiome(this.getBlockPos());
-                ((SheepArmorAccess)sheepEntity).sheep_Armor_Fabric$setVariant(SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry));
+                ((SheepArmorAccess)sheepEntity).setVariant(SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry, world.getRandom()));
             }
-
         }
-
         return sheepEntity;
     }
 
