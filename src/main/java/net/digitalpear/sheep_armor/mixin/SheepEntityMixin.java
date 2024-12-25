@@ -153,7 +153,6 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         SheepEntity sheepEntity = EntityType.SHEEP.create(world, SpawnReason.BREEDING);
         if (sheepEntity != null) {
-
             DyeColor dyeColor = this.getColor();
             DyeColor dyeColor2 = ((SheepEntity)entity).getColor();
             sheepEntity.setColor(DyeColor.mixColors(world, dyeColor, dyeColor2));
@@ -177,8 +176,8 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
      */
     @Inject(method = "onEatingGrass", at = @At("HEAD"))
     private void applyTrimmingFunctionality(CallbackInfo ci){
-        if (getBodyArmor().getEnchantments().getLevel(getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(SAEnchantments.TRIMMING)) > 0){
-            int level = getBodyArmor().getEnchantments().getLevel(getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(SAEnchantments.TRIMMING));
+        int level = getBodyArmor().getEnchantments().getLevel(getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(SAEnchantments.TRIMMING));
+        if (level > 0){
             this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.5F);
             if (getWorld() instanceof ServerWorld){
                 for (int i = 0; i < random.nextBetween(1, level); i++){
@@ -189,7 +188,6 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
                                 itemEntity.setVelocity(itemEntity.getVelocity().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
                             }
                         }
-
                     });
                 }
             }

@@ -17,46 +17,32 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 public class SheepArmorItem extends ArmorItem {
     private final Identifier armorTexture;
     private final Identifier woolarmorTexture;
-    @Nullable
-    private final Identifier overlayTexture;
 
-    private String path = "textures/entity/sheep/armor/";
+    private static final String TEXTURE_PATH = "textures/entity/sheep/armor/";
 
     public SheepArmorItem(String materialName, ArmorMaterial material, Item.Settings settings) {
         super(material, EquipmentType.BODY, settings);
-        Identifier identifier = SheepArmor.id(path + materialName);
+        Identifier identifier = SheepArmor.id(TEXTURE_PATH + materialName);
         this.armorTexture = identifier.withSuffixedPath(".png");
         this.woolarmorTexture = identifier.withSuffixedPath("_fur.png");
-        this.overlayTexture = null;
-//        this.overlayTexture = hasOverlay ? identifier.withSuffixedPath("_overlay.png") : null;
     }
 
     public Identifier getArmorTexture() {
         return this.armorTexture;
     }
+
     public Identifier getWoolarmorTexture() {
         return this.woolarmorTexture;
-    }
-
-    @Nullable
-    public Identifier getOverlayTexture() {
-        return this.overlayTexture;
     }
 
     @Override
     public SoundEvent getBreakSound() {
         return SoundEvents.ITEM_SHIELD_BREAK;
     }
-
-//    @Override
-//    public boolean isEnchantable(ItemStack stack) {
-//        return super.isEnchantable(stack);
-//    }
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
@@ -71,7 +57,6 @@ public class SheepArmorItem extends ArmorItem {
                     return ActionResult.SUCCESS.withNewHandStack(stack);
                 }
             }
-
         }
         return super.useOnEntity(stack, user, entity, hand);
     }

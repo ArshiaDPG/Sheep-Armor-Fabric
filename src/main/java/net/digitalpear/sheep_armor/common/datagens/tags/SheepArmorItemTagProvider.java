@@ -34,7 +34,9 @@ public class SheepArmorItemTagProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_AMETHYST_EQUIPMENT).add(Items.AMETHYST_SHARD);
         getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_SHULKER_EQUIPMENT).add(Items.SHULKER_SHELL);
 
-        getOrCreateTagBuilder(ItemTags.VANISHING_ENCHANTABLE).addOptionalTag(SATags.SAItemTags.SHEEP_ARMORS);
-        getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE).addOptionalTag(SATags.SAItemTags.SHEEP_ARMORS);
+        getOrCreateTagBuilder(ItemTags.VANISHING_ENCHANTABLE).forceAddTag(SATags.SAItemTags.SHEEP_ARMORS);
+        getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE).forceAddTag(SATags.SAItemTags.SHEEP_ARMORS);
+        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).forceAddTag(SATags.SAItemTags.SHEEP_ARMORS);
+
     }
 }

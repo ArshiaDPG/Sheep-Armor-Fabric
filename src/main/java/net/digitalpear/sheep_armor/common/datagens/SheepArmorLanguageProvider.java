@@ -22,6 +22,5 @@ public class SheepArmorLanguageProvider extends FabricLanguageProvider {
 
         translationBuilder.addEnchantment(SAEnchantments.TRIMMING, "Trimming");
         translationBuilder.addEnchantment(SAEnchantments.WOOLSPLOSION, "Woolsplosion");
-//        translationBuilder.add("enchantment." + SAEnchantments.LIGHTNESS.getValue().toTranslationKey(), "Lightness");
     }
 }

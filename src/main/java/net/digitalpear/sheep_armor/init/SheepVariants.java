@@ -48,9 +48,7 @@ public class SheepVariants {
         return variant;
     }
 
-//    static void registerVanillaSheepTexture(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key){
-//        registry.register(key, new SheepVariant(SheepVariant.VANILLA_SHEEP_TEXTURE, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(BiomeTags.IS_OVERWORLD)));
-//    }
+
     static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key) {
         register(registry, key, key.getValue(), registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(BiomeTags.IS_OVERWORLD));
     }

@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "#sheep_armor:sheep_armors",
-      "required": false
-    }
+    "#sheep_armor:sheep_armors"
   ]
 }

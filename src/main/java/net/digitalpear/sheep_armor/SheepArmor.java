@@ -53,6 +53,8 @@ public class SheepArmor implements ModInitializer {
             -Sheep armor model is now slightly inflated like other armors.
             -Scrapped MCE sheep variants in favor of variants that better visually fit the vanilla game.
             -Sheep armor can now have an enchant glint.
+            -Sheep armors can now be enchanted with unbreaking and mending.
+            -
      */
 
 

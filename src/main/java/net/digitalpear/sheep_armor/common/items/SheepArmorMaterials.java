@@ -6,7 +6,6 @@ import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.equipment.EquipmentAssetKeys;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -30,7 +29,7 @@ public interface SheepArmorMaterials {
             SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
             0.0F,
             0.0F,
-            ItemTags.REPAIRS_LEATHER_ARMOR);
+            SATags.SAItemTags.REPAIRS_AMETHYST_EQUIPMENT);
 
     ArmorMaterial COPPER = register(12,
             7,
@@ -38,7 +37,7 @@ public interface SheepArmorMaterials {
             SoundEvents.ITEM_ARMOR_EQUIP_IRON,
             0.0F,
             0.0F,
-            ItemTags.REPAIRS_LEATHER_ARMOR);
+            SATags.SAItemTags.REPAIRS_COPPER_EQUIPMENT);
 
     ArmorMaterial SHULKER = register(20,
             15,
@@ -46,7 +45,7 @@ public interface SheepArmorMaterials {
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
             0.0F,
             0.0F,
-            ItemTags.REPAIRS_LEATHER_ARMOR);
+            SATags.SAItemTags.REPAIRS_SHULKER_EQUIPMENT);
 
 
     private static ArmorMaterial register(int durability, int defenseAmount, int enchantability, RegistryEntry<SoundEvent > equipSound, float toughness, float knockbackResistance, TagKey<Item> repairIngredient) {

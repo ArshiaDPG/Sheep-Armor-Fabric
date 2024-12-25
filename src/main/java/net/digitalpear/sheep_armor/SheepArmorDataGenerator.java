@@ -2,6 +2,7 @@ package net.digitalpear.sheep_armor;
 
 import net.digitalpear.sheep_armor.common.datagens.*;
 import net.digitalpear.sheep_armor.common.datagens.tags.SheepArmorBiomeTagProvider;
+import net.digitalpear.sheep_armor.common.datagens.tags.SheepArmorEnchantmentTagProvider;
 import net.digitalpear.sheep_armor.common.datagens.tags.SheepArmorItemTagProvider;
 import net.digitalpear.sheep_armor.common.entity.SARegistryKeys;
 import net.digitalpear.sheep_armor.init.SAEnchantments;
@@ -21,6 +22,7 @@ public class SheepArmorDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(SheepArnorRecipeProvider::new);
 
         pack.addProvider(SheepArmorItemTagProvider::new);
+        pack.addProvider(SheepArmorEnchantmentTagProvider::new);
         pack.addProvider(SheepArmorBiomeTagProvider::new);
 
         pack.addProvider(SheepArmorSheepVariantProvider::new);
