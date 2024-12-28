@@ -31,10 +31,11 @@ public class SheepArmorItemTagProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(SATags.SAItemTags.THORNY_SHEEP_ARMORS).add(SAItems.CACTUS_SHEEP_ARMOR);
 
         SAItems.SHEEP_ARMOR_MAP.keySet().forEach(item -> {
-            if (!item.getDefaultStack().isIn(SATags.SAItemTags.THORNY_SHEEP_ARMORS)){
+            if (item != SAItems.CACTUS_SHEEP_ARMOR){
                 getOrCreateTagBuilder(SATags.SAItemTags.SHEEP_ARMORS).add(item);
             }
         });
+        getOrCreateTagBuilder(SATags.SAItemTags.SHEEP_ARMORS).forceAddTag(SATags.SAItemTags.THORNY_SHEEP_ARMORS);
 
         getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_CACTUS_EQUIPMENT).add(Items.CACTUS);
         getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_COPPER_EQUIPMENT).add(Items.COPPER_INGOT);
