@@ -11,7 +11,7 @@ import net.minecraft.world.biome.Biome;
 public class SheepVariant {
 
     public static final String SHEEP_TEXTURE_PATH = "textures/entity/sheep/";
-    public static final Identifier VANILLA_SHEEP_TEXTURE = Identifier.ofVanilla("textures/entity/sheep/sheep");
+    public static final Identifier VANILLA_SHEEP_TEXTURE = Identifier.ofVanilla("sheep");
 
     public static final Codec<SheepVariant> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(

@@ -1,0 +1,5 @@
+{
+  "biomes": "#sheep_armor:spawns_gloomy_sheep",
+  "texture": "sheep_armor:textures/entity/sheep/gloomy",
+  "wool_texture": "sheep_armor:textures/entity/sheep/gloomy_fur"
+}

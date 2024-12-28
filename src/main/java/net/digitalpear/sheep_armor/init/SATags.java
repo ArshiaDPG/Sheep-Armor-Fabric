@@ -21,9 +21,10 @@ public class SATags {
     }
     public static class SABiomeTags {
 
-        public static final TagKey<Biome> MOUNTAIN_SHEEP_BIOMES = of("mountain_sheep_biomes");
-        public static final TagKey<Biome> REGAL_SHEEP_BIOMES = of("regal_sheep_biomes");
-        public static final TagKey<Biome> SOOT_SHEEP_BIOMES = of("soot_sheep_biomes");
+        public static final TagKey<Biome> SPAWNS_ROCKY_SHEEP = of("spawns_rocky_sheep");
+        public static final TagKey<Biome> SPAWNS_REGAL_SHEEP = of("spawns_regal_sheep");
+        public static final TagKey<Biome> SPAWNS_SOOT_SHEEP = of("spawns_soot_sheep");
+        public static final TagKey<Biome> SPAWNS_GLOOMY_SHEEP = of("spawns_gloomy_sheep");
 
 
         private static TagKey<Biome> of(String id) {

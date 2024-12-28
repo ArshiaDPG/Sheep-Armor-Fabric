@@ -26,17 +26,20 @@ public class SheepArmorBiomeTagProvider extends FabricTagProvider<Biome> {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(SATags.SABiomeTags.MOUNTAIN_SHEEP_BIOMES)
+        getOrCreateTagBuilder(SATags.SABiomeTags.SPAWNS_ROCKY_SHEEP)
                 .forceAddTag(BiomeTags.IS_MOUNTAIN)
                 .add(BiomeKeys.STONY_SHORE);
 
-        getOrCreateTagBuilder(SATags.SABiomeTags.REGAL_SHEEP_BIOMES)
+        getOrCreateTagBuilder(SATags.SABiomeTags.SPAWNS_REGAL_SHEEP)
                 .add(BiomeKeys.FLOWER_FOREST)
                 .add(BiomeKeys.CHERRY_GROVE)
                 .add(BiomeKeys.SUNFLOWER_PLAINS)
                 .add(BiomeKeys.MEADOW);
 
-        getOrCreateTagBuilder(SATags.SABiomeTags.SOOT_SHEEP_BIOMES)
+        getOrCreateTagBuilder(SATags.SABiomeTags.SPAWNS_SOOT_SHEEP)
                 .forceAddTag(BiomeTags.IS_NETHER);
+
+        getOrCreateTagBuilder(SATags.SABiomeTags.SPAWNS_GLOOMY_SHEEP)
+                .add(BiomeKeys.PALE_GARDEN).add(BiomeKeys.DEEP_DARK);
     }
 }

@@ -1,5 +1,5 @@
 {
   "biomes": "#minecraft:is_overworld",
-  "texture": "sheep_armor:textures/entity/sheep/barn",
-  "wool_texture": "sheep_armor:textures/entity/sheep/barn_fur"
+  "texture": "minecraft:textures/entity/sheep/sheep",
+  "wool_texture": "minecraft:textures/entity/sheep/sheep_fur"
 }

@@ -27,7 +27,7 @@ public class SheepArmorItemTagProvider extends FabricTagProvider<Item> {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        SAItems.SHEEP_ARMOR_MAP.forEach((armor, item2) -> getOrCreateTagBuilder(SATags.SAItemTags.SHEEP_ARMORS).add(armor));
+        SAItems.SHEEP_ARMOR_MAP.keySet().forEach(getOrCreateTagBuilder(SATags.SAItemTags.SHEEP_ARMORS)::add);
 
         getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_CACTUS_EQUIPMENT).add(Items.CACTUS);
         getOrCreateTagBuilder(SATags.SAItemTags.REPAIRS_COPPER_EQUIPMENT).add(Items.COPPER_INGOT);
@@ -37,6 +37,5 @@ public class SheepArmorItemTagProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(ItemTags.VANISHING_ENCHANTABLE).forceAddTag(SATags.SAItemTags.SHEEP_ARMORS);
         getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE).forceAddTag(SATags.SAItemTags.SHEEP_ARMORS);
         getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).forceAddTag(SATags.SAItemTags.SHEEP_ARMORS);
-
     }
 }

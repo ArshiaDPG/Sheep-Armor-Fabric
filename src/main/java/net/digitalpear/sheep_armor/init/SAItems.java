@@ -24,24 +24,18 @@ public class SAItems {
         return Items.register(keyOf(name), factory, settings);
     }
 
-    private static Item createSheepArmorItem(String materialName, ArmorMaterial material, Item ingredient, int durability){
-        Item item = createItem(materialName + "_sheep_armor",settings ->
-                new SheepArmorItem(materialName, material, settings),
-                sheepArmorSettings());
+    private static Item createSheepArmorItem(String materialName, ArmorMaterial material, Item ingredient){
+        Item item = createItem(materialName + "_sheep_armor",
+                settings -> new SheepArmorItem(materialName, material, settings),
+                new Item.Settings().maxCount(1));
         SHEEP_ARMOR_MAP.put(item, ingredient);
         return item;
     }
 
-    private static Item.Settings sheepArmorSettings(){
-        return new Item.Settings()
-                .maxCount(1);
-    }
-
-
-    public static final Item CACTUS_SHEEP_ARMOR = createSheepArmorItem("cactus", SheepArmorMaterials.CACTUS, Items.CACTUS, 35);
-    public static final Item AMETHYST_SHEEP_ARMOR = createSheepArmorItem("amethyst", SheepArmorMaterials.AMETHYST, Items.AMETHYST_SHARD, 75);
-    public static final Item COPPER_SHEEP_ARMOR = createSheepArmorItem("copper", SheepArmorMaterials.COPPER, Items.COPPER_INGOT, 125);
-    public static final Item SHULKER_SHEEP_ARMOR = createSheepArmorItem("shulker", SheepArmorMaterials.SHULKER, Items.SHULKER_SHELL, 365);
+    public static final Item CACTUS_SHEEP_ARMOR = createSheepArmorItem("cactus", SheepArmorMaterials.CACTUS, Items.CACTUS);
+    public static final Item AMETHYST_SHEEP_ARMOR = createSheepArmorItem("amethyst", SheepArmorMaterials.AMETHYST, Items.AMETHYST_SHARD);
+    public static final Item COPPER_SHEEP_ARMOR = createSheepArmorItem("copper", SheepArmorMaterials.COPPER, Items.COPPER_INGOT);
+    public static final Item SHULKER_SHEEP_ARMOR = createSheepArmorItem("shulker", SheepArmorMaterials.SHULKER, Items.SHULKER_SHELL);
 
 
     public static void init(){

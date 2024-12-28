@@ -20,16 +20,18 @@ public class SheepVariants {
     public static List<RegistryKey<SheepVariant>> variants = new ArrayList<>();
 
     public static final RegistryKey<SheepVariant> BARN = of("barn");
-    public static final RegistryKey<SheepVariant> MOUNTAIN = of("mountain");
+    public static final RegistryKey<SheepVariant> ROCKY = of("rocky");
     public static final RegistryKey<SheepVariant> REGAL = of("regal");
     public static final RegistryKey<SheepVariant> SOOT = of("soot");
+    public static final RegistryKey<SheepVariant> GLOOMY = of("gloomy");
 
 
     public static void bootstrap(Registerable<SheepVariant> registry) {
-        register(registry, BARN);
-        register(registry, MOUNTAIN, SATags.SABiomeTags.MOUNTAIN_SHEEP_BIOMES);
-        register(registry, REGAL, SATags.SABiomeTags.REGAL_SHEEP_BIOMES);
-        register(registry, SOOT, SATags.SABiomeTags.SOOT_SHEEP_BIOMES);
+        register(registry, BARN, SheepVariant.VANILLA_SHEEP_TEXTURE, BiomeTags.IS_OVERWORLD);
+        register(registry, ROCKY, SATags.SABiomeTags.SPAWNS_ROCKY_SHEEP);
+        register(registry, REGAL, SATags.SABiomeTags.SPAWNS_REGAL_SHEEP);
+        register(registry, SOOT, SATags.SABiomeTags.SPAWNS_SOOT_SHEEP);
+        register(registry, GLOOMY, SATags.SABiomeTags.SPAWNS_GLOOMY_SHEEP);
     }
 
 
@@ -48,12 +50,11 @@ public class SheepVariants {
         return variant;
     }
 
-
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key) {
-        register(registry, key, key.getValue(), registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(BiomeTags.IS_OVERWORLD));
-    }
     static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, TagKey<Biome> biomeTag) {
         register(registry, key, key.getValue(), registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
+    }
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, TagKey<Biome> biomeTag) {
+        register(registry, key, texturePath, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
     }
     static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, RegistryEntryList<Biome> biomes) {
         registry.register(key, new SheepVariant(texturePath.withPrefixedPath(SheepVariant.SHEEP_TEXTURE_PATH), biomes));
