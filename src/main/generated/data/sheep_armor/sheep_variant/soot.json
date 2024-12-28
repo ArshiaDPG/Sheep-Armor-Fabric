@@ -1,5 +1,6 @@
 {
   "biomes": "#sheep_armor:spawns_soot_sheep",
+  "inner_wool_texture": "sheep_armor:textures/entity/sheep/soot_inner_fur",
   "texture": "sheep_armor:textures/entity/sheep/soot",
   "wool_colors": [
     {

@@ -1,5 +1,6 @@
 {
   "biomes": "#sheep_armor:spawns_rocky_sheep",
+  "inner_wool_texture": "sheep_armor:textures/entity/sheep/rocky_inner_fur",
   "texture": "sheep_armor:textures/entity/sheep/rocky",
   "wool_colors": [
     {

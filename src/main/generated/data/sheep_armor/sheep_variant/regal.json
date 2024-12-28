@@ -1,5 +1,6 @@
 {
   "biomes": "#sheep_armor:spawns_regal_sheep",
+  "inner_wool_texture": "sheep_armor:textures/entity/sheep/regal_inner_fur",
   "texture": "sheep_armor:textures/entity/sheep/regal",
   "wool_colors": [
     {

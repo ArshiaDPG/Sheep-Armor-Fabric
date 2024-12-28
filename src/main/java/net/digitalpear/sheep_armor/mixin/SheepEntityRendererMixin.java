@@ -3,6 +3,7 @@ package net.digitalpear.sheep_armor.mixin;
 
 import net.digitalpear.sheep_armor.client.SheepArmorRenderer;
 import net.digitalpear.sheep_armor.client.SheepArmorWoolRenderer;
+import net.digitalpear.sheep_armor.client.SheepInnerWoolRenderer;
 import net.digitalpear.sheep_armor.common.access.SheepArmorAccess;
 import net.digitalpear.sheep_armor.common.access.SheepRendererAccess;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
@@ -39,6 +40,7 @@ public abstract class SheepEntityRendererMixin extends AgeableMobEntityRenderer<
     private void addSheepArmor(EntityRendererFactory.Context context, CallbackInfo ci) {
         this.addFeature(new SheepArmorRenderer(this, context.getEntityModels()));
         this.addFeature(new SheepArmorWoolRenderer(this, context.getEntityModels()));
+        this.addFeature(new SheepInnerWoolRenderer(this, context.getEntityModels()));
     }
 
     @Inject(at = @At("RETURN"), method = "getTexture(Lnet/minecraft/client/render/entity/state/SheepEntityRenderState;)Lnet/minecraft/util/Identifier;", cancellable = true)

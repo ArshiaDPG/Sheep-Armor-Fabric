@@ -6,6 +6,7 @@ import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.random.Random;
 
 import java.util.List;
+import java.util.Objects;
 
 public record WoolColorEntry(DyeColor color, int weight) {
     public static final List<WoolColorEntry> DEFAULT_SHEEP_COLORS = List.of(
@@ -23,6 +24,18 @@ public record WoolColorEntry(DyeColor color, int weight) {
                     Codec.intRange(1, 500).fieldOf("weight").orElse(1).forGetter(woolColorEntry -> woolColorEntry.weight)
             ).apply(instance, WoolColorEntry::new));
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WoolColorEntry that = (WoolColorEntry) o;
+        return weight == that.weight && color == that.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, weight);
+    }
 
     public static DyeColor generateColor(List<WoolColorEntry> entryList, Random random) {
         if (entryList.isEmpty()) {

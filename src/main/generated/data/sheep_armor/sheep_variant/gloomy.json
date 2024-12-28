@@ -1,5 +1,6 @@
 {
   "biomes": "#sheep_armor:spawns_gloomy_sheep",
+  "inner_wool_texture": "sheep_armor:textures/entity/sheep/gloomy_inner_fur",
   "texture": "sheep_armor:textures/entity/sheep/gloomy",
   "wool_colors": [
     {
@@ -11,7 +12,7 @@
       "weight": 5
     },
     {
-      "color": "white",
+      "color": "light_blue",
       "weight": 5
     },
     {

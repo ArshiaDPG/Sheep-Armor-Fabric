@@ -1,6 +1,7 @@
 {
   "biomes": "#minecraft:is_overworld",
-  "texture": "minecraft:textures/entity/sheep/sheep",
+  "inner_wool_texture": "sheep_armor:textures/entity/sheep/barn_inner_fur",
+  "texture": "sheep_armor:textures/entity/sheep/barn",
   "wool_colors": [
     {
       "color": "black",
@@ -27,5 +28,5 @@
       "weight": 481
     }
   ],
-  "wool_texture": "minecraft:textures/entity/sheep/sheep_fur"
+  "wool_texture": "sheep_armor:textures/entity/sheep/barn_fur"
 }
