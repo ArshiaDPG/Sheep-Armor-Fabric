@@ -1,13 +1,31 @@
 {
   "biomes": "#sheep_armor:spawns_gloomy_sheep",
   "texture": "sheep_armor:textures/entity/sheep/gloomy",
-  "wool_colors": {
-    "base_color": "cyan",
-    "common_color": "black",
-    "legendary_color": "pink",
-    "rare_color": "light_gray",
-    "super_rare_color": "brown",
-    "uncommon_color": "gray"
-  },
+  "wool_colors": [
+    {
+      "color": "black",
+      "weight": 5
+    },
+    {
+      "color": "gray",
+      "weight": 5
+    },
+    {
+      "color": "light_gray",
+      "weight": 5
+    },
+    {
+      "color": "brown",
+      "weight": 3
+    },
+    {
+      "color": "pink",
+      "weight": 1
+    },
+    {
+      "color": "cyan",
+      "weight": 481
+    }
+  ],
   "wool_texture": "sheep_armor:textures/entity/sheep/gloomy_fur"
 }

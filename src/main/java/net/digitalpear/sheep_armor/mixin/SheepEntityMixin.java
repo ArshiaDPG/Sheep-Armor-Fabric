@@ -5,6 +5,7 @@ import net.digitalpear.sheep_armor.SheepArmor;
 import net.digitalpear.sheep_armor.common.access.SheepArmorAccess;
 import net.digitalpear.sheep_armor.common.entity.SARegistryKeys;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
+import net.digitalpear.sheep_armor.common.entity.WoolColorEntry;
 import net.digitalpear.sheep_armor.init.SAEnchantments;
 import net.digitalpear.sheep_armor.init.SAItems;
 import net.digitalpear.sheep_armor.init.SheepVariants;
@@ -78,7 +79,7 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
         RegistryEntry<Biome> biomeEntry = world.getBiome(this.getBlockPos());
         RegistryEntry<SheepVariant> compatibleBiome = SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry, world.getRandom());
         this.setVariant(compatibleBiome);
-        this.setColor(this.getVariant().value().getWoolColors().generateColor(world.getRandom()));
+        this.setColor(WoolColorEntry.generateColor(this.getVariant().value().getWoolColors(), world.getRandom()));
     }
 
     @Shadow public abstract DyeColor getColor();

@@ -1,8 +1,9 @@
 package net.digitalpear.sheep_armor.init;
 
 import net.digitalpear.sheep_armor.SheepArmor;
-import net.digitalpear.sheep_armor.common.entity.SheepVariant;
 import net.digitalpear.sheep_armor.common.entity.SARegistryKeys;
+import net.digitalpear.sheep_armor.common.entity.SheepVariant;
+import net.digitalpear.sheep_armor.common.entity.WoolColorEntry;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
@@ -28,7 +29,7 @@ public class SheepVariants {
 
 
     public static void bootstrap(Registerable<SheepVariant> registry) {
-        register(registry, BARN, SheepVariant.VANILLA_SHEEP_TEXTURE, DyeColor.WHITE, BiomeTags.IS_OVERWORLD);
+        register(registry, BARN, SheepVariant.VANILLA_SHEEP_TEXTURE, WoolColorEntry.DEFAULT_SHEEP_COLORS, BiomeTags.IS_OVERWORLD);
         register(registry, ROCKY, DyeColor.LIGHT_GRAY, SATags.SABiomeTags.SPAWNS_ROCKY_SHEEP);
         register(registry, REGAL, DyeColor.WHITE, SATags.SABiomeTags.SPAWNS_REGAL_SHEEP);
         register(registry, SOOT, DyeColor.GRAY, SATags.SABiomeTags.SPAWNS_SOOT_SHEEP);
@@ -50,15 +51,30 @@ public class SheepVariants {
         variants.add(variant);
         return variant;
     }
+    public static List<WoolColorEntry> generateOneColorDiff(DyeColor baseColor){
+        List<WoolColorEntry> COLORS = new ArrayList<>(List.of(
+                new WoolColorEntry(DyeColor.BLACK, 5),
+                new WoolColorEntry(DyeColor.GRAY, 5),
+                new WoolColorEntry(DyeColor.LIGHT_GRAY, 5),
+                new WoolColorEntry(DyeColor.BROWN, 3),
+                new WoolColorEntry(DyeColor.PINK, 1),
+                new WoolColorEntry(DyeColor.PINK, 1)
+        ));
+        COLORS.add(new WoolColorEntry(baseColor, 481));
+        return COLORS;
+    }
 
     static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, DyeColor defaultColor, TagKey<Biome> biomeTag) {
-        register(registry, key, key.getValue(), defaultColor, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
+        register(registry, key, key.getValue(), generateOneColorDiff(defaultColor), registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
     }
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, DyeColor defaultColor, TagKey<Biome> biomeTag) {
-        register(registry, key, texturePath, defaultColor, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, List<WoolColorEntry> colors, TagKey<Biome> biomeTag) {
+        register(registry, key, key.getValue(), colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
     }
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, DyeColor defaultColor, RegistryEntryList<Biome> biomes) {
-        registry.register(key, new SheepVariant(texturePath.withPrefixedPath(SheepVariant.SHEEP_TEXTURE_PATH), new SheepVariant.SheepColor(defaultColor), biomes));
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, List<WoolColorEntry> colors, TagKey<Biome> biomeTag) {
+        register(registry, key, texturePath, colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
+    }
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, List<WoolColorEntry> colors, RegistryEntryList<Biome> biomes) {
+        registry.register(key, new SheepVariant(texturePath.withPrefixedPath(SheepVariant.SHEEP_TEXTURE_PATH), colors, biomes));
     }
 
 
