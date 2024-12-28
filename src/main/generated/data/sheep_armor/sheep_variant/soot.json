@@ -1,5 +1,13 @@
 {
   "biomes": "#sheep_armor:spawns_soot_sheep",
   "texture": "sheep_armor:textures/entity/sheep/soot",
+  "wool_colors": {
+    "base_color": "gray",
+    "common_color": "black",
+    "legendary_color": "pink",
+    "rare_color": "light_gray",
+    "super_rare_color": "brown",
+    "uncommon_color": "gray"
+  },
   "wool_texture": "sheep_armor:textures/entity/sheep/soot_fur"
 }

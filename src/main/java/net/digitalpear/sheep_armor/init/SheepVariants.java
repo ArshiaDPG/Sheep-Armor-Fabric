@@ -8,6 +8,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.biome.Biome;
@@ -27,17 +28,17 @@ public class SheepVariants {
 
 
     public static void bootstrap(Registerable<SheepVariant> registry) {
-        register(registry, BARN, SheepVariant.VANILLA_SHEEP_TEXTURE, BiomeTags.IS_OVERWORLD);
-        register(registry, ROCKY, SATags.SABiomeTags.SPAWNS_ROCKY_SHEEP);
-        register(registry, REGAL, SATags.SABiomeTags.SPAWNS_REGAL_SHEEP);
-        register(registry, SOOT, SATags.SABiomeTags.SPAWNS_SOOT_SHEEP);
-        register(registry, GLOOMY, SATags.SABiomeTags.SPAWNS_GLOOMY_SHEEP);
+        register(registry, BARN, SheepVariant.VANILLA_SHEEP_TEXTURE, DyeColor.WHITE, BiomeTags.IS_OVERWORLD);
+        register(registry, ROCKY, DyeColor.LIGHT_GRAY, SATags.SABiomeTags.SPAWNS_ROCKY_SHEEP);
+        register(registry, REGAL, DyeColor.WHITE, SATags.SABiomeTags.SPAWNS_REGAL_SHEEP);
+        register(registry, SOOT, DyeColor.GRAY, SATags.SABiomeTags.SPAWNS_SOOT_SHEEP);
+        register(registry, GLOOMY, DyeColor.CYAN, SATags.SABiomeTags.SPAWNS_GLOOMY_SHEEP);
     }
 
 
     public static RegistryEntry<SheepVariant> fromBiome(DynamicRegistryManager dynamicRegistryManager, RegistryEntry<Biome> biome, Random random) {
         Registry<SheepVariant> registry = dynamicRegistryManager.getOrThrow(SARegistryKeys.SHEEP_VARIANT);
-        List<RegistryEntry.Reference<SheepVariant>> entries = registry.streamEntries().filter((entry) -> entry.value().getBiomes().contains(biome)).toList();
+        List<RegistryEntry.Reference<SheepVariant>> entries = registry.streamEntries().filter(entry -> entry.value() != registry.get(BARN)).filter(entry -> entry.value().getBiomes().contains(biome)).toList();
         if (entries.isEmpty()){
             return registry.getOrThrow(BARN);
         }
@@ -50,14 +51,14 @@ public class SheepVariants {
         return variant;
     }
 
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, TagKey<Biome> biomeTag) {
-        register(registry, key, key.getValue(), registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, DyeColor defaultColor, TagKey<Biome> biomeTag) {
+        register(registry, key, key.getValue(), defaultColor, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
     }
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, TagKey<Biome> biomeTag) {
-        register(registry, key, texturePath, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, DyeColor defaultColor, TagKey<Biome> biomeTag) {
+        register(registry, key, texturePath, defaultColor, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
     }
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, RegistryEntryList<Biome> biomes) {
-        registry.register(key, new SheepVariant(texturePath.withPrefixedPath(SheepVariant.SHEEP_TEXTURE_PATH), biomes));
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, DyeColor defaultColor, RegistryEntryList<Biome> biomes) {
+        registry.register(key, new SheepVariant(texturePath.withPrefixedPath(SheepVariant.SHEEP_TEXTURE_PATH), new SheepVariant.SheepColor(defaultColor), biomes));
     }
 
 

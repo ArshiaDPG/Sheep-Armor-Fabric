@@ -1,5 +1,13 @@
 {
   "biomes": "#minecraft:is_overworld",
   "texture": "minecraft:textures/entity/sheep/sheep",
+  "wool_colors": {
+    "base_color": "white",
+    "common_color": "black",
+    "legendary_color": "pink",
+    "rare_color": "light_gray",
+    "super_rare_color": "brown",
+    "uncommon_color": "gray"
+  },
   "wool_texture": "minecraft:textures/entity/sheep/sheep_fur"
 }
