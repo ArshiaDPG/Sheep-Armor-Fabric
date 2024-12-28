@@ -5,11 +5,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.random.Random;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class WoolColorEntry{
+public record WoolColorEntry(DyeColor color, int weight) {
     public static final List<WoolColorEntry> DEFAULT_SHEEP_COLORS = List.of(
             new WoolColorEntry(DyeColor.BLACK, 5),
             new WoolColorEntry(DyeColor.GRAY, 5),
@@ -26,19 +24,8 @@ public class WoolColorEntry{
             ).apply(instance, WoolColorEntry::new));
 
 
-    private final DyeColor color;
-    private final int weight;
-    public WoolColorEntry(DyeColor color, int weight){
-        this.color = color;
-        this.weight = weight;
-    }
-
-    public static List<WoolColorEntry> createList(WoolColorEntry... entries){
-        return new ArrayList<>(Arrays.asList(entries));
-    }
-
-    public static DyeColor generateColor(List<WoolColorEntry> entryList, Random random){
-        if (entryList.isEmpty()){
+    public static DyeColor generateColor(List<WoolColorEntry> entryList, Random random) {
+        if (entryList.isEmpty()) {
             return DyeColor.WHITE;
         }
         int totalWeight = entryList.stream().mapToInt(wc -> wc.weight).sum();

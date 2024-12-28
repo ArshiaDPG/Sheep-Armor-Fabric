@@ -3,28 +3,24 @@
   "texture": "sheep_armor:textures/entity/sheep/soot",
   "wool_colors": [
     {
-      "color": "black",
-      "weight": 5
-    },
-    {
       "color": "gray",
-      "weight": 5
+      "weight": 481
     },
     {
       "color": "light_gray",
+      "weight": 8
+    },
+    {
+      "color": "white",
       "weight": 5
     },
     {
-      "color": "brown",
+      "color": "black",
       "weight": 3
     },
     {
-      "color": "pink",
+      "color": "green",
       "weight": 1
-    },
-    {
-      "color": "gray",
-      "weight": 481
     }
   ],
   "wool_texture": "sheep_armor:textures/entity/sheep/soot_fur"

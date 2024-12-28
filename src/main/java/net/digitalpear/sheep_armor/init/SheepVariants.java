@@ -15,6 +15,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SheepVariants {
@@ -30,10 +31,10 @@ public class SheepVariants {
 
     public static void bootstrap(Registerable<SheepVariant> registry) {
         register(registry, BARN, SheepVariant.VANILLA_SHEEP_TEXTURE, WoolColorEntry.DEFAULT_SHEEP_COLORS, BiomeTags.IS_OVERWORLD);
-        register(registry, ROCKY, DyeColor.LIGHT_GRAY, SATags.SABiomeTags.SPAWNS_ROCKY_SHEEP);
-        register(registry, REGAL, DyeColor.WHITE, SATags.SABiomeTags.SPAWNS_REGAL_SHEEP);
-        register(registry, SOOT, DyeColor.GRAY, SATags.SABiomeTags.SPAWNS_SOOT_SHEEP);
-        register(registry, GLOOMY, DyeColor.CYAN, SATags.SABiomeTags.SPAWNS_GLOOMY_SHEEP);
+        register(registry, ROCKY, SheepColors.ROCKY, SATags.SABiomeTags.SPAWNS_ROCKY_SHEEP);
+        register(registry, REGAL, SheepColors.REGAL, SATags.SABiomeTags.SPAWNS_REGAL_SHEEP);
+        register(registry, SOOT, SheepColors.SOOT, SATags.SABiomeTags.SPAWNS_SOOT_SHEEP);
+        register(registry, GLOOMY, SheepColors.GLOOMY, SATags.SABiomeTags.SPAWNS_GLOOMY_SHEEP);
     }
 
 
@@ -51,21 +52,7 @@ public class SheepVariants {
         variants.add(variant);
         return variant;
     }
-    public static List<WoolColorEntry> generateOneColorDiff(DyeColor baseColor){
-        List<WoolColorEntry> COLORS = new ArrayList<>(List.of(
-                new WoolColorEntry(DyeColor.BLACK, 5),
-                new WoolColorEntry(DyeColor.GRAY, 5),
-                new WoolColorEntry(DyeColor.LIGHT_GRAY, 5),
-                new WoolColorEntry(DyeColor.BROWN, 3),
-                new WoolColorEntry(DyeColor.PINK, 1)
-        ));
-        COLORS.add(new WoolColorEntry(baseColor, 481));
-        return COLORS;
-    }
 
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, DyeColor defaultColor, TagKey<Biome> biomeTag) {
-        register(registry, key, key.getValue(), generateOneColorDiff(defaultColor), registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
-    }
     static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, List<WoolColorEntry> colors, TagKey<Biome> biomeTag) {
         register(registry, key, key.getValue(), colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
     }
@@ -79,5 +66,42 @@ public class SheepVariants {
 
     public static void init(){
 
+    }
+
+    public static class SheepColors {
+        public static final List<WoolColorEntry> REGAL = woolColorList(
+                new WoolColorEntry(DyeColor.BLACK, 5),
+                new WoolColorEntry(DyeColor.GRAY, 5),
+                new WoolColorEntry(DyeColor.LIGHT_GRAY, 5),
+                new WoolColorEntry(DyeColor.LIME, 3),
+                new WoolColorEntry(DyeColor.PINK, 1),
+                new WoolColorEntry(DyeColor.WHITE, 481)
+        );
+        public static final List<WoolColorEntry> ROCKY = woolColorList(
+                new WoolColorEntry(DyeColor.BROWN, 481),
+                new WoolColorEntry(DyeColor.GRAY, 8),
+                new WoolColorEntry(DyeColor.BLACK, 5),
+                new WoolColorEntry(DyeColor.WHITE, 5),
+                new WoolColorEntry(DyeColor.LIGHT_GRAY, 5),
+                new WoolColorEntry(DyeColor.LIGHT_BLUE, 1)
+        );
+        public static final List<WoolColorEntry> GLOOMY = woolColorList(
+                new WoolColorEntry(DyeColor.GRAY, 481),
+                new WoolColorEntry(DyeColor.LIGHT_GRAY, 5),
+                new WoolColorEntry(DyeColor.WHITE, 5),
+                new WoolColorEntry(DyeColor.CYAN, 3),
+                new WoolColorEntry(DyeColor.YELLOW, 1)
+        );
+        public static final List<WoolColorEntry> SOOT = woolColorList(
+                new WoolColorEntry(DyeColor.GRAY, 481),
+                new WoolColorEntry(DyeColor.LIGHT_GRAY, 8),
+                new WoolColorEntry(DyeColor.WHITE, 5),
+                new WoolColorEntry(DyeColor.BLACK, 3),
+                new WoolColorEntry(DyeColor.GREEN, 1)
+        );
+
+        public static List<WoolColorEntry> woolColorList(WoolColorEntry... entries){
+            return new ArrayList<>(Arrays.asList(entries));
+        }
     }
 }

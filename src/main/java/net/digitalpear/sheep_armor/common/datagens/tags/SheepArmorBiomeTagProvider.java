@@ -27,7 +27,10 @@ public class SheepArmorBiomeTagProvider extends FabricTagProvider<Biome> {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(SATags.SABiomeTags.SPAWNS_ROCKY_SHEEP)
-                .forceAddTag(BiomeTags.IS_MOUNTAIN)
+                .add(BiomeKeys.STONY_PEAKS)
+                .add(BiomeKeys.GROVE)
+                .add(BiomeKeys.FROZEN_PEAKS)
+                .add(BiomeKeys.JAGGED_PEAKS)
                 .add(BiomeKeys.STONY_SHORE);
 
         getOrCreateTagBuilder(SATags.SABiomeTags.SPAWNS_REGAL_SHEEP)

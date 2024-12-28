@@ -3,11 +3,19 @@
   "texture": "sheep_armor:textures/entity/sheep/rocky",
   "wool_colors": [
     {
+      "color": "brown",
+      "weight": 481
+    },
+    {
+      "color": "gray",
+      "weight": 8
+    },
+    {
       "color": "black",
       "weight": 5
     },
     {
-      "color": "gray",
+      "color": "white",
       "weight": 5
     },
     {
@@ -15,16 +23,8 @@
       "weight": 5
     },
     {
-      "color": "brown",
-      "weight": 3
-    },
-    {
-      "color": "pink",
+      "color": "light_blue",
       "weight": 1
-    },
-    {
-      "color": "light_gray",
-      "weight": 481
     }
   ],
   "wool_texture": "sheep_armor:textures/entity/sheep/rocky_fur"

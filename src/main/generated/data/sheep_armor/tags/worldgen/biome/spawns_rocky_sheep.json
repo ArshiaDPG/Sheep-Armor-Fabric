@@ -1,6 +1,9 @@
 {
   "values": [
-    "#minecraft:is_mountain",
+    "minecraft:stony_peaks",
+    "minecraft:grove",
+    "minecraft:frozen_peaks",
+    "minecraft:jagged_peaks",
     "minecraft:stony_shore"
   ]
 }

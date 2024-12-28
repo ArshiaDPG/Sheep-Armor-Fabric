@@ -54,10 +54,12 @@ public class SheepArmor implements ModInitializer {
             -Scrapped MCE sheep variants in favor of variants that better visually fit the vanilla game.
             -Sheep armor can now have an enchant glint.
             -Sheep armors can now be enchanted with unbreaking and mending.
+
         SNAPSHOT 5 CHANGELOG:
             -Barn Sheep now once again use the vanilla sheep texture.
             -Added gloomy sheep variant that spawns in horror themed biomes.
             -Renamed Mountain sheep to Rocky sheep.
+            -Sheep variants now include a weighted list which allows customization of wool colors.
      */
 
 
