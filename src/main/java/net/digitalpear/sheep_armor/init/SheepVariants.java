@@ -57,7 +57,6 @@ public class SheepVariants {
                 new WoolColorEntry(DyeColor.GRAY, 5),
                 new WoolColorEntry(DyeColor.LIGHT_GRAY, 5),
                 new WoolColorEntry(DyeColor.BROWN, 3),
-                new WoolColorEntry(DyeColor.PINK, 1),
                 new WoolColorEntry(DyeColor.PINK, 1)
         ));
         COLORS.add(new WoolColorEntry(baseColor, 481));

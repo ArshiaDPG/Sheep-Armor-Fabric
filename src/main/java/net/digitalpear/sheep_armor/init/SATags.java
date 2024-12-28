@@ -9,6 +9,7 @@ import net.minecraft.world.biome.Biome;
 public class SATags {
 
     public static class SAItemTags{
+        public static final TagKey<Item> THORNY_SHEEP_ARMORS = of("throny_sheep_armors");
         public static final TagKey<Item> SHEEP_ARMORS = of("sheep_armors");
         public static final TagKey<Item> REPAIRS_CACTUS_EQUIPMENT = of("repairs_cactus_equipment");
         public static final TagKey<Item> REPAIRS_COPPER_EQUIPMENT = of("repairs_copper_equipment");

@@ -29,7 +29,7 @@ public class SAEnchantments {
     public static void bootstrap(Registerable<Enchantment> registry) {
         RegistryEntryLookup<Item> itemLookup = registry.getRegistryLookup(RegistryKeys.ITEM);
         register(registry, TRIMMING, sheepEnchantmentProperties(itemLookup, 2, 3, Enchantment.leveledCost(1, 11), Enchantment.leveledCost(12, 11), 4));
-        register(registry, WOOLSPLOSION, sheepEnchantmentProperties(itemLookup, 3, 1, Enchantment.leveledCost(1, 11), Enchantment.leveledCost(18, 11), 6));
+        register(registry, WOOLSPLOSION, sheepEnchantmentProperties(itemLookup, 3, 4, Enchantment.leveledCost(1, 11), Enchantment.leveledCost(18, 11), 6));
     }
 
     private static void register(Registerable<Enchantment> registry, RegistryKey<Enchantment> key, Enchantment.Builder builder) {

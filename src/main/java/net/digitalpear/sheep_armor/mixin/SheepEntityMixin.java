@@ -7,7 +7,7 @@ import net.digitalpear.sheep_armor.common.entity.SARegistryKeys;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
 import net.digitalpear.sheep_armor.common.entity.WoolColorEntry;
 import net.digitalpear.sheep_armor.init.SAEnchantments;
-import net.digitalpear.sheep_armor.init.SAItems;
+import net.digitalpear.sheep_armor.init.SATags;
 import net.digitalpear.sheep_armor.init.SheepVariants;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
@@ -129,22 +129,22 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
     @Override
     protected void applyDamage(ServerWorld world, DamageSource source, float amount) {
         if (this.shouldArmorAbsorbDamage(source)){
-            ItemStack itemStack = this.getBodyArmor();
+            ItemStack armorStack = this.getBodyArmor();
 
             //Cactus armor thorns effect
-            if (itemStack.isOf(SAItems.CACTUS_SHEEP_ARMOR) && source.getAttacker() != null){
+            if (armorStack.isIn(SATags.SAItemTags.THORNY_SHEEP_ARMORS) && source.getAttacker() != null){
                 source.getAttacker().damage(world, this.getDamageSources().cactus(), 2);
             }
 
-            //Sould explode
-            boolean explode = getBodyArmor().getEnchantments().getLevel(getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(SAEnchantments.WOOLSPLOSION)) > 0;
-
             //Damage item
-            itemStack.damage(MathHelper.ceil(amount), this, EquipmentSlot.BODY);
+            armorStack.damage(MathHelper.ceil(amount), this, EquipmentSlot.BODY);
 
             //Explode if armor breaks and should explode
-            if (itemStack.isEmpty() && explode){
-                this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 5, World.ExplosionSourceType.NONE);
+            if (armorStack.isEmpty()){
+                int level = getBodyArmor().getEnchantments().getLevel(getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(SAEnchantments.WOOLSPLOSION));
+                if (level > 0){
+                    this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 2 * level, World.ExplosionSourceType.NONE);
+                }
             }
         }
         else{
