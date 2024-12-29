@@ -1,5 +1,6 @@
 package net.digitalpear.sheep_armor.common.datagens;
 
+import net.digitalpear.sheep_armor.SheepArmor;
 import net.digitalpear.sheep_armor.init.SAEnchantments;
 import net.digitalpear.sheep_armor.init.SAItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -22,5 +23,13 @@ public class SheepArmorLanguageProvider extends FabricLanguageProvider {
 
         translationBuilder.addEnchantment(SAEnchantments.TRIMMING, "Trimming");
         translationBuilder.addEnchantment(SAEnchantments.WOOLSPLOSION, "Woolsplosion");
+
+
+        translationBuilder.add(SheepArmor.ClientConfig.hasInnerColoring.getTranslationKey(), "Has Inner Coloring");
+
+        translationBuilder.add(SheepArmor.CommonConfig.hasVariants.getTranslationKey(), "Has Variants");
+        translationBuilder.add(SheepArmor.CommonConfig.hasCustomColors.getTranslationKey(), "Has Custom Colors");
+        translationBuilder.add(SheepArmor.CommonConfig.universalBarn.getTranslationKey(), "Universal Barn Spawns");
+        translationBuilder.add(SheepArmor.CommonConfig.sheepArmorEnabled.getTranslationKey(), "Sheep Armor Enabled");
     }
 }

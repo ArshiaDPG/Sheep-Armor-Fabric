@@ -15,15 +15,17 @@ import java.util.EnumMap;
 
 public interface SheepArmorMaterials {
 
-    ArmorMaterial CACTUS = register(5,
-            2,
-            2,
-            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
-            0.0F,
-            0.0F,
-            SATags.SAItemTags.REPAIRS_CACTUS_EQUIPMENT);
+    ArmorMaterial CACTUS = register(
+            5, //Durability
+            2, //Defense Amount
+            2, //Enchantability
+            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, //Equip Sound
+            0.0F, //Toughness
+            0.0F, //Knockback Resistance
+            SATags.SAItemTags.REPAIRS_CACTUS_EQUIPMENT); //Repair Ingredient
 
-    ArmorMaterial AMETHYST = register(9,
+    ArmorMaterial AMETHYST = register(
+            9,
             5,
             30,
             SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
@@ -31,7 +33,8 @@ public interface SheepArmorMaterials {
             0.0F,
             SATags.SAItemTags.REPAIRS_AMETHYST_EQUIPMENT);
 
-    ArmorMaterial COPPER = register(12,
+    ArmorMaterial COPPER = register(
+            12,
             7,
             4,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON,
@@ -39,11 +42,12 @@ public interface SheepArmorMaterials {
             0.0F,
             SATags.SAItemTags.REPAIRS_COPPER_EQUIPMENT);
 
-    ArmorMaterial SHULKER = register(20,
+    ArmorMaterial SHULKER = register(
+            20,
             15,
             15,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
-            0.0F,
+            0.5F,
             0.0F,
             SATags.SAItemTags.REPAIRS_SHULKER_EQUIPMENT);
 

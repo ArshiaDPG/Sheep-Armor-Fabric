@@ -40,9 +40,12 @@ public class SheepVariants {
 
     public static RegistryEntry<SheepVariant> fromBiome(DynamicRegistryManager dynamicRegistryManager, RegistryEntry<Biome> biome, Random random) {
         Registry<SheepVariant> registry = dynamicRegistryManager.getOrThrow(SARegistryKeys.SHEEP_VARIANT);
-        List<RegistryEntry.Reference<SheepVariant>> entries = registry.streamEntries().filter(entry -> entry.value() != registry.get(BARN)).filter(entry -> entry.value().getBiomes().contains(biome)).toList();
+        List<RegistryEntry.Reference<SheepVariant>> entries = new ArrayList<>(registry.streamEntries().filter(entry -> entry.value() != registry.get(BARN)).filter(entry -> entry.value().getBiomes().contains(biome)).toList());
         if (entries.isEmpty()){
             return registry.getOrThrow(BARN);
+        }
+        if (SheepArmor.CommonConfig.universalBarn.getValue() && !entries.contains(registry.getOrThrow(BARN))){
+            entries.add(registry.getOrThrow(BARN));
         }
         return entries.get(random.nextInt(entries.size()));
     }

@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -29,6 +30,11 @@ public class SheepArmorItem extends ArmorItem {
         Identifier identifier = SheepArmor.id(TEXTURE_PATH + materialName);
         this.armorTexture = identifier.withSuffixedPath(".png");
         this.woolarmorTexture = identifier.withSuffixedPath("_fur.png");
+    }
+
+    @Override
+    public boolean isEnabled(FeatureSet enabledFeatures) {
+        return SheepArmor.CommonConfig.sheepArmorEnabled.getValue() && super.isEnabled(enabledFeatures);
     }
 
     public Identifier getArmorTexture() {

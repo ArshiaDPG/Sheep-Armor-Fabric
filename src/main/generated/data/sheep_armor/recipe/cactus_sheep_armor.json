@@ -3,11 +3,11 @@
   "category": "equipment",
   "key": {
     "C": "minecraft:cactus",
-    "W": "minecraft:leather"
+    "L": "minecraft:leather"
   },
   "pattern": [
     "CCC",
-    "CWC"
+    "CLC"
   ],
   "result": {
     "count": 1,

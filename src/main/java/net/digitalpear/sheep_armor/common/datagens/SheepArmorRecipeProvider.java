@@ -14,9 +14,9 @@ import net.minecraft.registry.RegistryWrapper;
 
 import java.util.concurrent.CompletableFuture;
 
-public class SheepArnorRecipeProvider extends FabricRecipeProvider {
+public class SheepArmorRecipeProvider extends FabricRecipeProvider {
 
-    public SheepArnorRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public SheepArmorRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
 
@@ -25,16 +25,16 @@ public class SheepArnorRecipeProvider extends FabricRecipeProvider {
         return new RecipeGenerator(registries, exporter) {
             @Override
             public void generate() {
-                SAItems.SHEEP_ARMOR_MAP.forEach((armor, ingredient) -> makeArmorRecipe(armor, ingredient).offerTo(exporter));
+                SAItems.SHEEP_ARMOR_MAP.forEach(this::makeSheepArmorRecipe);
             }
 
-            public ShapedRecipeJsonBuilder makeArmorRecipe(Item armor, Item ingredient){
-                return ShapedRecipeJsonBuilder.create(registries.getOrThrow(RegistryKeys.ITEM), RecipeCategory.COMBAT, armor)
+            public void makeSheepArmorRecipe(Item armor, Item ingredient){
+                ShapedRecipeJsonBuilder.create(registries.getOrThrow(RegistryKeys.ITEM), RecipeCategory.COMBAT, armor)
                         .pattern("CCC")
-                        .pattern("CWC")
+                        .pattern("CLC")
                         .input('C', ingredient)
-                        .input('W', Items.LEATHER)
-                        .criterion(hasItem(ingredient), conditionsFromItem(ingredient));
+                        .input('L', Items.LEATHER)
+                        .criterion(hasItem(ingredient), conditionsFromItem(ingredient)).offerTo(exporter);
             }
         };
     }

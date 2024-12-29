@@ -19,7 +19,7 @@ public class SheepArmorDataGenerator implements DataGeneratorEntrypoint {
 
         pack.addProvider(SheepArmorModelProvider::new);
         pack.addProvider(SheepArmorLanguageProvider::new);
-        pack.addProvider(SheepArnorRecipeProvider::new);
+        pack.addProvider(SheepArmorRecipeProvider::new);
 
         pack.addProvider(SheepArmorItemTagProvider::new);
         pack.addProvider(SheepArmorEnchantmentTagProvider::new);

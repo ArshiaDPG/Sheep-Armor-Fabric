@@ -21,7 +21,7 @@ public record WoolColorEntry(DyeColor color, int weight) {
     public static final Codec<WoolColorEntry> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(
                     DyeColor.CODEC.fieldOf("color").orElse(DyeColor.WHITE).forGetter(woolColorEntry -> woolColorEntry.color),
-                    Codec.intRange(1, 500).fieldOf("weight").orElse(1).forGetter(woolColorEntry -> woolColorEntry.weight)
+                    Codec.INT.fieldOf("weight").orElse(1).forGetter(woolColorEntry -> woolColorEntry.weight)
             ).apply(instance, WoolColorEntry::new));
 
     @Override

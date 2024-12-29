@@ -78,8 +78,12 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
     private void addVariantStuff(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, CallbackInfoReturnable<EntityData> cir){
         RegistryEntry<Biome> biomeEntry = world.getBiome(this.getBlockPos());
         RegistryEntry<SheepVariant> compatibleBiome = SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry, world.getRandom());
-        this.setVariant(compatibleBiome);
-        this.setColor(WoolColorEntry.generateColor(this.getVariant().value().getWoolColors(), world.getRandom()));
+        if (SheepArmor.CommonConfig.hasVariants.getValue()){
+            this.setVariant(compatibleBiome);
+            if (SheepArmor.CommonConfig.hasCustomColors.getValue()){
+                this.setColor(WoolColorEntry.generateColor(this.getVariant().value().getWoolColors(), world.getRandom()));
+            }
+        }
     }
 
     @Shadow public abstract DyeColor getColor();
