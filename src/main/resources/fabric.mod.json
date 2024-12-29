@@ -25,6 +25,9 @@
         ],
         "client":[
             "net.digitalpear.sheep_armor.client.SheepArmorClient"
+        ],
+        "modmenu": [
+             "net.digitalpear.sheep_armor.SheepArmorModMenuIntegration"
         ]
   },
 
@@ -36,6 +39,6 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": ">=${minecraft_version}",
-    "configapi": ">=${minecraft_version}-2.4.1"
+    "cloth-config": ">=10.0.0"
   }
 }

@@ -1,7 +1,8 @@
 package net.digitalpear.sheep_armor;
 
-import com.craftjakob.configapi.config.*;
 import com.google.common.collect.ImmutableBiMap;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.digitalpear.sheep_armor.common.entity.SARegistryKeys;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
 import net.digitalpear.sheep_armor.init.SAData;
@@ -70,12 +71,14 @@ public class SheepArmor implements ModInitializer {
             -Sheep's inner wool layer is now colored like the wool.
             -Regal, Soot and Rocky sheep now have textures thanks to KattZZi.
 
-        SNAPSHOT 5 CHANGELOG:
+        SNAPSHOT 6 CHANGELOG:
             -Weights for wool colors no longer has a limit.
             -Added some config options using Config API (https://modrinth.com/mod/config-api).
             -Added clifftree compat.
             -Added easter egg when naming sheep "Gwen".
             -Gloomy sheep now has textures thanks to KattZZi.
+        SNAPSHOT 7 CHANGELOG:
+            -Reworked config to use Auto Config API.
      */
 
 
@@ -91,66 +94,14 @@ public class SheepArmor implements ModInitializer {
         SAEnchantments.init();
         SheepVariants.init();
 
-
-        ConfigRegister.get().registerConfig(MOD_ID, Config.ConfigType.COMMON, CommonConfig::new);
-        ConfigRegister.get().registerConfig(MOD_ID, Config.ConfigType.CLIENT, ClientConfig::new);
+        AutoConfig.register(SheepArmorConfig.class, GsonConfigSerializer::new);
     }
 
-    private static String makeConfigKey(String name){
-        return "config." + MOD_ID + "." + name;
-    }
-    public static class ClientConfig implements IConfigurator {
-        public static ConfigValueTypes.BooleanValue hasInnerColoring;
-
-        @Override
-        public void configure(ConfigBuilder configBuilder) {
-            hasInnerColoring = configBuilder
-                    .translation(makeConfigKey("hasInnerColoring"))
-                    .comment("Whether sheep body hair is colored like their wool.")
-                    .define("hasInnerColoring", true);
-        }
-    }
 
     public static String hasValidName(LivingEntityRenderState state){
         if (state.customName != null && SPECIAL_NAMES.containsKey(state.customName.getString())){
             return SPECIAL_NAMES.get(state.customName.getString());
         }
         return null;
-    }
-
-    public static class CommonConfig implements IConfigurator {
-        public static ConfigValueTypes.BooleanValue universalBarn;
-        public static ConfigValueTypes.BooleanValue hasVariants;
-        public static ConfigValueTypes.BooleanValue hasCustomColors;
-        public static ConfigValueTypes.BooleanValue sheepArmorEnabled;
-
-        @Override
-        public void configure(ConfigBuilder configBuilder) {
-            configBuilder.push("Sheep Variant Config");
-            hasVariants = configBuilder
-                    .translation(makeConfigKey("hasVariants"))
-                    .comment("Whether biome specific sheep variants spawn.")
-                    .define("hasVariants", true);
-
-            hasCustomColors = configBuilder
-                    .translation(makeConfigKey("hasCustomColors"))
-                    .comment("Whether sheep use their variant's assigned colors when spawning.", "(Will not work if variants are disabled)")
-                    .define("hasCustomColors", true);
-
-            universalBarn = configBuilder
-                    .translation(makeConfigKey("universalBarn"))
-                    .comment("Whether vanilla sheep have a chance of spawning alongside other valid sheep variants no matter what.")
-                    .define("universalBarn", false);
-
-            configBuilder.pop();
-
-            configBuilder.push("Sheep Armor Config");
-            sheepArmorEnabled = configBuilder
-                    .translation(makeConfigKey("sheepArmorEnabled"))
-                    .comment("Whether sheep armor can be crafted/found in the world.")
-                    .requiresWorldRestart()
-                    .define("sheepArmorEnabled", true);
-        }
-
     }
 }

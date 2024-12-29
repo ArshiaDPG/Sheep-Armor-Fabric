@@ -1,7 +1,9 @@
 package net.digitalpear.sheep_armor.mixin;
 
 
+import me.shedaniel.autoconfig.AutoConfig;
 import net.digitalpear.sheep_armor.SheepArmor;
+import net.digitalpear.sheep_armor.SheepArmorConfig;
 import net.digitalpear.sheep_armor.common.access.SheepArmorAccess;
 import net.digitalpear.sheep_armor.common.entity.SARegistryKeys;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
@@ -78,9 +80,10 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
     private void addVariantStuff(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, CallbackInfoReturnable<EntityData> cir){
         RegistryEntry<Biome> biomeEntry = world.getBiome(this.getBlockPos());
         RegistryEntry<SheepVariant> compatibleBiome = SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry, world.getRandom());
-        if (SheepArmor.CommonConfig.hasVariants.getValue()){
+        SheepArmorConfig config = AutoConfig.getConfigHolder(SheepArmorConfig.class).getConfig();
+        if (config.hasVariants){
             this.setVariant(compatibleBiome);
-            if (SheepArmor.CommonConfig.hasCustomColors.getValue()){
+            if (config.hasCustomColors){
                 this.setColor(WoolColorEntry.generateColor(this.getVariant().value().getWoolColors(), world.getRandom()));
             }
         }

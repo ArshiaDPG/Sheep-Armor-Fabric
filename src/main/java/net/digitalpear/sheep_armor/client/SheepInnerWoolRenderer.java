@@ -1,6 +1,8 @@
 package net.digitalpear.sheep_armor.client;
 
+import me.shedaniel.autoconfig.AutoConfig;
 import net.digitalpear.sheep_armor.SheepArmor;
+import net.digitalpear.sheep_armor.SheepArmorConfig;
 import net.digitalpear.sheep_armor.common.access.SheepRendererAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -34,7 +36,8 @@ public class SheepInnerWoolRenderer extends FeatureRenderer<SheepEntityRenderSta
     }
 
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, SheepEntityRenderState sheepEntityRenderState, float f, float g) {
-        if (SheepArmor.ClientConfig.hasInnerColoring.getValue() && SheepArmor.hasValidName(sheepEntityRenderState) == null){
+        SheepArmorConfig config = AutoConfig.getConfigHolder(SheepArmorConfig.class).getConfig();
+        if (config.hasInnerColoring && SheepArmor.hasValidName(sheepEntityRenderState) == null){
             Identifier SKIN = getTexture(sheepEntityRenderState);
             EntityModel<SheepEntityRenderState> entityModel = sheepEntityRenderState.baby ? this.babySheepModel : this.sheepModel;
             if (sheepEntityRenderState.invisible) {

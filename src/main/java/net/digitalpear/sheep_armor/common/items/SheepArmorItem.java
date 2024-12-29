@@ -1,6 +1,8 @@
 package net.digitalpear.sheep_armor.common.items;
 
+import me.shedaniel.autoconfig.AutoConfig;
 import net.digitalpear.sheep_armor.SheepArmor;
+import net.digitalpear.sheep_armor.SheepArmorConfig;
 import net.digitalpear.sheep_armor.common.access.SheepArmorAccess;
 import net.digitalpear.sheep_armor.init.SATags;
 import net.minecraft.entity.LivingEntity;
@@ -34,7 +36,8 @@ public class SheepArmorItem extends ArmorItem {
 
     @Override
     public boolean isEnabled(FeatureSet enabledFeatures) {
-        return SheepArmor.CommonConfig.sheepArmorEnabled.getValue() && super.isEnabled(enabledFeatures);
+        SheepArmorConfig config = AutoConfig.getConfigHolder(SheepArmorConfig.class).getConfig();
+        return config.sheepArmorEnabled && super.isEnabled(enabledFeatures);
     }
 
     public Identifier getArmorTexture() {

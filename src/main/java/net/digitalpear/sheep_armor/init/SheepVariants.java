@@ -1,6 +1,8 @@
 package net.digitalpear.sheep_armor.init;
 
+import me.shedaniel.autoconfig.AutoConfig;
 import net.digitalpear.sheep_armor.SheepArmor;
+import net.digitalpear.sheep_armor.SheepArmorConfig;
 import net.digitalpear.sheep_armor.common.entity.SARegistryKeys;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
 import net.digitalpear.sheep_armor.common.entity.WoolColorEntry;
@@ -44,7 +46,8 @@ public class SheepVariants {
         if (entries.isEmpty()){
             return registry.getOrThrow(BARN);
         }
-        if (SheepArmor.CommonConfig.universalBarn.getValue() && !entries.contains(registry.getOrThrow(BARN))){
+        SheepArmorConfig config = AutoConfig.getConfigHolder(SheepArmorConfig.class).getConfig();
+        if (config.universalBarn && !entries.contains(registry.getOrThrow(BARN))){
             entries.add(registry.getOrThrow(BARN));
         }
         return entries.get(random.nextInt(entries.size()));
