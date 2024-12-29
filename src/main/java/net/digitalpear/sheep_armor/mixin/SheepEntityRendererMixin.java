@@ -1,6 +1,7 @@
 package net.digitalpear.sheep_armor.mixin;
 
 
+import net.digitalpear.sheep_armor.SheepArmor;
 import net.digitalpear.sheep_armor.client.SheepArmorRenderer;
 import net.digitalpear.sheep_armor.client.SheepArmorWoolRenderer;
 import net.digitalpear.sheep_armor.client.SheepInnerWoolRenderer;
@@ -13,6 +14,7 @@ import net.minecraft.client.render.entity.SheepEntityRenderer;
 import net.minecraft.client.render.entity.model.SheepEntityModel;
 import net.minecraft.client.render.entity.state.SheepEntityRenderState;
 import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,6 +32,9 @@ public abstract class SheepEntityRendererMixin extends AgeableMobEntityRenderer<
     @Inject(at = @At("RETURN"), method = "updateRenderState(Lnet/minecraft/entity/passive/SheepEntity;Lnet/minecraft/client/render/entity/state/SheepEntityRenderState;F)V")
     private void renderState(SheepEntity sheepEntity, SheepEntityRenderState sheepEntityRenderState, float f, CallbackInfo ci){
         if (sheepEntityRenderState instanceof SheepRendererAccess){
+            if (SheepArmor.hasValidName(sheepEntityRenderState) != null){
+                sheepEntityRenderState.color = DyeColor.WHITE;
+            }
             ((SheepRendererAccess) sheepEntityRenderState).setBodyArmor(sheepEntity.getBodyArmor());
             ((SheepRendererAccess) sheepEntityRenderState).setVariant(((SheepArmorAccess)sheepEntity).getVariant().value());
         }
@@ -44,10 +49,14 @@ public abstract class SheepEntityRendererMixin extends AgeableMobEntityRenderer<
     }
 
     @Inject(at = @At("RETURN"), method = "getTexture(Lnet/minecraft/client/render/entity/state/SheepEntityRenderState;)Lnet/minecraft/util/Identifier;", cancellable = true)
-    private void newTexture(SheepEntityRenderState sheepEntityRenderState, CallbackInfoReturnable<Identifier> cir){
-        SheepVariant variant = ((SheepRendererAccess) sheepEntityRenderState).getVariant();
-        if (variant != null){
-            cir.setReturnValue(variant.getTexturePath().withSuffixedPath(".png"));
+    private void newTexture(SheepEntityRenderState sheepEntityRenderState, CallbackInfoReturnable<Identifier> cir) {
+        if (SheepArmor.hasValidName(sheepEntityRenderState) != null) {
+            cir.setReturnValue(SheepArmor.id(SheepVariant.SHEEP_TEXTURE_PATH).withSuffixedPath("special/" + SheepArmor.hasValidName(sheepEntityRenderState) + ".png"));
+        } else {
+            SheepVariant variant = ((SheepRendererAccess) sheepEntityRenderState).getVariant();
+            if (variant != null) {
+                cir.setReturnValue(variant.getTexturePath().withSuffixedPath(".png"));
+            }
         }
     }
 }

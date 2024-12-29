@@ -29,7 +29,7 @@ public class SheepArmorLanguageProvider extends FabricLanguageProvider {
 
         translationBuilder.add(SheepArmor.CommonConfig.hasVariants.getTranslationKey(), "Has Variants");
         translationBuilder.add(SheepArmor.CommonConfig.hasCustomColors.getTranslationKey(), "Has Custom Colors");
-        translationBuilder.add(SheepArmor.CommonConfig.universalBarn.getTranslationKey(), "Universal Barn Spawns");
+        translationBuilder.add(SheepArmor.CommonConfig.universalBarn.getTranslationKey(), "Universal Barn Sheep Spawns");
         translationBuilder.add(SheepArmor.CommonConfig.sheepArmorEnabled.getTranslationKey(), "Sheep Armor Enabled");
     }
 }

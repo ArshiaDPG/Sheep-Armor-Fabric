@@ -89,8 +89,9 @@ public class SheepVariants {
                 new WoolColorEntry(DyeColor.LIGHT_BLUE, 1)
         );
         public static final List<WoolColorEntry> GLOOMY = woolColorList(
-                new WoolColorEntry(DyeColor.GRAY, 481),
-                new WoolColorEntry(DyeColor.LIGHT_GRAY, 5),
+                new WoolColorEntry(DyeColor.LIGHT_GRAY, 481),
+                new WoolColorEntry(DyeColor.BLUE, 8),
+                new WoolColorEntry(DyeColor.GRAY, 5),
                 new WoolColorEntry(DyeColor.LIGHT_BLUE, 5),
                 new WoolColorEntry(DyeColor.CYAN, 3),
                 new WoolColorEntry(DyeColor.YELLOW, 1)

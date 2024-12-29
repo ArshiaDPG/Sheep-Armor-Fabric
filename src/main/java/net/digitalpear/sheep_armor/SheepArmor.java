@@ -1,6 +1,7 @@
 package net.digitalpear.sheep_armor;
 
 import com.craftjakob.configapi.config.*;
+import com.google.common.collect.ImmutableBiMap;
 import net.digitalpear.sheep_armor.common.entity.SARegistryKeys;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
 import net.digitalpear.sheep_armor.init.SAData;
@@ -9,6 +10,7 @@ import net.digitalpear.sheep_armor.init.SAItems;
 import net.digitalpear.sheep_armor.init.SheepVariants;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.network.codec.PacketCodecs;
@@ -25,6 +27,10 @@ public class SheepArmor implements ModInitializer {
         The Sheep Variant code itself was done by me.
      */
 
+
+    public static final ImmutableBiMap<String, String> SPECIAL_NAMES = new ImmutableBiMap.Builder<String, String>()
+            .put("Gwen", "flecked")
+            .build();
 
     public static final TrackedDataHandler<RegistryEntry<SheepVariant>> SHEEP_VARIANT = TrackedDataHandler.create(PacketCodecs.registryEntry(SARegistryKeys.SHEEP_VARIANT));
     public static final String MOD_ID = "sheep_armor";
@@ -67,6 +73,9 @@ public class SheepArmor implements ModInitializer {
         SNAPSHOT 5 CHANGELOG:
             -Weights for wool colors no longer has a limit.
             -Added some config options using Config API (https://modrinth.com/mod/config-api).
+            -Added clifftree compat.
+            -Added easter egg when naming sheep "Gwen".
+            -Gloomy sheep now has textures thanks to KattZZi.
      */
 
 
@@ -102,6 +111,13 @@ public class SheepArmor implements ModInitializer {
         }
     }
 
+    public static String hasValidName(LivingEntityRenderState state){
+        if (state.customName != null && SPECIAL_NAMES.containsKey(state.customName.getString())){
+            return SPECIAL_NAMES.get(state.customName.getString());
+        }
+        return null;
+    }
+
     public static class CommonConfig implements IConfigurator {
         public static ConfigValueTypes.BooleanValue universalBarn;
         public static ConfigValueTypes.BooleanValue hasVariants;
@@ -135,5 +151,6 @@ public class SheepArmor implements ModInitializer {
                     .requiresWorldRestart()
                     .define("sheepArmorEnabled", true);
         }
+
     }
 }

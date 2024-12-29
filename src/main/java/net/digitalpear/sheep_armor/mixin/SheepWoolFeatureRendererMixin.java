@@ -1,6 +1,7 @@
 package net.digitalpear.sheep_armor.mixin;
 
 
+import net.digitalpear.sheep_armor.SheepArmor;
 import net.digitalpear.sheep_armor.common.access.SheepRendererAccess;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -24,9 +25,14 @@ public class SheepWoolFeatureRendererMixin {
 
     @Inject(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/state/SheepEntityRenderState;FF)V", at = @At("HEAD"))
     private void newTexture(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, SheepEntityRenderState sheepEntityRenderState, float f, float g, CallbackInfo ci){
-        SheepVariant variant = ((SheepRendererAccess) sheepEntityRenderState).getVariant();
-        if (variant != null){
-            SKIN = variant.getWoolTexturePath().withSuffixedPath(".png");
+        if (SheepArmor.hasValidName(sheepEntityRenderState) != null){
+            SKIN = SheepArmor.id(SheepVariant.SHEEP_TEXTURE_PATH).withSuffixedPath("special/" + SheepArmor.hasValidName(sheepEntityRenderState) + "_fur.png");
+        }
+        else{
+            SheepVariant variant = ((SheepRendererAccess) sheepEntityRenderState).getVariant();
+            if (variant != null){
+                SKIN = variant.getWoolTexturePath().withSuffixedPath(".png");
+            }
         }
     }
 }

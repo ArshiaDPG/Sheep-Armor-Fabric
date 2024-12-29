@@ -4,11 +4,15 @@
   "texture": "sheep_armor:textures/entity/sheep/gloomy",
   "wool_colors": [
     {
-      "color": "gray",
+      "color": "light_gray",
       "weight": 481
     },
     {
-      "color": "light_gray",
+      "color": "blue",
+      "weight": 8
+    },
+    {
+      "color": "gray",
       "weight": 5
     },
     {

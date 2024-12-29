@@ -34,7 +34,7 @@ public class SheepInnerWoolRenderer extends FeatureRenderer<SheepEntityRenderSta
     }
 
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, SheepEntityRenderState sheepEntityRenderState, float f, float g) {
-        if (SheepArmor.ClientConfig.hasInnerColoring.getValue()){
+        if (SheepArmor.ClientConfig.hasInnerColoring.getValue() && SheepArmor.hasValidName(sheepEntityRenderState) == null){
             Identifier SKIN = getTexture(sheepEntityRenderState);
             EntityModel<SheepEntityRenderState> entityModel = sheepEntityRenderState.baby ? this.babySheepModel : this.sheepModel;
             if (sheepEntityRenderState.invisible) {

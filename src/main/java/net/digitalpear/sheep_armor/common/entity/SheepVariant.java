@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.digitalpear.sheep_armor.SheepArmor;
 import net.minecraft.registry.RegistryCodecs;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
@@ -47,8 +48,12 @@ public class SheepVariant {
         i = 31 * i + this.texturePath.hashCode();
         i = 31 * i + this.innerWoolTexturePath.hashCode();
         i = 31 * i + this.woolTexturePath.hashCode();
-        i = 31 * i + this.biomes.hashCode();
-        i = 31 * i + this.woolColors.hashCode();
+        for (RegistryEntry<Biome> entry : this.biomes){
+            i = 31 * i + entry.hashCode();
+        }
+        for (WoolColorEntry entry : this.woolColors){
+            i = 31 * i + entry.hashCode();
+        }
         return i;
     }
 

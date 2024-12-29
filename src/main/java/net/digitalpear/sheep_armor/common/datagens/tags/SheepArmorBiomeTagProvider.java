@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 
@@ -40,7 +41,8 @@ public class SheepArmorBiomeTagProvider extends FabricTagProvider<Biome> {
                 .add(BiomeKeys.MEADOW);
 
         getOrCreateTagBuilder(SATags.SABiomeTags.SPAWNS_SOOT_SHEEP)
-                .forceAddTag(BiomeTags.IS_NETHER);
+                .forceAddTag(BiomeTags.IS_NETHER)
+                .addOptionalTag(Identifier.of("clifftree", "inferno"));
 
         getOrCreateTagBuilder(SATags.SABiomeTags.SPAWNS_GLOOMY_SHEEP)
                 .add(BiomeKeys.PALE_GARDEN).add(BiomeKeys.DEEP_DARK);

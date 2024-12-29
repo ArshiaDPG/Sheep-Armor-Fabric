@@ -24,6 +24,7 @@ public record WoolColorEntry(DyeColor color, int weight) {
                     Codec.INT.fieldOf("weight").orElse(1).forGetter(woolColorEntry -> woolColorEntry.weight)
             ).apply(instance, WoolColorEntry::new));
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
