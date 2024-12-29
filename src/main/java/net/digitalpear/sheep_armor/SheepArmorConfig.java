@@ -6,6 +6,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 
 @Config(name = SheepArmor.MOD_ID)
+@Config.Gui.Background("minecraft:textures/block/white_wool.png")
 public class SheepArmorConfig implements ConfigData {
 
 

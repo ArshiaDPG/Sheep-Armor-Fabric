@@ -75,10 +75,11 @@ public class SheepArmor implements ModInitializer {
             -Weights for wool colors no longer has a limit.
             -Added some config options using Config API (https://modrinth.com/mod/config-api).
             -Added clifftree compat.
-            -Added easter egg when naming sheep "Gwen".
+            -Added Easter egg when naming sheep "Gwen".
             -Gloomy sheep now has textures thanks to KattZZi.
         SNAPSHOT 7 CHANGELOG:
             -Reworked config to use Auto Config API.
+            -Added Modmenu integration.
      */
 
 
