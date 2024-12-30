@@ -50,6 +50,7 @@ dependencies {
     }
 
     modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
+//    modApi "maven.modrinth:colorful-books:${project.colorful_books_version}"
 //    runtimeOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 

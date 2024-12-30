@@ -12,13 +12,19 @@ import net.digitalpear.sheep_armor.init.SheepVariants;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Map;
 
 public class SheepArmor implements ModInitializer {
 
@@ -82,6 +88,14 @@ public class SheepArmor implements ModInitializer {
             -Added Modmenu integration.
      */
 
+    /*
+        Colors associated with each enchantment.
+        Guide for compat with mods like Colorful Books.
+     */
+    private static final Map<RegistryKey<Enchantment>, Item> enchantDyes = Map.ofEntries(
+            Map.entry(SAEnchantments.TRIMMING, Items.GREEN_DYE),
+            Map.entry(SAEnchantments.WOOLSPLOSION, Items.ORANGE_DYE)
+    );
 
     @Override
     public void onInitialize() {

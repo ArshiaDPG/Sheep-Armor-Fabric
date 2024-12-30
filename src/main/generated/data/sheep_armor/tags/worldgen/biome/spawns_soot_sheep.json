@@ -2,7 +2,27 @@
   "values": [
     "#minecraft:is_nether",
     {
-      "id": "#clifftree:inferno",
+      "id": "clifftree:inferno",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:volcano",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:volcanic_plains",
+      "required": false
+    },
+    {
+      "id": "profundis:molten_caves",
+      "required": false
+    },
+    {
+      "id": "cavernous:volcanic_caves",
+      "required": false
+    },
+    {
+      "id": "wilderwild:magmatic_caves",
       "required": false
     }
   ]

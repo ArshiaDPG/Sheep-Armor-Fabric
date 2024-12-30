@@ -1,6 +1,38 @@
 {
   "values": [
     "minecraft:pale_garden",
-    "minecraft:deep_dark"
+    "minecraft:deep_dark",
+    {
+      "id": "limbo:agony",
+      "required": false
+    },
+    {
+      "id": "limbo:blossom",
+      "required": false
+    },
+    {
+      "id": "limbo:change",
+      "required": false
+    },
+    {
+      "id": "limbo:desolation",
+      "required": false
+    },
+    {
+      "id": "limbo:despair",
+      "required": false
+    },
+    {
+      "id": "limbo:dread",
+      "required": false
+    },
+    {
+      "id": "limbo:hope",
+      "required": false
+    },
+    {
+      "id": "limbo:isolation",
+      "required": false
+    }
   ]
 }
