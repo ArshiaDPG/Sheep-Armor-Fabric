@@ -86,6 +86,10 @@ public class SheepArmor implements ModInitializer {
         SNAPSHOT 7 CHANGELOG:
             -Reworked config to use Auto Config API.
             -Added Modmenu integration.
+            -Added compat for more mods.
+            -Amount of thorns damage from cactus armor can now be set in the config.
+            -Loot tables that have horse armor can now be set in the config.
+            -Horse armor can now be enchanted and slightly damanged when found in loot tables.
      */
 
     /*
@@ -99,6 +103,8 @@ public class SheepArmor implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        AutoConfig.register(SheepArmorConfig.class, GsonConfigSerializer::new);
+
         TrackedDataHandlerRegistry.register(SHEEP_VARIANT);
 
         DynamicRegistries.registerSynced(SARegistryKeys.SHEEP_VARIANT, SheepVariant.CODEC);
@@ -108,8 +114,6 @@ public class SheepArmor implements ModInitializer {
         SAData.init();
         SAEnchantments.init();
         SheepVariants.init();
-
-        AutoConfig.register(SheepArmorConfig.class, GsonConfigSerializer::new);
     }
 
 

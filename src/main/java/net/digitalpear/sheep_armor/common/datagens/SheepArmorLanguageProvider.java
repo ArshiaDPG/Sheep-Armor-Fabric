@@ -33,6 +33,8 @@ public class SheepArmorLanguageProvider extends FabricLanguageProvider {
         addConfigTranslation(translationBuilder, "universalBarn", "Universal Barn Sheep Spawns", "Whether vanilla sheep have a chance of spawning alongside other valid sheep variants no matter what.");
         addConfigTranslation(translationBuilder, "sheepArmorEnabled", "Sheep Armor Enabled", "Whether sheep armor can be crafted/found in the world.");
         addConfigTranslation(translationBuilder, "hasInnerColoring", "Has Inner Coloring", "Whether sheep body hair is colored like their wool.");
+        addConfigTranslation(translationBuilder, "thornyArmorDamage", "Thorny Armor Damage", "The amount of damage sheep armor with built-in thorns does.");
+        addConfigTranslation(translationBuilder, "lootTableAdditions", "Loot Table Additions", "List of loot tables and the sheep armor that is added to them.");
     }
 
 

@@ -3,7 +3,6 @@ package net.digitalpear.sheep_armor.common.entity;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.math.random.Random;
 
 import java.util.List;
 import java.util.Objects;
@@ -36,22 +35,5 @@ public record WoolColorEntry(DyeColor color, int weight) {
     @Override
     public int hashCode() {
         return Objects.hash(color, weight);
-    }
-
-    public static DyeColor generateColor(List<WoolColorEntry> entryList, Random random) {
-        if (entryList.isEmpty()) {
-            return DyeColor.WHITE;
-        }
-        int totalWeight = entryList.stream().mapToInt(wc -> wc.weight).sum();
-        int randomValue = random.nextInt(totalWeight);
-
-        for (WoolColorEntry wc : entryList) {
-            if (randomValue < wc.weight) {
-                return wc.color;
-            }
-            randomValue -= wc.weight;
-        }
-
-        throw new IllegalStateException("Failed to generate a color");
     }
 }

@@ -7,10 +7,13 @@ import net.minecraft.registry.RegistryCodecs;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.biome.Biome;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SheepVariant {
 
@@ -57,6 +60,14 @@ public class SheepVariant {
         return i;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SheepVariant that = (SheepVariant) o;
+        return Objects.equals(texturePath, that.texturePath) && Objects.equals(woolTexturePath, that.woolTexturePath) && Objects.equals(innerWoolTexturePath, that.innerWoolTexturePath) && Objects.equals(biomes, that.biomes) && Objects.equals(woolColors, that.woolColors);
+    }
+
     public Identifier getTexturePath(){
         return this.texturePath;
     }
@@ -75,5 +86,22 @@ public class SheepVariant {
 
     public List<WoolColorEntry> getWoolColors() {
         return woolColors;
+    }
+
+    public DyeColor generateColor(Random random) {
+        if (this.getWoolColors().isEmpty()) {
+            return DyeColor.WHITE;
+        }
+        int totalWeight = this.getWoolColors().stream().mapToInt(WoolColorEntry::weight).sum();
+        int randomValue = random.nextInt(totalWeight);
+
+        for (WoolColorEntry wc : this.getWoolColors()) {
+            if (randomValue < wc.weight()) {
+                return wc.color();
+            }
+            randomValue -= wc.weight();
+        }
+
+        throw new IllegalStateException("Failed to generate a color");
     }
 }

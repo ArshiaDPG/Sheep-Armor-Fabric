@@ -7,7 +7,6 @@ import net.digitalpear.sheep_armor.SheepArmorConfig;
 import net.digitalpear.sheep_armor.common.access.SheepArmorAccess;
 import net.digitalpear.sheep_armor.common.entity.SARegistryKeys;
 import net.digitalpear.sheep_armor.common.entity.SheepVariant;
-import net.digitalpear.sheep_armor.common.entity.WoolColorEntry;
 import net.digitalpear.sheep_armor.init.SAEnchantments;
 import net.digitalpear.sheep_armor.init.SATags;
 import net.digitalpear.sheep_armor.init.SheepVariants;
@@ -79,12 +78,12 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
     @Inject(at = @At("RETURN"), method = "initialize")
     private void addVariantStuff(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, CallbackInfoReturnable<EntityData> cir){
         RegistryEntry<Biome> biomeEntry = world.getBiome(this.getBlockPos());
-        RegistryEntry<SheepVariant> compatibleBiome = SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry, world.getRandom());
+        RegistryEntry<SheepVariant> compatibleVariant = SheepVariants.fromBiome(this.getRegistryManager(), biomeEntry, world.getRandom());
         SheepArmorConfig config = AutoConfig.getConfigHolder(SheepArmorConfig.class).getConfig();
         if (config.hasVariants){
-            this.setVariant(compatibleBiome);
+            this.setVariant(compatibleVariant);
             if (config.hasCustomColors){
-                this.setColor(WoolColorEntry.generateColor(this.getVariant().value().getWoolColors(), world.getRandom()));
+                this.setColor(this.getVariant().value().generateColor(world.getRandom()));
             }
         }
     }
@@ -140,7 +139,8 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
 
             //Cactus armor thorns effect
             if (armorStack.isIn(SATags.SAItemTags.THORNY_SHEEP_ARMORS) && source.getAttacker() != null){
-                source.getAttacker().damage(world, this.getDamageSources().cactus(), 2);
+                SheepArmorConfig config = AutoConfig.getConfigHolder(SheepArmorConfig.class).getConfig();
+                source.getAttacker().damage(world, this.getDamageSources().cactus(), config.thornyArmorDamage);
             }
 
             //Damage item
