@@ -33,7 +33,7 @@ public class SheepRenderStateMixin implements SheepRendererAccess {
 
     @Override
     public void setBodyArmor(ItemStack stack) {
-        if (stack.isIn(AWTags.SAItemTags.SHEEP_ARMORS)){
+        if (stack.isIn(AWTags.AWItemTags.SHEEP_ARMORS)){
             armorStack = stack;
         }
         else{

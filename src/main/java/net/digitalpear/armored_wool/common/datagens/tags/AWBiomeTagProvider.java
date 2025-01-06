@@ -29,7 +29,7 @@ public class AWBiomeTagProvider extends FabricTagProvider<Biome> {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 
-        getOrCreateTagBuilder(AWTags.SABiomeTags.SPAWNS_ROCKY_SHEEP)
+        getOrCreateTagBuilder(AWTags.AWBiomeTags.SPAWNS_ROCKY_SHEEP)
                 .add(BiomeKeys.STONY_PEAKS)
                 .add(BiomeKeys.GROVE)
                 .add(BiomeKeys.FROZEN_PEAKS)
@@ -41,7 +41,7 @@ public class AWBiomeTagProvider extends FabricTagProvider<Biome> {
                 .addOptional(Identifier.of("blooming_biosphere", "tidepools"))
         ;
 
-        getOrCreateTagBuilder(AWTags.SABiomeTags.SPAWNS_REGAL_SHEEP)
+        getOrCreateTagBuilder(AWTags.AWBiomeTags.SPAWNS_REGAL_SHEEP)
                 .add(BiomeKeys.FLOWER_FOREST)
                 .add(BiomeKeys.CHERRY_GROVE)
                 .add(BiomeKeys.SUNFLOWER_PLAINS)
@@ -52,7 +52,7 @@ public class AWBiomeTagProvider extends FabricTagProvider<Biome> {
                 .addOptional(Identifier.of("blooming_biosphere", "snowy_cherry_grove"))
         ;
 
-        getOrCreateTagBuilder(AWTags.SABiomeTags.SPAWNS_SOOT_SHEEP)
+        getOrCreateTagBuilder(AWTags.AWBiomeTags.SPAWNS_SOOT_SHEEP)
                 .forceAddTag(BiomeTags.IS_NETHER)
                 .addOptional(Identifier.of("clifftree", "inferno"))
                 .addOptional(Identifier.of("biomesoplenty", "volcano"))
@@ -62,7 +62,7 @@ public class AWBiomeTagProvider extends FabricTagProvider<Biome> {
                 .addOptional(Identifier.of("wilderwild", "magmatic_caves"))
         ;
 
-        getOrCreateTagBuilder(AWTags.SABiomeTags.SPAWNS_GLOOMY_SHEEP)
+        getOrCreateTagBuilder(AWTags.AWBiomeTags.SPAWNS_GLOOMY_SHEEP)
                 .add(BiomeKeys.PALE_GARDEN)
                 .add(BiomeKeys.DEEP_DARK)
                 .addOptional(Identifier.of("limbo", "agony"))

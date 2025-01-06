@@ -33,10 +33,10 @@ public class SheepVariants {
 
     public static void bootstrap(Registerable<SheepVariant> registry) {
         register(registry, BARN, WoolColorEntry.DEFAULT_SHEEP_COLORS, BiomeTags.IS_OVERWORLD);
-        register(registry, ROCKY, SheepColors.ROCKY, AWTags.SABiomeTags.SPAWNS_ROCKY_SHEEP);
-        register(registry, REGAL, SheepColors.REGAL, AWTags.SABiomeTags.SPAWNS_REGAL_SHEEP);
-        register(registry, SOOT, SheepColors.SOOT, AWTags.SABiomeTags.SPAWNS_SOOT_SHEEP);
-        register(registry, GLOOMY, SheepColors.GLOOMY, AWTags.SABiomeTags.SPAWNS_GLOOMY_SHEEP);
+        register(registry, ROCKY, SheepColors.ROCKY, AWTags.AWBiomeTags.SPAWNS_ROCKY_SHEEP);
+        register(registry, REGAL, SheepColors.REGAL, AWTags.AWBiomeTags.SPAWNS_REGAL_SHEEP);
+        register(registry, SOOT, SheepColors.SOOT, AWTags.AWBiomeTags.SPAWNS_SOOT_SHEEP);
+        register(registry, GLOOMY, SheepColors.GLOOMY, AWTags.AWBiomeTags.SPAWNS_GLOOMY_SHEEP);
     }
 
 

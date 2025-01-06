@@ -22,7 +22,7 @@ public interface SheepArmorMaterials {
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, //Equip Sound
             0.0F, //Toughness
             0.0F, //Knockback Resistance
-            AWTags.SAItemTags.REPAIRS_CACTUS_EQUIPMENT); //Repair Ingredient
+            AWTags.AWItemTags.REPAIRS_CACTUS_EQUIPMENT); //Repair Ingredient
 
     ArmorMaterial AMETHYST = register(
             9,
@@ -31,7 +31,7 @@ public interface SheepArmorMaterials {
             SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
             0.0F,
             0.0F,
-            AWTags.SAItemTags.REPAIRS_AMETHYST_EQUIPMENT);
+            AWTags.AWItemTags.REPAIRS_AMETHYST_EQUIPMENT);
 
     ArmorMaterial COPPER = register(
             12,
@@ -40,7 +40,7 @@ public interface SheepArmorMaterials {
             SoundEvents.ITEM_ARMOR_EQUIP_IRON,
             0.0F,
             0.0F,
-            AWTags.SAItemTags.REPAIRS_COPPER_EQUIPMENT);
+            AWTags.AWItemTags.REPAIRS_COPPER_EQUIPMENT);
 
     ArmorMaterial SHULKER = register(
             20,
@@ -49,7 +49,7 @@ public interface SheepArmorMaterials {
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
             0.5F,
             0.0F,
-            AWTags.SAItemTags.REPAIRS_SHULKER_EQUIPMENT);
+            AWTags.AWItemTags.REPAIRS_SHULKER_EQUIPMENT);
 
 
     private static ArmorMaterial register(int durability, int defenseAmount, int enchantability, RegistryEntry<SoundEvent > equipSound, float toughness, float knockbackResistance, TagKey<Item> repairIngredient) {

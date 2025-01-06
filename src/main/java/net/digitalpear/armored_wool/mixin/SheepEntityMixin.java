@@ -82,10 +82,11 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
         ArmoredWoolConfig config = AutoConfig.getConfigHolder(ArmoredWoolConfig.class).getConfig();
         if (config.serverConfig.hasVariants){
             this.setVariant(compatibleVariant);
-            if (config.serverConfig.hasCustomColors){
-                this.setColor(this.getVariant().value().generateColor(world.getRandom()));
-            }
         }
+        if (config.serverConfig.hasCustomColors){
+            this.setColor(compatibleVariant.value().generateColor(world.getRandom()));
+        }
+
     }
 
     @Shadow public abstract DyeColor getColor();
@@ -138,7 +139,7 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
             ItemStack armorStack = this.getBodyArmor();
 
             //Cactus armor thorns effect
-            if (armorStack.isIn(AWTags.SAItemTags.THORNY_SHEEP_ARMORS) && source.getAttacker() != null){
+            if (armorStack.isIn(AWTags.AWItemTags.THORNY_SHEEP_ARMORS) && source.getAttacker() != null){
                 ArmoredWoolConfig config = AutoConfig.getConfigHolder(ArmoredWoolConfig.class).getConfig();
                 source.getAttacker().damage(world, this.getDamageSources().cactus(), config.serverConfig.thornyArmorDamage);
             }

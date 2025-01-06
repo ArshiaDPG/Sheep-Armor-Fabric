@@ -56,8 +56,8 @@ public class SheepArmorItem extends ArmorItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         World world = user.getWorld();
-        if (entity instanceof SheepEntity sheep) {
-            if (stack.isIn(AWTags.SAItemTags.SHEEP_ARMORS) && !sheep.isSheared() && !((SheepArmorAccess) sheep).hasArmor() && !sheep.isBaby()){
+        if (entity instanceof SheepEntity sheep && entity.getType().isIn(AWTags.AWEntityTypeTags.ARMOR_COMPATIBLE_SHEEP)) {
+            if (stack.isIn(AWTags.AWItemTags.SHEEP_ARMORS) && !sheep.isSheared() && !((SheepArmorAccess) sheep).hasArmor() && !sheep.isBaby()){
                 if (!world.isClient()) {
                     sheep.equipBodyArmor(stack.copyWithCount(1));
                     stack.decrementUnlessCreative(1, user);

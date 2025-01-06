@@ -3,6 +3,7 @@ package net.digitalpear.armored_wool;
 import net.digitalpear.armored_wool.common.datagens.*;
 import net.digitalpear.armored_wool.common.datagens.tags.AWBiomeTagProvider;
 import net.digitalpear.armored_wool.common.datagens.tags.AWEnchantmentTagProvider;
+import net.digitalpear.armored_wool.common.datagens.tags.AWEntityTagProvider;
 import net.digitalpear.armored_wool.common.datagens.tags.AWItemTagProvider;
 import net.digitalpear.armored_wool.common.entity.AWRegistryKeys;
 import net.digitalpear.armored_wool.init.AWEnchantments;
@@ -24,6 +25,7 @@ public class ArmoredWoolDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(AWItemTagProvider::new);
         pack.addProvider(AWEnchantmentTagProvider::new);
         pack.addProvider(AWBiomeTagProvider::new);
+        pack.addProvider(AWEntityTagProvider::new);
 
         pack.addProvider(AWSheepVariantProvider::new);
 

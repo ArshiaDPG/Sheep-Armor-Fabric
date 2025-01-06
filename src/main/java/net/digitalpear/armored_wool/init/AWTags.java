@@ -1,6 +1,7 @@
 package net.digitalpear.armored_wool.init;
 
 import net.digitalpear.armored_wool.ArmoredWool;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
@@ -8,7 +9,7 @@ import net.minecraft.world.biome.Biome;
 
 public class AWTags {
 
-    public static class SAItemTags{
+    public static class AWItemTags {
         public static final TagKey<Item> THORNY_SHEEP_ARMORS = of("throny_sheep_armors");
         public static final TagKey<Item> SHEEP_ARMORS = of("sheep_armors");
         public static final TagKey<Item> REPAIRS_CACTUS_EQUIPMENT = of("repairs_cactus_equipment");
@@ -20,7 +21,7 @@ public class AWTags {
             return TagKey.of(RegistryKeys.ITEM, ArmoredWool.id(id));
         }
     }
-    public static class SABiomeTags {
+    public static class AWBiomeTags {
 
         public static final TagKey<Biome> SPAWNS_ROCKY_SHEEP = of("spawns_rocky_sheep");
         public static final TagKey<Biome> SPAWNS_REGAL_SHEEP = of("spawns_regal_sheep");
@@ -31,6 +32,15 @@ public class AWTags {
         private static TagKey<Biome> of(String id) {
             return TagKey.of(RegistryKeys.BIOME, ArmoredWool.id(id));
         }
+    }
+    public static class AWEntityTypeTags{
+
+        public static final TagKey<EntityType<?>> ARMOR_COMPATIBLE_SHEEP = of("armor_compatible_sheep");
+
+        private static TagKey<EntityType<?>> of(String id) {
+            return TagKey.of(RegistryKeys.ENTITY_TYPE, ArmoredWool.id(id));
+        }
+
     }
 
 

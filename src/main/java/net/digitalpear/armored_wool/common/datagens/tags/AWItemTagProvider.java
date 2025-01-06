@@ -29,22 +29,22 @@ public class AWItemTagProvider extends FabricTagProvider<Item> {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 
-        getOrCreateTagBuilder(AWTags.SAItemTags.THORNY_SHEEP_ARMORS).add(AWItems.CACTUS_SHEEP_ARMOR);
+        getOrCreateTagBuilder(AWTags.AWItemTags.THORNY_SHEEP_ARMORS).add(AWItems.CACTUS_SHEEP_ARMOR);
 
         AWItems.SHEEP_ARMOR_MAP.keySet().forEach(item -> {
             if (item != AWItems.CACTUS_SHEEP_ARMOR){
-                getOrCreateTagBuilder(AWTags.SAItemTags.SHEEP_ARMORS).add(item);
+                getOrCreateTagBuilder(AWTags.AWItemTags.SHEEP_ARMORS).add(item);
             }
         });
-        getOrCreateTagBuilder(AWTags.SAItemTags.SHEEP_ARMORS).forceAddTag(AWTags.SAItemTags.THORNY_SHEEP_ARMORS);
+        getOrCreateTagBuilder(AWTags.AWItemTags.SHEEP_ARMORS).forceAddTag(AWTags.AWItemTags.THORNY_SHEEP_ARMORS);
 
-        getOrCreateTagBuilder(AWTags.SAItemTags.REPAIRS_CACTUS_EQUIPMENT).add(Items.CACTUS);
-        getOrCreateTagBuilder(AWTags.SAItemTags.REPAIRS_COPPER_EQUIPMENT).add(Items.COPPER_INGOT);
-        getOrCreateTagBuilder(AWTags.SAItemTags.REPAIRS_AMETHYST_EQUIPMENT).add(Items.AMETHYST_SHARD);
-        getOrCreateTagBuilder(AWTags.SAItemTags.REPAIRS_SHULKER_EQUIPMENT).add(Items.SHULKER_SHELL);
+        getOrCreateTagBuilder(AWTags.AWItemTags.REPAIRS_CACTUS_EQUIPMENT).add(Items.CACTUS);
+        getOrCreateTagBuilder(AWTags.AWItemTags.REPAIRS_COPPER_EQUIPMENT).add(Items.COPPER_INGOT);
+        getOrCreateTagBuilder(AWTags.AWItemTags.REPAIRS_AMETHYST_EQUIPMENT).add(Items.AMETHYST_SHARD);
+        getOrCreateTagBuilder(AWTags.AWItemTags.REPAIRS_SHULKER_EQUIPMENT).add(Items.SHULKER_SHELL);
 
-        getOrCreateTagBuilder(ItemTags.VANISHING_ENCHANTABLE).forceAddTag(AWTags.SAItemTags.SHEEP_ARMORS);
-        getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE).forceAddTag(AWTags.SAItemTags.SHEEP_ARMORS);
-        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).forceAddTag(AWTags.SAItemTags.SHEEP_ARMORS);
+        getOrCreateTagBuilder(ItemTags.VANISHING_ENCHANTABLE).forceAddTag(AWTags.AWItemTags.SHEEP_ARMORS);
+        getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE).forceAddTag(AWTags.AWItemTags.SHEEP_ARMORS);
+        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).forceAddTag(AWTags.AWItemTags.SHEEP_ARMORS);
     }
 }

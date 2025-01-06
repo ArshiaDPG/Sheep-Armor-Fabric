@@ -89,6 +89,7 @@ public class ArmoredWool implements ModInitializer {
             -Config will now specify whether a setting is for the client or server.
             -Renamed mod to "Armored Wool".
             -Fixed cactus armor item texture being 17x17 instead of 16x16.
+            -Sheep armor compatibility is now determined using an entity tag.
      */
 
     /*

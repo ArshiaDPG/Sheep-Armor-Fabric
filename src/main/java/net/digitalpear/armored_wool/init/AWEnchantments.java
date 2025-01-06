@@ -37,7 +37,7 @@ public class AWEnchantments {
     }
 
     private static Enchantment.Builder sheepEnchantmentProperties(RegistryEntryLookup<Item> itemLookup, int weight, int maxLevel, Enchantment.Cost minCost, Enchantment.Cost maxCost, int anvilCost, AttributeModifierSlot... slots){
-        return Enchantment.builder(Enchantment.definition(itemLookup.getOrThrow(AWTags.SAItemTags.SHEEP_ARMORS), weight, maxLevel, minCost, maxCost, anvilCost, slots));
+        return Enchantment.builder(Enchantment.definition(itemLookup.getOrThrow(AWTags.AWItemTags.SHEEP_ARMORS), weight, maxLevel, minCost, maxCost, anvilCost, slots));
     }
     private static Enchantment.Builder sheepEnchantmentProperties(RegistryEntryLookup<Item> itemLookup, int weight, int maxLevel, Enchantment.Cost minCost, Enchantment.Cost maxCost, int anvilCost){
         return sheepEnchantmentProperties(itemLookup, weight, maxLevel, minCost, maxCost, anvilCost, AttributeModifierSlot.BODY);
