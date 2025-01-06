@@ -1,5 +1,6 @@
 {
   "biomes": "#armored_wool:spawns_gloomy_sheep",
+  "has_inner_wool": true,
   "inner_wool_texture": "armored_wool:textures/entity/sheep/gloomy_inner_fur",
   "texture": "armored_wool:textures/entity/sheep/gloomy",
   "wool_colors": [

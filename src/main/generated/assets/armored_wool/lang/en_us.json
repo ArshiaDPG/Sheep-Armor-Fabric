@@ -23,5 +23,5 @@
   "text.autoconfig.armored_wool.option.serverConfig.thornyArmorDamage.@Tooltip": "The amount of damage sheep armor with built-in thorns does.",
   "text.autoconfig.armored_wool.option.serverConfig.universalBarn": "Universal Barn Sheep Spawns",
   "text.autoconfig.armored_wool.option.serverConfig.universalBarn.@Tooltip": "Whether vanilla sheep have a chance of spawning alongside other valid sheep variants no matter what.",
-  "text.autoconfig.armored_wool.title": "Sheep Armor Config"
+  "text.autoconfig.armored_wool.title": "Armored Wool Config"
 }

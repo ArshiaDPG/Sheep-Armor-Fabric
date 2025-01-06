@@ -1,5 +1,6 @@
 {
   "biomes": "#minecraft:is_overworld",
+  "has_inner_wool": true,
   "inner_wool_texture": "armored_wool:textures/entity/sheep/barn_inner_fur",
   "texture": "armored_wool:textures/entity/sheep/barn",
   "wool_colors": [

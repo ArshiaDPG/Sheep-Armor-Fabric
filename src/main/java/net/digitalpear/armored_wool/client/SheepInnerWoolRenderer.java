@@ -36,34 +36,39 @@ public class SheepInnerWoolRenderer extends FeatureRenderer<SheepEntityRenderSta
     }
 
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, SheepEntityRenderState sheepEntityRenderState, float f, float g) {
-        ArmoredWoolConfig config = AutoConfig.getConfigHolder(ArmoredWoolConfig.class).getConfig();
-        if (config.clientConfig.hasInnerColoring && ArmoredWool.hasValidName(sheepEntityRenderState) == null){
-            Identifier SKIN = getTexture(sheepEntityRenderState);
-            EntityModel<SheepEntityRenderState> entityModel = sheepEntityRenderState.baby ? this.babySheepModel : this.sheepModel;
-            if (sheepEntityRenderState.invisible) {
-                if (sheepEntityRenderState.hasOutline) {
-                    entityModel.setAngles(sheepEntityRenderState);
-                    VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getOutline(SKIN));
-                    entityModel.render(matrixStack, vertexConsumer, i, LivingEntityRenderer.getOverlay(sheepEntityRenderState, 0.0F), -16777216);
-                }
-            } else {
-                int r;
-                if (sheepEntityRenderState.customName != null && "jeb_".equals(sheepEntityRenderState.customName.getString())) {
-                    int k = MathHelper.floor(sheepEntityRenderState.age);
-                    int l = k / 25 + sheepEntityRenderState.id;
-                    int m = DyeColor.values().length;
-                    int n = l % m;
-                    int o = (l + 1) % m;
-                    float h = ((float)(k % 25) + MathHelper.fractionalPart(sheepEntityRenderState.age)) / 25.0F;
-                    int p = SheepEntity.getRgbColor(DyeColor.byId(n));
-                    int q = SheepEntity.getRgbColor(DyeColor.byId(o));
-                    r = ColorHelper.lerp(h, p, q);
-                } else {
-                    r = SheepEntity.getRgbColor(sheepEntityRenderState.color);
-                }
-
-                render(entityModel, SKIN, matrixStack, vertexConsumerProvider, i, sheepEntityRenderState, r);
-            }
+        if (!((SheepRendererAccess) sheepEntityRenderState).getVariant().hasInnerWool() || ArmoredWool.hasValidName(sheepEntityRenderState) != null){
+            return;
         }
+        ArmoredWoolConfig config = AutoConfig.getConfigHolder(ArmoredWoolConfig.class).getConfig();
+        if (!config.clientConfig.hasInnerColoring){
+            return;
+        }
+        Identifier SKIN = getTexture(sheepEntityRenderState);
+        EntityModel<SheepEntityRenderState> entityModel = sheepEntityRenderState.baby ? this.babySheepModel : this.sheepModel;
+        if (sheepEntityRenderState.invisible) {
+            if (sheepEntityRenderState.hasOutline) {
+                entityModel.setAngles(sheepEntityRenderState);
+                VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getOutline(SKIN));
+                entityModel.render(matrixStack, vertexConsumer, i, LivingEntityRenderer.getOverlay(sheepEntityRenderState, 0.0F), -16777216);
+            }
+        } else {
+            int r;
+            if (sheepEntityRenderState.customName != null && "jeb_".equals(sheepEntityRenderState.customName.getString())) {
+                int k = MathHelper.floor(sheepEntityRenderState.age);
+                int l = k / 25 + sheepEntityRenderState.id;
+                int m = DyeColor.values().length;
+                int n = l % m;
+                int o = (l + 1) % m;
+                float h = ((float)(k % 25) + MathHelper.fractionalPart(sheepEntityRenderState.age)) / 25.0F;
+                int p = SheepEntity.getRgbColor(DyeColor.byId(n));
+                int q = SheepEntity.getRgbColor(DyeColor.byId(o));
+                r = ColorHelper.lerp(h, p, q);
+            } else {
+                r = SheepEntity.getRgbColor(sheepEntityRenderState.color);
+            }
+
+            render(entityModel, SKIN, matrixStack, vertexConsumerProvider, i, sheepEntityRenderState, r);
+        }
+
     }
 }

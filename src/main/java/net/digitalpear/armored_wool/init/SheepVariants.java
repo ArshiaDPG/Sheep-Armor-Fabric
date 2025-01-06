@@ -33,7 +33,7 @@ public class SheepVariants {
 
     public static void bootstrap(Registerable<SheepVariant> registry) {
         register(registry, BARN, WoolColorEntry.DEFAULT_SHEEP_COLORS, BiomeTags.IS_OVERWORLD);
-        register(registry, ROCKY, SheepColors.ROCKY, AWTags.AWBiomeTags.SPAWNS_ROCKY_SHEEP);
+        register(registry, ROCKY, SheepColors.ROCKY, AWTags.AWBiomeTags.SPAWNS_ROCKY_SHEEP, false);
         register(registry, REGAL, SheepColors.REGAL, AWTags.AWBiomeTags.SPAWNS_REGAL_SHEEP);
         register(registry, SOOT, SheepColors.SOOT, AWTags.AWBiomeTags.SPAWNS_SOOT_SHEEP);
         register(registry, GLOOMY, SheepColors.GLOOMY, AWTags.AWBiomeTags.SPAWNS_GLOOMY_SHEEP);
@@ -60,13 +60,16 @@ public class SheepVariants {
     }
 
     static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, List<WoolColorEntry> colors, TagKey<Biome> biomeTag) {
-        register(registry, key, key.getValue(), colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
+        register(registry, key, key.getValue(), colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag), true);
     }
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, List<WoolColorEntry> colors, TagKey<Biome> biomeTag) {
-        register(registry, key, texturePath, colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag));
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, List<WoolColorEntry> colors, TagKey<Biome> biomeTag, boolean hasInnerWool) {
+        register(registry, key, key.getValue(), colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag), hasInnerWool);
     }
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, List<WoolColorEntry> colors, RegistryEntryList<Biome> biomes) {
-        registry.register(key, new SheepVariant(texturePath.withPrefixedPath(SheepVariant.SHEEP_TEXTURE_PATH), colors, biomes));
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, List<WoolColorEntry> colors, TagKey<Biome> biomeTag, boolean hasInnerWool) {
+        register(registry, key, texturePath, colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag), hasInnerWool);
+    }
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, List<WoolColorEntry> colors, RegistryEntryList<Biome> biomes, boolean hasInnerWool) {
+        registry.register(key, new SheepVariant(texturePath.withPrefixedPath(SheepVariant.SHEEP_TEXTURE_PATH), colors, biomes, hasInnerWool));
     }
 
 

@@ -18,7 +18,7 @@ import java.util.Objects;
 public class SheepVariant {
 
     public static final String SHEEP_TEXTURE_PATH = "textures/entity/sheep/";
-    public static final Identifier VANILLA_SHEEP_TEXTURE = Identifier.ofVanilla("sheep");
+    public static final Identifier VANILLA_SHEEP_TEXTURE = Identifier.ofVanilla("sheep").withPrefixedPath(SHEEP_TEXTURE_PATH);
     public static final Identifier VANILLA_SHEEP_INNER_WOOL = ArmoredWool.id("barn").withSuffixedPath("inner_fur").withPrefixedPath(SHEEP_TEXTURE_PATH);
 
     public static final Codec<SheepVariant> CODEC = RecordCodecBuilder.create((instance) ->
@@ -26,6 +26,7 @@ public class SheepVariant {
                     Identifier.CODEC.fieldOf("texture").orElse(VANILLA_SHEEP_TEXTURE).forGetter((sheepVariant) -> sheepVariant.texturePath),
                     Identifier.CODEC.fieldOf("wool_texture").orElse(VANILLA_SHEEP_TEXTURE.withSuffixedPath("_fur")).forGetter((sheepVariant) -> sheepVariant.woolTexturePath),
                     Identifier.CODEC.fieldOf("inner_wool_texture").orElse(VANILLA_SHEEP_INNER_WOOL).forGetter((sheepVariant) -> sheepVariant.innerWoolTexturePath),
+                    Codec.BOOL.fieldOf("has_inner_wool").orElse(true).forGetter(sheepVariant -> sheepVariant.hasInnerWool),
                     Codec.list(WoolColorEntry.CODEC).fieldOf("wool_colors").orElse(WoolColorEntry.DEFAULT_SHEEP_COLORS).forGetter(sheepVariant -> sheepVariant.woolColors),
                     RegistryCodecs.entryList(RegistryKeys.BIOME).fieldOf("biomes").orElse(RegistryEntryList.empty()).forGetter(sheepVariant -> sheepVariant.biomes)
             ).apply(instance, SheepVariant::new));
@@ -33,16 +34,18 @@ public class SheepVariant {
     private final Identifier texturePath;
     private final Identifier woolTexturePath;
     private final Identifier innerWoolTexturePath;
+    private final boolean hasInnerWool;
     private final RegistryEntryList<Biome> biomes;
     private final List<WoolColorEntry> woolColors;
 
-    public SheepVariant(Identifier texturePath, List<WoolColorEntry> woolColors, RegistryEntryList<Biome> biomes) {
-        this(texturePath, texturePath.withSuffixedPath("_fur"), texturePath.withSuffixedPath("_inner_fur"), woolColors, biomes);
+    public SheepVariant(Identifier texturePath, List<WoolColorEntry> woolColors, RegistryEntryList<Biome> biomes, boolean hasInnerWool) {
+        this(texturePath, texturePath.withSuffixedPath("_fur"), texturePath.withSuffixedPath("_inner_fur"), hasInnerWool, woolColors, biomes);
     }
-    public SheepVariant(Identifier texturePath, Identifier woolTexturePath, Identifier innerWoolTexturePath, List<WoolColorEntry> woolColors, RegistryEntryList<Biome> biomes) {
+    public SheepVariant(Identifier texturePath, Identifier woolTexturePath, Identifier innerWoolTexturePath, boolean hasInnerWool, List<WoolColorEntry> woolColors, RegistryEntryList<Biome> biomes) {
         this.texturePath = texturePath;
         this.woolTexturePath = woolTexturePath;
         this.innerWoolTexturePath = innerWoolTexturePath;
+        this.hasInnerWool = hasInnerWool;
         this.woolColors = woolColors;
         this.biomes = biomes;
     }
@@ -66,6 +69,10 @@ public class SheepVariant {
         if (o == null || getClass() != o.getClass()) return false;
         SheepVariant that = (SheepVariant) o;
         return Objects.equals(texturePath, that.texturePath) && Objects.equals(woolTexturePath, that.woolTexturePath) && Objects.equals(innerWoolTexturePath, that.innerWoolTexturePath) && Objects.equals(biomes, that.biomes) && Objects.equals(woolColors, that.woolColors);
+    }
+
+    public boolean hasInnerWool() {
+        return hasInnerWool;
     }
 
     public Identifier getTexturePath(){
