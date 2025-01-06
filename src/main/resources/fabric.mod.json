@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "sheep_armor",
+  "id": "armored_wool",
   "version": "${version}",
 
-  "name": "Sheep Armor",
+  "name": "Armored Wool",
   "description": "",
   "authors": [
     "DigitalPear",
@@ -13,26 +13,26 @@
   "contact": {},
 
   "license": "Apache-2.0",
-  "icon": "assets/sheep_armor/icon.png",
+  "icon": "assets/armored_wool/icon.png",
 
   "environment": "*",
   "entrypoints": {
         "fabric-datagen": [
-        "net.digitalpear.sheep_armor.SheepArmorDataGenerator"
+        "net.digitalpear.armored_wool.ArmoredWoolDataGenerator"
         ],
         "main":[
-            "net.digitalpear.sheep_armor.SheepArmor"
+            "net.digitalpear.armored_wool.ArmoredWool"
         ],
         "client":[
-            "net.digitalpear.sheep_armor.client.SheepArmorClient"
+            "net.digitalpear.armored_wool.client.ArmoredWoolClient"
         ],
         "modmenu": [
-             "net.digitalpear.sheep_armor.SheepArmorModMenuIntegration"
+             "net.digitalpear.armored_wool.ArmoredWoolModMenuIntegration"
         ]
   },
 
       "mixins": [
-        "sheep_armor.mixins.json"
+        "armored_wool.mixins.json"
       ],
 
   "depends": {

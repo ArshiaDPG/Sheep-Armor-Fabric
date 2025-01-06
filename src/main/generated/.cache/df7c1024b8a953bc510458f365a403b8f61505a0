@@ -1,7 +1,0 @@
-// 1.21.4	-999999999-01-01T00:00:00	Sheep Armor/Tags for minecraft:enchantment
-736a3a82c91c5bc5cf48f44504c44cfd5b9012c9 data/minecraft/tags/enchantment/in_enchanting_table.json
-736a3a82c91c5bc5cf48f44504c44cfd5b9012c9 data/minecraft/tags/enchantment/non_treasure.json
-0f8f6aa130bb5e4cd9411c9b1345c1d9a987aa1e data/minecraft/tags/enchantment/on_random_loot.json
-0f8f6aa130bb5e4cd9411c9b1345c1d9a987aa1e data/minecraft/tags/enchantment/tradeable.json
-fa3cc5c847bc90e36f4e648397fec7579bb28294 data/minecraft/tags/enchantment/trades/taiga_special.json
-fa3cc5c847bc90e36f4e648397fec7579bb28294 data/minecraft/tags/enchantment/treasure.json

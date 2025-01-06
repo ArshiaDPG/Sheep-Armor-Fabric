@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.digitalpear.armored_wool.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+      "SheepEntityMixin"
+  ],
+  "client": [
+      "SheepEntityRendererMixin",
+      "SheepWoolFeatureRendererMixin",
+      "SheepRenderStateMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

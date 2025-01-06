@@ -1,0 +1,5 @@
+// 1.21.4	-999999999-01-01T00:00:00	Armored Wool/Tags for minecraft:worldgen/biome
+0f2f754807af73318956be454cc83d785a086ac4 data/armored_wool/tags/worldgen/biome/spawns_gloomy_sheep.json
+2c3d661e7146f441e29629524b6e8113938f9f9a data/armored_wool/tags/worldgen/biome/spawns_regal_sheep.json
+c16d1e41815145fc15be735356a12da4b6dc5687 data/armored_wool/tags/worldgen/biome/spawns_rocky_sheep.json
+c1966d696511e254a003d3857ead84bd00c45b2b data/armored_wool/tags/worldgen/biome/spawns_soot_sheep.json
