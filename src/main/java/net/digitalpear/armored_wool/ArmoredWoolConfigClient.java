@@ -14,6 +14,7 @@ public class ArmoredWoolConfigClient implements ConfigData {
 
     @ConfigEntry.Category("sheep_variant")
     @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Gui.Excluded
     public Map<String, String> easterEggVariants = Map.ofEntries(
             Map.entry("Gwen", "flecked")
     );
