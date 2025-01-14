@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_shulker_shell": {
+    "has_shulker_sheep_armor": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:shulker_shell"
+            "items": "armored_wool:shulker_sheep_armor"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_shulker_shell"
+      "has_shulker_sheep_armor"
     ]
   ],
   "rewards": {

@@ -11,10 +11,10 @@ import net.digitalpear.armored_wool.init.AWItems;
 import net.digitalpear.armored_wool.init.SheepVariants;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
-import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.network.codec.PacketCodecs;
@@ -117,10 +117,10 @@ public class ArmoredWool implements ModInitializer {
     }
 
 
-    public static String hasValidName(LivingEntityRenderState state){
+    public static String hasValidName(SheepEntity state){
         ArmoredWoolConfig config = AutoConfig.getConfigHolder(ArmoredWoolConfig.class).getConfig();
-        if (state.customName != null && config.clientConfig.easterEggVariants.containsKey(state.customName.getString())){
-            return config.clientConfig.easterEggVariants.get(state.customName.getString());
+        if (state.getCustomName() != null && config.clientConfig.easterEggVariants.containsKey(state.getCustomName().getString())){
+            return config.clientConfig.easterEggVariants.get(state.getCustomName().getString());
         }
         return null;
     }

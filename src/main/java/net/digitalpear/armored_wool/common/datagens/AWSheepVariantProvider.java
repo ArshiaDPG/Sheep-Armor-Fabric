@@ -21,7 +21,7 @@ public class AWSheepVariantProvider extends FabricDynamicRegistryProvider {
     }
 
     private void add(RegistryWrapper.WrapperLookup registries, Entries entries, RegistryKey<SheepVariant> resourceKey) {
-        RegistryWrapper.Impl<SheepVariant> configuredFeatureRegistryLookup = registries.getOrThrow(AWRegistryKeys.SHEEP_VARIANT);
+        RegistryWrapper.Impl<SheepVariant> configuredFeatureRegistryLookup = registries.getWrapperOrThrow(AWRegistryKeys.SHEEP_VARIANT);
 
         entries.add(resourceKey, configuredFeatureRegistryLookup.getOrThrow(resourceKey).value());
     }

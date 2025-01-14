@@ -37,6 +37,7 @@ public class ArmoredWoolConfigServer implements ConfigData {
 
     @ConfigEntry.Category("sheep_armor")
     @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Gui.Excluded
     public Map<String, String> lootTableAdditions = Map.ofEntries(
             Map.entry(getId(LootTables.END_CITY_TREASURE_CHEST), getId(AWItems.SHULKER_SHEEP_ARMOR)),
             Map.entry(getId(LootTables.DESERT_PYRAMID_CHEST), getId(AWItems.CACTUS_SHEEP_ARMOR)),

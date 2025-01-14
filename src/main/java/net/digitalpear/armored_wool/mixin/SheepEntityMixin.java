@@ -20,8 +20,12 @@ import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootTables;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.DamageTypeTags;
@@ -33,7 +37,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -46,6 +52,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.List;
 
 @Mixin(SheepEntity.class)
 public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmorAccess {
@@ -60,12 +68,12 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
 
     @Inject(at = @At("HEAD"), method = "readCustomDataFromNbt")
     public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
-        RegistryEntry<SheepVariant> sheepVariant = this.getRegistryManager().getOrThrow(AWRegistryKeys.SHEEP_VARIANT).getEntry(Identifier.tryParse(nbt.getString("variant"))).get();
+        RegistryEntry<SheepVariant> sheepVariant = this.getRegistryManager().get(AWRegistryKeys.SHEEP_VARIANT).getEntry(Identifier.tryParse(nbt.getString("variant"))).get();
         this.setVariant(sheepVariant);
     }
     @Inject(at = @At("HEAD"), method = "initDataTracker")
     private void addData(DataTracker.Builder builder, CallbackInfo ci){
-        builder.add(VARIANT, this.getRegistryManager().getOrThrow(AWRegistryKeys.SHEEP_VARIANT).getEntry(SheepVariants.BARN.getValue()).get());
+        builder.add(VARIANT, this.getRegistryManager().get(AWRegistryKeys.SHEEP_VARIANT).getEntry(SheepVariants.BARN.getValue()).get());
     }
     @Unique
     public RegistryEntry<SheepVariant> getVariant(){
@@ -89,9 +97,12 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
 
     }
 
-    @Shadow public abstract DyeColor getColor();
 
     @Shadow public abstract void setColor(DyeColor color);
+
+    @Shadow protected abstract DyeColor getChildColor(AnimalEntity firstParent, AnimalEntity secondParent);
+
+    @Shadow public abstract RegistryKey<LootTable> getLootTableId();
 
     protected SheepEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -110,12 +121,13 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
         return this.hasArmor() && !source.isIn(DamageTypeTags.BYPASSES_WOLF_ARMOR);
     }
 
+
     @Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
     private void armorInteractions(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir){
         ItemStack stack = player.getStackInHand(hand);
         if (hasArmor() && stack.isOf(Items.SHEARS)) {
             if (getWorld() instanceof ServerWorld){
-                dropStack((ServerWorld) getWorld(), getBodyArmor());
+                dropStack(getBodyArmor());
             }
             this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.PLAYERS, 1.0F, 1.0F);
             equipBodyArmor(ItemStack.EMPTY);
@@ -126,22 +138,24 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
     }
 
     @Inject(method = "sheared", at = @At("HEAD"))
-    private void removeArmorOnSheard(ServerWorld world, SoundCategory shearedSoundCategory, ItemStack shears, CallbackInfo ci) {
+    private void removeArmorOnSheard(SoundCategory shearedSoundCategory, CallbackInfo ci) {
         if (hasArmor()){
-            dropStack(world, getBodyArmor());
+            dropStack(getBodyArmor());
             equipBodyArmor(ItemStack.EMPTY);
         }
     }
 
+
+
     @Override
-    protected void applyDamage(ServerWorld world, DamageSource source, float amount) {
+    protected void applyDamage(DamageSource source, float amount) {
         if (this.shouldArmorAbsorbDamage(source)){
             ItemStack armorStack = this.getBodyArmor();
 
             //Cactus armor thorns effect
             if (armorStack.isIn(AWTags.AWItemTags.THORNY_SHEEP_ARMORS) && source.getAttacker() != null){
                 ArmoredWoolConfig config = AutoConfig.getConfigHolder(ArmoredWoolConfig.class).getConfig();
-                source.getAttacker().damage(world, this.getDamageSources().cactus(), config.serverConfig.thornyArmorDamage);
+                source.getAttacker().damage(this.getDamageSources().cactus(), config.serverConfig.thornyArmorDamage);
             }
 
             //Damage item
@@ -149,25 +163,23 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
 
             //Explode if armor breaks and should explode
             if (armorStack.isEmpty()){
-                int level = getBodyArmor().getEnchantments().getLevel(getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(AWEnchantments.WOOLSPLOSION));
+                int level = getBodyArmor().getEnchantments().getLevel(getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(AWEnchantments.WOOLSPLOSION).get());
                 if (level > 0){
                     this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 2 * level, World.ExplosionSourceType.NONE);
                 }
             }
         }
         else{
-            super.applyDamage(world, source, amount);
+            super.applyDamage(source, amount);
         }
     }
 
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        SheepEntity sheepEntity = EntityType.SHEEP.create(world, SpawnReason.BREEDING);
+        SheepEntity sheepEntity = EntityType.SHEEP.create(world);
         if (sheepEntity != null) {
-            DyeColor dyeColor = this.getColor();
-            DyeColor dyeColor2 = ((SheepEntity)entity).getColor();
-            sheepEntity.setColor(DyeColor.mixColors(world, dyeColor, dyeColor2));
+            sheepEntity.setColor(getChildColor(this, (AnimalEntity) entity));
 
             if (random.nextFloat() > 0.5f){
                 ((SheepArmorAccess)sheepEntity).setVariant(this.getVariant());
@@ -188,21 +200,26 @@ public abstract class SheepEntityMixin extends AnimalEntity implements SheepArmo
      */
     @Inject(method = "onEatingGrass", at = @At("HEAD"))
     private void applyTrimmingFunctionality(CallbackInfo ci){
-        int level = getBodyArmor().getEnchantments().getLevel(getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(AWEnchantments.TRIMMING));
+        int level = getBodyArmor().getEnchantments().getLevel(getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(AWEnchantments.TRIMMING).get());
         if (level > 0){
             this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.5F);
             if (getWorld() instanceof ServerWorld){
                 for (int i = 0; i < random.nextBetween(1, level); i++){
-                    this.forEachShearedItem((ServerWorld) getWorld(), LootTables.SHEEP_SHEARING, getBodyArmor(), (serverWorld, itemStack) -> {
-                        for(int j = 0; j < itemStack.getCount(); ++j) {
-                            ItemEntity itemEntity = this.dropStack(serverWorld, itemStack.copyWithCount(1), 1.0F);
-                            if (itemEntity != null) {
-                                itemEntity.setVelocity(itemEntity.getVelocity().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
-                            }
+                    List<ItemStack> stacks = generateLoot((ServerWorld) getWorld(), getLootTableId(), getBlockPos());
+                    for (ItemStack stack : stacks){
+                        ItemEntity itemEntity = this.dropStack(stack, 1.0F);
+                        if (itemEntity != null) {
+                            itemEntity.setVelocity(itemEntity.getVelocity().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
                         }
-                    });
+                    }
                 }
             }
         }
+
+    }
+    private static List<ItemStack> generateLoot(ServerWorld world, RegistryKey<LootTable> tableRegistryKey, BlockPos pos) {
+        LootTable lootTable = world.getServer().getReloadableRegistries().getLootTable(tableRegistryKey);
+        LootContextParameterSet lootContextParameterSet = (new LootContextParameterSet.Builder(world)).add(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos)).build(LootContextTypes.ENCHANTED_ENTITY);
+        return lootTable.generateLoot(lootContextParameterSet);
     }
 }

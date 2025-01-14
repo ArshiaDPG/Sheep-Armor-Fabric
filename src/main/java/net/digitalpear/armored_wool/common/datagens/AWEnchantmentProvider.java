@@ -20,7 +20,7 @@ public class AWEnchantmentProvider extends FabricDynamicRegistryProvider {
         AWEnchantments.enchantments.forEach(enchantmentRegistryKey -> add(wrapperLookup, entries, enchantmentRegistryKey));
     }
     private void add(RegistryWrapper.WrapperLookup registries, Entries entries, RegistryKey<Enchantment> resourceKey) {
-        RegistryWrapper.Impl<Enchantment> configuredFeatureRegistryLookup = registries.getOrThrow(RegistryKeys.ENCHANTMENT);
+        RegistryWrapper.Impl<Enchantment> configuredFeatureRegistryLookup = registries.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
 
         entries.add(resourceKey, configuredFeatureRegistryLookup.getOrThrow(resourceKey).value());
     }

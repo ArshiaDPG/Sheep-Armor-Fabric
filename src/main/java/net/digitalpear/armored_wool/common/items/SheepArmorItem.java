@@ -9,10 +9,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.equipment.ArmorMaterial;
-import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -27,8 +27,8 @@ public class SheepArmorItem extends ArmorItem {
 
     private static final String TEXTURE_PATH = "textures/entity/sheep/armor/";
 
-    public SheepArmorItem(String materialName, ArmorMaterial material, Item.Settings settings) {
-        super(material, EquipmentType.BODY, settings);
+    public SheepArmorItem(String materialName, RegistryEntry<ArmorMaterial> material, Item.Settings settings) {
+        super(material, Type.BODY, settings);
         Identifier identifier = ArmoredWool.id(TEXTURE_PATH + materialName);
         this.armorTexture = identifier.withSuffixedPath(".png");
         this.woolarmorTexture = identifier.withSuffixedPath("_fur.png");
@@ -63,7 +63,7 @@ public class SheepArmorItem extends ArmorItem {
                     stack.decrementUnlessCreative(1, user);
                 }
                 else{
-                    return ActionResult.SUCCESS.withNewHandStack(stack);
+                    return ActionResult.SUCCESS;
                 }
             }
         }

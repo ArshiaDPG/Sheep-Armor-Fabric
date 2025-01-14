@@ -63,7 +63,6 @@ public class AWBiomeTagProvider extends FabricTagProvider<Biome> {
         ;
 
         getOrCreateTagBuilder(AWTags.AWBiomeTags.SPAWNS_GLOOMY_SHEEP)
-                .add(BiomeKeys.PALE_GARDEN)
                 .add(BiomeKeys.DEEP_DARK)
                 .addOptional(Identifier.of("limbo", "agony"))
                 .addOptional(Identifier.of("limbo", "blossom"))
@@ -75,5 +74,4 @@ public class AWBiomeTagProvider extends FabricTagProvider<Biome> {
                 .addOptional(Identifier.of("limbo", "isolation"))
         ;
     }
-
 }

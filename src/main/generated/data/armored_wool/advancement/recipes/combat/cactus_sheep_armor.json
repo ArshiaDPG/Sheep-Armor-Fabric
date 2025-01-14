@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cactus": {
+    "has_cactus_sheep_armor": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:cactus"
+            "items": "armored_wool:cactus_sheep_armor"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cactus"
+      "has_cactus_sheep_armor"
     ]
   ],
   "rewards": {

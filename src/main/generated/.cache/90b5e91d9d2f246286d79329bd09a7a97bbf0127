@@ -1,7 +1,7 @@
-// 1.21.4	-999999999-01-01T00:00:00	Armored Wool/Tags for minecraft:enchantment
-f08edb0875331b2046c8a27de747b9e4254d2794 data/minecraft/tags/enchantment/in_enchanting_table.json
-f08edb0875331b2046c8a27de747b9e4254d2794 data/minecraft/tags/enchantment/non_treasure.json
-fa48cdea1c159e4d3499727d5a0ffffd5ed7aad3 data/minecraft/tags/enchantment/on_random_loot.json
-fa48cdea1c159e4d3499727d5a0ffffd5ed7aad3 data/minecraft/tags/enchantment/tradeable.json
-0f6a1b367bbaaf7e043297daa2ec74b1f235fc6c data/minecraft/tags/enchantment/trades/taiga_special.json
-0f6a1b367bbaaf7e043297daa2ec74b1f235fc6c data/minecraft/tags/enchantment/treasure.json
+// 1.21.1	2025-01-13T19:06:09.8181819	Armored Wool/Tags for minecraft:enchantment
+fa48cdea1c159e4d3499727d5a0ffffd5ed7aad3 data\minecraft\tags\enchantment\on_random_loot.json
+f08edb0875331b2046c8a27de747b9e4254d2794 data\minecraft\tags\enchantment\non_treasure.json
+0f6a1b367bbaaf7e043297daa2ec74b1f235fc6c data\minecraft\tags\enchantment\trades\taiga_special.json
+0f6a1b367bbaaf7e043297daa2ec74b1f235fc6c data\minecraft\tags\enchantment\treasure.json
+fa48cdea1c159e4d3499727d5a0ffffd5ed7aad3 data\minecraft\tags\enchantment\tradeable.json
+f08edb0875331b2046c8a27de747b9e4254d2794 data\minecraft\tags\enchantment\in_enchanting_table.json

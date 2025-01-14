@@ -41,14 +41,14 @@ public class SheepVariants {
 
 
     public static RegistryEntry<SheepVariant> fromBiome(DynamicRegistryManager dynamicRegistryManager, RegistryEntry<Biome> biome, Random random) {
-        Registry<SheepVariant> registry = dynamicRegistryManager.getOrThrow(AWRegistryKeys.SHEEP_VARIANT);
+        Registry<SheepVariant> registry = dynamicRegistryManager.get(AWRegistryKeys.SHEEP_VARIANT);
         List<RegistryEntry.Reference<SheepVariant>> entries = new ArrayList<>(registry.streamEntries().filter(entry -> entry.value() != registry.get(BARN)).filter(entry -> entry.value().getBiomes().contains(biome)).toList());
         if (entries.isEmpty()){
-            return registry.getOrThrow(BARN);
+            return registry.getEntry(BARN).get();
         }
         ArmoredWoolConfig config = AutoConfig.getConfigHolder(ArmoredWoolConfig.class).getConfig();
-        if (config.serverConfig.universalBarn && !entries.contains(registry.getOrThrow(BARN))){
-            entries.add(registry.getOrThrow(BARN));
+        if (config.serverConfig.universalBarn && !entries.contains(registry.getEntry(BARN))){
+            entries.add(registry.getEntry(BARN).get());
         }
         return entries.get(random.nextInt(entries.size()));
     }
