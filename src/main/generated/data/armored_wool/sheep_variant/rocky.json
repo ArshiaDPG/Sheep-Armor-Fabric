@@ -1,6 +1,6 @@
 {
   "biomes": "#armored_wool:spawns_rocky_sheep",
-  "has_inner_wool": true,
+  "has_inner_wool": false,
   "inner_wool_texture": "armored_wool:textures/entity/sheep/rocky_inner_fur",
   "texture": "armored_wool:textures/entity/sheep/rocky",
   "wool_colors": [

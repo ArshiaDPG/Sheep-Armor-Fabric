@@ -1,5 +1,9 @@
 {
   "values": [
+    {
+      "id": "#c:is_stony_shores",
+      "required": false
+    },
     "minecraft:stony_peaks",
     "minecraft:grove",
     "minecraft:frozen_peaks",
@@ -19,6 +23,10 @@
     },
     {
       "id": "blooming_biosphere:tidepools",
+      "required": false
+    },
+    {
+      "id": "#terralith:cliffs",
       "required": false
     }
   ]

@@ -1,9 +1,15 @@
 {
   "values": [
+    {
+      "id": "#c:is_flower_forest",
+      "required": false
+    },
+    {
+      "id": "#c:is_floral",
+      "required": false
+    },
     "minecraft:flower_forest",
-    "minecraft:cherry_grove",
     "minecraft:sunflower_plains",
-    "minecraft:meadow",
     {
       "id": "biomesoplenty:orchard",
       "required": false

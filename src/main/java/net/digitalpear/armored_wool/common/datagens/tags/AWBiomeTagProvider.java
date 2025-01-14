@@ -30,6 +30,7 @@ public class AWBiomeTagProvider extends FabricTagProvider<Biome> {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 
         getOrCreateTagBuilder(AWTags.AWBiomeTags.SPAWNS_ROCKY_SHEEP)
+                .addOptionalTag(Identifier.of("c", "is_stony_shores"))
                 .add(BiomeKeys.STONY_PEAKS)
                 .add(BiomeKeys.GROVE)
                 .add(BiomeKeys.FROZEN_PEAKS)
@@ -39,13 +40,15 @@ public class AWBiomeTagProvider extends FabricTagProvider<Biome> {
                 .addOptional(Identifier.of("biomesoplenty", "rocky_rainforest"))
                 .addOptional(Identifier.of("biomesoplenty", "rocky_shrubland"))
                 .addOptional(Identifier.of("blooming_biosphere", "tidepools"))
+                .addOptionalTag(Identifier.of("terralith", "cliffs"))
+
         ;
 
         getOrCreateTagBuilder(AWTags.AWBiomeTags.SPAWNS_REGAL_SHEEP)
+                .addOptionalTag(Identifier.of("c", "is_flower_forest"))
+                .addOptionalTag(Identifier.of("c", "is_floral"))
                 .add(BiomeKeys.FLOWER_FOREST)
-                .add(BiomeKeys.CHERRY_GROVE)
                 .add(BiomeKeys.SUNFLOWER_PLAINS)
-                .add(BiomeKeys.MEADOW)
                 .addOptional(Identifier.of("biomesoplenty", "orchard"))
                 .addOptional(Identifier.of("biomesoplenty", "lavender_field"))
                 .addOptional(Identifier.of("wilderwild", "flower_field"))
@@ -54,12 +57,14 @@ public class AWBiomeTagProvider extends FabricTagProvider<Biome> {
 
         getOrCreateTagBuilder(AWTags.AWBiomeTags.SPAWNS_SOOT_SHEEP)
                 .forceAddTag(BiomeTags.IS_NETHER)
+                .addOptionalTag(Identifier.of("c", "is_nether"))
                 .addOptional(Identifier.of("clifftree", "inferno"))
                 .addOptional(Identifier.of("biomesoplenty", "volcano"))
                 .addOptional(Identifier.of("biomesoplenty", "volcanic_plains"))
                 .addOptional(Identifier.of("profundis", "molten_caves"))
                 .addOptional(Identifier.of("cavernous", "volcanic_caves"))
                 .addOptional(Identifier.of("wilderwild", "magmatic_caves"))
+                .addOptionalTag(Identifier.of("terralith", "volcanic"))
         ;
 
         getOrCreateTagBuilder(AWTags.AWBiomeTags.SPAWNS_GLOOMY_SHEEP)
