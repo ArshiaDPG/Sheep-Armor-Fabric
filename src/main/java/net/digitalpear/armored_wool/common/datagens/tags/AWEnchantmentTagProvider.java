@@ -17,13 +17,14 @@ public class AWEnchantmentTagProvider extends FabricTagProvider<Enchantment> {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(EnchantmentTags.IN_ENCHANTING_TABLE).add(AWEnchantments.TRIMMING);
-        getOrCreateTagBuilder(EnchantmentTags.NON_TREASURE).add(AWEnchantments.TRIMMING);
+        getOrCreateTagBuilder(EnchantmentTags.IN_ENCHANTING_TABLE).add(AWEnchantments.TRIMMING, AWEnchantments.LIGHTNESS);
+        getOrCreateTagBuilder(EnchantmentTags.NON_TREASURE).add(AWEnchantments.TRIMMING, AWEnchantments.LIGHTNESS);
 
         getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AWEnchantments.WOOLSPLOSION);
         getOrCreateTagBuilder(EnchantmentTags.TAIGA_SPECIAL_TRADE).add(AWEnchantments.WOOLSPLOSION);
+        getOrCreateTagBuilder(EnchantmentTags.SNOW_COMMON_TRADE).add(AWEnchantments.LIGHTNESS);
 
-        getOrCreateTagBuilder(EnchantmentTags.ON_RANDOM_LOOT).add(AWEnchantments.WOOLSPLOSION).add(AWEnchantments.TRIMMING);
-        getOrCreateTagBuilder(EnchantmentTags.TRADEABLE).add(AWEnchantments.WOOLSPLOSION).add(AWEnchantments.TRIMMING);
+        getOrCreateTagBuilder(EnchantmentTags.ON_RANDOM_LOOT).add(AWEnchantments.WOOLSPLOSION, AWEnchantments.TRIMMING, AWEnchantments.LIGHTNESS);
+        getOrCreateTagBuilder(EnchantmentTags.TRADEABLE).add(AWEnchantments.TRIMMING, AWEnchantments.LIGHTNESS);
     }
 }

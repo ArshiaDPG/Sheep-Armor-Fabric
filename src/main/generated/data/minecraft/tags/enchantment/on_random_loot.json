@@ -1,6 +1,7 @@
 {
   "values": [
     "armored_wool:woolsplosion",
-    "armored_wool:trimming"
+    "armored_wool:trimming",
+    "armored_wool:lightness"
   ]
 }

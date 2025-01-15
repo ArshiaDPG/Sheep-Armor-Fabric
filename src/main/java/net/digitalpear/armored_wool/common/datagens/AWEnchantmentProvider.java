@@ -24,6 +24,7 @@ public class AWEnchantmentProvider extends FabricDynamicRegistryProvider {
 
         entries.add(resourceKey, configuredFeatureRegistryLookup.getOrThrow(resourceKey).value());
     }
+
     @Override
     public String getName() {
         return "enchantment";

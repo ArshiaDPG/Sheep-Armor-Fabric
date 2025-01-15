@@ -23,6 +23,7 @@ public class AWLanguageProvider extends FabricLanguageProvider {
 
         translationBuilder.addEnchantment(AWEnchantments.TRIMMING, "Trimming");
         translationBuilder.addEnchantment(AWEnchantments.WOOLSPLOSION, "Woolsplosion");
+        translationBuilder.addEnchantment(AWEnchantments.LIGHTNESS, "Lightness");
 
         translationBuilder.add("text.autoconfig." + ArmoredWool.MOD_ID + ".title", ArmoredWool.MOD_NAME + " Config");
 

@@ -1,0 +1,54 @@
+{
+  "anvil_cost": 3,
+  "description": {
+    "translate": "enchantment.armored_wool.lightness"
+  },
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": -0.02,
+          "per_level_above_first": -0.01
+        },
+        "attribute": "minecraft:gravity",
+        "id": "armored_wool:enchantment.lightness",
+        "operation": "add_value"
+      },
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": -0.3,
+          "per_level_above_first": -0.15
+        },
+        "attribute": "minecraft:fall_damage_multiplier",
+        "id": "armored_wool:enchantment.lightness",
+        "operation": "add_value"
+      },
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 2.0,
+          "per_level_above_first": 1.0
+        },
+        "attribute": "minecraft:safe_fall_distance",
+        "id": "armored_wool:enchantment.lightness",
+        "operation": "add_value"
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 11,
+    "per_level_above_first": 11
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 7
+  },
+  "slots": [
+    "body"
+  ],
+  "supported_items": "#armored_wool:sheep_armors",
+  "weight": 4
+}
