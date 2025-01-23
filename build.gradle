@@ -51,12 +51,6 @@ dependencies {
     }
 
     modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
-
-//    modImplementation "me.fallenbreath:conditional-mixin-fabric:${project.conditional_mixin_version}"
-//    include "me.fallenbreath:conditional-mixin-fabric:${project.conditional_mixin_version}"
-
-//    modApi "maven.modrinth:colorful-books:${project.colorful_books_version}"
-//    runtimeOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 processResources {
