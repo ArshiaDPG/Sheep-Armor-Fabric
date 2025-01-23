@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "net.digitalpear.armored_wool.mixin",
   "compatibilityLevel": "JAVA_21",
+  "plugins": "net.digitalpear.armored_wool.mixin.SheepCompatConfig",
   "mixins": [
       "SheepEntityMixin"
   ],
