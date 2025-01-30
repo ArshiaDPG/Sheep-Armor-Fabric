@@ -11,6 +11,16 @@
           "base": -0.02,
           "per_level_above_first": -0.01
         },
+        "attribute": "minecraft:jump_strength",
+        "id": "armored_wool:enchantment.lightness",
+        "operation": "add_value"
+      },
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": -0.02,
+          "per_level_above_first": -0.01
+        },
         "attribute": "minecraft:gravity",
         "id": "armored_wool:enchantment.lightness",
         "operation": "add_value"

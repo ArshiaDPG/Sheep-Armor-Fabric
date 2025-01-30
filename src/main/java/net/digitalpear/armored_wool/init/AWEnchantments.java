@@ -36,6 +36,7 @@ public class AWEnchantments {
         register(registry, TRIMMING, sheepEnchantmentProperties(itemLookup, 1, 3, Enchantment.leveledCost(1, 11), Enchantment.leveledCost(12, 11), 4));
         register(registry, WOOLSPLOSION, sheepEnchantmentProperties(itemLookup, 3, 4, Enchantment.leveledCost(1, 11), Enchantment.leveledCost(18, 11), 6));
         register(registry, LIGHTNESS, sheepEnchantmentProperties(itemLookup, 4, 2, Enchantment.leveledCost(1, 7), Enchantment.leveledCost(11, 11), 3)
+                .addEffect(EnchantmentEffectComponentTypes.ATTRIBUTES, new AttributeEnchantmentEffect(ArmoredWool.id("enchantment.lightness"), EntityAttributes.JUMP_STRENGTH, EnchantmentLevelBasedValue.linear(-0.02f, -0.01f), EntityAttributeModifier.Operation.ADD_VALUE))
                 .addEffect(EnchantmentEffectComponentTypes.ATTRIBUTES, new AttributeEnchantmentEffect(ArmoredWool.id("enchantment.lightness"), EntityAttributes.GRAVITY, EnchantmentLevelBasedValue.linear(-0.02f, -0.01f), EntityAttributeModifier.Operation.ADD_VALUE))
                 .addEffect(EnchantmentEffectComponentTypes.ATTRIBUTES, new AttributeEnchantmentEffect(ArmoredWool.id("enchantment.lightness"), EntityAttributes.FALL_DAMAGE_MULTIPLIER, EnchantmentLevelBasedValue.linear(-0.3f, -0.15f), EntityAttributeModifier.Operation.ADD_VALUE))
                 .addEffect(EnchantmentEffectComponentTypes.ATTRIBUTES, new AttributeEnchantmentEffect(ArmoredWool.id("enchantment.lightness"), EntityAttributes.SAFE_FALL_DISTANCE, EnchantmentLevelBasedValue.linear(2, 1), EntityAttributeModifier.Operation.ADD_VALUE))
