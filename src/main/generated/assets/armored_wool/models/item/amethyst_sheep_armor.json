@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "armored_wool:item/amethyst_sheep_armor"
-  }
-}

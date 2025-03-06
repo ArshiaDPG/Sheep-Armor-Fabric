@@ -1,33 +1,38 @@
 {
-  "biomes": "#minecraft:is_overworld",
-  "has_inner_wool": true,
-  "inner_wool_texture": "armored_wool:textures/entity/sheep/barn_inner_fur",
-  "texture": "armored_wool:textures/entity/sheep/barn",
+  "assets": {
+    "texture": "minecraft:textures/entity/sheep/sheep.png",
+    "wool_texture": "minecraft:textures/entity/sheep/sheep_wool.png",
+    "wool_undercoat_texture": "minecraft:textures/entity/sheep/sheep_wool_undercoat.png"
+  },
+  "spawn_conditions": [
+    {
+      "priority": 0
+    }
+  ],
   "wool_colors": [
     {
-      "color": "black",
+      "data": "black",
       "weight": 5
     },
     {
-      "color": "gray",
+      "data": "gray",
       "weight": 5
     },
     {
-      "color": "light_gray",
+      "data": "light_gray",
       "weight": 5
     },
     {
-      "color": "brown",
+      "data": "brown",
       "weight": 3
     },
     {
-      "color": "pink",
+      "data": "pink",
       "weight": 1
     },
     {
-      "color": "white",
+      "data": "white",
       "weight": 481
     }
-  ],
-  "wool_texture": "armored_wool:textures/entity/sheep/barn_fur"
+  ]
 }

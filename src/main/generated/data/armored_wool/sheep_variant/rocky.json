@@ -1,33 +1,42 @@
 {
-  "biomes": "#armored_wool:spawns_rocky_sheep",
-  "has_inner_wool": false,
-  "inner_wool_texture": "armored_wool:textures/entity/sheep/rocky_inner_fur",
-  "texture": "armored_wool:textures/entity/sheep/rocky",
+  "assets": {
+    "texture": "armored_wool:textures/entity/sheep/rocky.png",
+    "wool_texture": "armored_wool:textures/entity/sheep/rocky_wool.png",
+    "wool_undercoat_texture": "armored_wool:textures/entity/sheep/rocky_wool_undercoat.png"
+  },
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "#armored_wool:spawns_rocky_sheep"
+      },
+      "priority": 1
+    }
+  ],
   "wool_colors": [
     {
-      "color": "brown",
+      "data": "brown",
       "weight": 481
     },
     {
-      "color": "gray",
+      "data": "gray",
       "weight": 8
     },
     {
-      "color": "black",
+      "data": "black",
       "weight": 5
     },
     {
-      "color": "white",
+      "data": "white",
       "weight": 5
     },
     {
-      "color": "light_gray",
+      "data": "light_gray",
       "weight": 5
     },
     {
-      "color": "light_blue",
+      "data": "light_blue",
       "weight": 1
     }
-  ],
-  "wool_texture": "armored_wool:textures/entity/sheep/rocky_fur"
+  ]
 }

@@ -1,24 +1,27 @@
 package net.digitalpear.armored_wool.init;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.digitalpear.armored_wool.ArmoredWool;
-import net.digitalpear.armored_wool.ArmoredWoolConfig;
 import net.digitalpear.armored_wool.common.entity.AWRegistryKeys;
 import net.digitalpear.armored_wool.common.entity.SheepVariant;
-import net.digitalpear.armored_wool.common.entity.WoolColorEntry;
-import net.minecraft.registry.*;
+import net.minecraft.entity.VariantSelectorProvider;
+import net.minecraft.entity.spawn.BiomeSpawnCondition;
+import net.minecraft.entity.spawn.SpawnConditionSelectors;
+import net.minecraft.entity.spawn.SpawnContext;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class SheepVariants {
 
@@ -32,25 +35,16 @@ public class SheepVariants {
 
 
     public static void bootstrap(Registerable<SheepVariant> registry) {
-        register(registry, BARN, WoolColorEntry.DEFAULT_SHEEP_COLORS, BiomeTags.IS_OVERWORLD);
-        register(registry, ROCKY, SheepColors.ROCKY, AWTags.AWBiomeTags.SPAWNS_ROCKY_SHEEP, false);
+        register(registry, BARN, Identifier.ofVanilla("sheep"), SheepColors.DEFAULT_SHEEP_COLORS, SpawnConditionSelectors.createFallback(0));
+        register(registry, ROCKY, SheepColors.ROCKY, AWTags.AWBiomeTags.SPAWNS_ROCKY_SHEEP);
         register(registry, REGAL, SheepColors.REGAL, AWTags.AWBiomeTags.SPAWNS_REGAL_SHEEP);
         register(registry, SOOT, SheepColors.SOOT, AWTags.AWBiomeTags.SPAWNS_SOOT_SHEEP);
         register(registry, GLOOMY, SheepColors.GLOOMY, AWTags.AWBiomeTags.SPAWNS_GLOOMY_SHEEP);
     }
 
 
-    public static RegistryEntry<SheepVariant> fromBiome(DynamicRegistryManager dynamicRegistryManager, RegistryEntry<Biome> biome, Random random) {
-        Registry<SheepVariant> registry = dynamicRegistryManager.getOrThrow(AWRegistryKeys.SHEEP_VARIANT);
-        List<RegistryEntry.Reference<SheepVariant>> entries = new ArrayList<>(registry.streamEntries().filter(entry -> entry.value() != registry.get(BARN)).filter(entry -> entry.value().getBiomes().contains(biome)).toList());
-        if (entries.isEmpty()){
-            return registry.getOrThrow(BARN);
-        }
-        ArmoredWoolConfig config = AutoConfig.getConfigHolder(ArmoredWoolConfig.class).getConfig();
-        if (config.serverConfig.universalBarn && !entries.contains(registry.getOrThrow(BARN))){
-            entries.add(registry.getOrThrow(BARN));
-        }
-        return entries.get(random.nextInt(entries.size()));
+    public static Optional<RegistryEntry.Reference<SheepVariant>> select(Random random, DynamicRegistryManager registries, SpawnContext context) {
+        return VariantSelectorProvider.select(registries.getOrThrow(AWRegistryKeys.SHEEP_VARIANT).streamEntries(), RegistryEntry::value, random, context);
     }
 
     private static RegistryKey<SheepVariant> of(String id) {
@@ -59,59 +53,51 @@ public class SheepVariants {
         return variant;
     }
 
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, List<WoolColorEntry> colors, TagKey<Biome> biomeTag) {
-        register(registry, key, key.getValue(), colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag), true);
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Pool<DyeColor> colors, TagKey<Biome> biomeTag) {
+        register(registry, key, key.getValue(), colors, SpawnConditionSelectors.createSingle(new BiomeSpawnCondition(registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag)), 1));
     }
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, List<WoolColorEntry> colors, TagKey<Biome> biomeTag, boolean hasInnerWool) {
-        register(registry, key, key.getValue(), colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag), hasInnerWool);
-    }
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, List<WoolColorEntry> colors, TagKey<Biome> biomeTag, boolean hasInnerWool) {
-        register(registry, key, texturePath, colors, registry.getRegistryLookup(RegistryKeys.BIOME).getOrThrow(biomeTag), hasInnerWool);
-    }
-    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, List<WoolColorEntry> colors, RegistryEntryList<Biome> biomes, boolean hasInnerWool) {
-        registry.register(key, new SheepVariant(texturePath.withPrefixedPath(SheepVariant.SHEEP_TEXTURE_PATH), colors, biomes, hasInnerWool));
+    static void register(Registerable<SheepVariant> registry, RegistryKey<SheepVariant> key, Identifier texturePath, Pool<DyeColor> colors, SpawnConditionSelectors spawnConditionSelectors) {
+        registry.register(key, new SheepVariant(texturePath.withPrefixedPath(SheepVariant.SheepAssets.SHEEP_TEXTURE_PATH), colors, spawnConditionSelectors));
     }
 
-
-    public static void init(){
-
-    }
+    public static void init(){}
 
     public static class SheepColors {
-        public static final List<WoolColorEntry> REGAL = woolColorList(
-                new WoolColorEntry(DyeColor.BLACK, 5),
-                new WoolColorEntry(DyeColor.GRAY, 5),
-                new WoolColorEntry(DyeColor.LIGHT_GRAY, 5),
-                new WoolColorEntry(DyeColor.LIME, 3),
-                new WoolColorEntry(DyeColor.PINK, 1),
-                new WoolColorEntry(DyeColor.WHITE, 481)
-        );
-        public static final List<WoolColorEntry> ROCKY = woolColorList(
-                new WoolColorEntry(DyeColor.BROWN, 481),
-                new WoolColorEntry(DyeColor.GRAY, 8),
-                new WoolColorEntry(DyeColor.BLACK, 5),
-                new WoolColorEntry(DyeColor.WHITE, 5),
-                new WoolColorEntry(DyeColor.LIGHT_GRAY, 5),
-                new WoolColorEntry(DyeColor.LIGHT_BLUE, 1)
-        );
-        public static final List<WoolColorEntry> GLOOMY = woolColorList(
-                new WoolColorEntry(DyeColor.LIGHT_GRAY, 481),
-                new WoolColorEntry(DyeColor.BLUE, 8),
-                new WoolColorEntry(DyeColor.GRAY, 5),
-                new WoolColorEntry(DyeColor.LIGHT_BLUE, 5),
-                new WoolColorEntry(DyeColor.CYAN, 3),
-                new WoolColorEntry(DyeColor.YELLOW, 1)
-        );
-        public static final List<WoolColorEntry> SOOT = woolColorList(
-                new WoolColorEntry(DyeColor.GRAY, 481),
-                new WoolColorEntry(DyeColor.LIGHT_GRAY, 8),
-                new WoolColorEntry(DyeColor.WHITE, 5),
-                new WoolColorEntry(DyeColor.BLACK, 3),
-                new WoolColorEntry(DyeColor.GREEN, 1)
-        );
+        public static final Pool<DyeColor> DEFAULT_SHEEP_COLORS = new Pool.Builder<DyeColor>()
+                .add(DyeColor.BLACK, 5)
+                .add(DyeColor.GRAY, 5)
+                .add(DyeColor.LIGHT_GRAY, 5)
+                .add(DyeColor.BROWN, 3)
+                .add(DyeColor.PINK, 1)
+                .add(DyeColor.WHITE, 481).build();
+        public static final Pool<DyeColor> REGAL = new Pool.Builder<DyeColor>()
+                .add(DyeColor.BLACK, 5)
+                .add(DyeColor.GRAY, 5)
+                .add(DyeColor.LIGHT_GRAY, 5)
+                .add(DyeColor.LIME, 3)
+                .add(DyeColor.PINK, 1)
+                .add(DyeColor.WHITE, 481).build();
+        public static final Pool<DyeColor> ROCKY = new Pool.Builder<DyeColor>()
+                .add(DyeColor.BROWN, 481)
+                .add(DyeColor.GRAY, 8)
+                .add(DyeColor.BLACK, 5)
+                .add(DyeColor.WHITE, 5)
+                .add(DyeColor.LIGHT_GRAY, 5)
+                .add(DyeColor.LIGHT_BLUE, 1).build();
+        public static final Pool<DyeColor> GLOOMY = new Pool.Builder<DyeColor>()
+                .add(DyeColor.LIGHT_GRAY, 481)
+                .add(DyeColor.BLUE, 8)
+                .add(DyeColor.GRAY, 5)
+                .add(DyeColor.LIGHT_BLUE, 5)
+                .add(DyeColor.CYAN, 3)
+                .add(DyeColor.YELLOW, 1).build();
 
-        public static List<WoolColorEntry> woolColorList(WoolColorEntry... entries){
-            return new ArrayList<>(Arrays.asList(entries));
-        }
+        public static final Pool<DyeColor> SOOT = new Pool.Builder<DyeColor>()
+                .add(DyeColor.GRAY, 481)
+                .add(DyeColor.LIGHT_GRAY, 8)
+                .add(DyeColor.WHITE, 5)
+                .add(DyeColor.BLACK, 3)
+                .add(DyeColor.GREEN, 1).build();
+
     }
 }

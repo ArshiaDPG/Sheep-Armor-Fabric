@@ -10,7 +10,8 @@
   "client": [
       "SheepEntityRendererMixin",
       "SheepWoolFeatureRendererMixin",
-      "SheepRenderStateMixin"
+      "SheepRenderStateMixin",
+      "SheepUndercoatFeatureMixin"
   ],
   "injectors": {
     "defaultRequire": 1

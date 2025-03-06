@@ -1,29 +1,38 @@
 {
-  "biomes": "#armored_wool:spawns_soot_sheep",
-  "has_inner_wool": true,
-  "inner_wool_texture": "armored_wool:textures/entity/sheep/soot_inner_fur",
-  "texture": "armored_wool:textures/entity/sheep/soot",
+  "assets": {
+    "texture": "armored_wool:textures/entity/sheep/soot.png",
+    "wool_texture": "armored_wool:textures/entity/sheep/soot_wool.png",
+    "wool_undercoat_texture": "armored_wool:textures/entity/sheep/soot_wool_undercoat.png"
+  },
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "#armored_wool:spawns_soot_sheep"
+      },
+      "priority": 1
+    }
+  ],
   "wool_colors": [
     {
-      "color": "gray",
+      "data": "gray",
       "weight": 481
     },
     {
-      "color": "light_gray",
+      "data": "light_gray",
       "weight": 8
     },
     {
-      "color": "white",
+      "data": "white",
       "weight": 5
     },
     {
-      "color": "black",
+      "data": "black",
       "weight": 3
     },
     {
-      "color": "green",
+      "data": "green",
       "weight": 1
     }
-  ],
-  "wool_texture": "armored_wool:textures/entity/sheep/soot_fur"
+  ]
 }

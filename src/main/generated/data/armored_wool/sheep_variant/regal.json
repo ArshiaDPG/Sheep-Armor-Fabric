@@ -1,33 +1,42 @@
 {
-  "biomes": "#armored_wool:spawns_regal_sheep",
-  "has_inner_wool": true,
-  "inner_wool_texture": "armored_wool:textures/entity/sheep/regal_inner_fur",
-  "texture": "armored_wool:textures/entity/sheep/regal",
+  "assets": {
+    "texture": "armored_wool:textures/entity/sheep/regal.png",
+    "wool_texture": "armored_wool:textures/entity/sheep/regal_wool.png",
+    "wool_undercoat_texture": "armored_wool:textures/entity/sheep/regal_wool_undercoat.png"
+  },
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "#armored_wool:spawns_regal_sheep"
+      },
+      "priority": 1
+    }
+  ],
   "wool_colors": [
     {
-      "color": "black",
+      "data": "black",
       "weight": 5
     },
     {
-      "color": "gray",
+      "data": "gray",
       "weight": 5
     },
     {
-      "color": "light_gray",
+      "data": "light_gray",
       "weight": 5
     },
     {
-      "color": "lime",
+      "data": "lime",
       "weight": 3
     },
     {
-      "color": "pink",
+      "data": "pink",
       "weight": 1
     },
     {
-      "color": "white",
+      "data": "white",
       "weight": 481
     }
-  ],
-  "wool_texture": "armored_wool:textures/entity/sheep/regal_fur"
+  ]
 }

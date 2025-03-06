@@ -1,33 +1,42 @@
 {
-  "biomes": "#armored_wool:spawns_gloomy_sheep",
-  "has_inner_wool": true,
-  "inner_wool_texture": "armored_wool:textures/entity/sheep/gloomy_inner_fur",
-  "texture": "armored_wool:textures/entity/sheep/gloomy",
+  "assets": {
+    "texture": "armored_wool:textures/entity/sheep/gloomy.png",
+    "wool_texture": "armored_wool:textures/entity/sheep/gloomy_wool.png",
+    "wool_undercoat_texture": "armored_wool:textures/entity/sheep/gloomy_wool_undercoat.png"
+  },
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "#armored_wool:spawns_gloomy_sheep"
+      },
+      "priority": 1
+    }
+  ],
   "wool_colors": [
     {
-      "color": "light_gray",
+      "data": "light_gray",
       "weight": 481
     },
     {
-      "color": "blue",
+      "data": "blue",
       "weight": 8
     },
     {
-      "color": "gray",
+      "data": "gray",
       "weight": 5
     },
     {
-      "color": "light_blue",
+      "data": "light_blue",
       "weight": 5
     },
     {
-      "color": "cyan",
+      "data": "cyan",
       "weight": 3
     },
     {
-      "color": "yellow",
+      "data": "yellow",
       "weight": 1
     }
-  ],
-  "wool_texture": "armored_wool:textures/entity/sheep/gloomy_fur"
+  ]
 }

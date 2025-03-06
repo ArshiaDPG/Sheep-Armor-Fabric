@@ -1,8 +1,0 @@
-// 1.21.4	-999999999-01-01T00:00:00	Armored Wool/Tags for minecraft:enchantment
-6777b6b9ca3850d00c80ddea89707d438af0c2d8 data/minecraft/tags/enchantment/in_enchanting_table.json
-6777b6b9ca3850d00c80ddea89707d438af0c2d8 data/minecraft/tags/enchantment/non_treasure.json
-dee6de232261f92453cb770d7e03a7d2d74cc072 data/minecraft/tags/enchantment/on_random_loot.json
-6777b6b9ca3850d00c80ddea89707d438af0c2d8 data/minecraft/tags/enchantment/tradeable.json
-4a8fbb3ecf41e7cc4b0c844f18ad17cd3153d121 data/minecraft/tags/enchantment/trades/snow_common.json
-0f6a1b367bbaaf7e043297daa2ec74b1f235fc6c data/minecraft/tags/enchantment/trades/taiga_special.json
-0f6a1b367bbaaf7e043297daa2ec74b1f235fc6c data/minecraft/tags/enchantment/treasure.json

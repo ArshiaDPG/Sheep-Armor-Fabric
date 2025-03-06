@@ -81,5 +81,4 @@ public class AWBiomeTagProvider extends FabricTagProvider<Biome> {
                 .addOptional(Identifier.of("limbo", "isolation"))
         ;
     }
-
 }

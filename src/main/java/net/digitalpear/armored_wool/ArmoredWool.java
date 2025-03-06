@@ -1,30 +1,17 @@
 package net.digitalpear.armored_wool;
 
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
-import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import net.digitalpear.armored_wool.common.entity.AWRegistryKeys;
 import net.digitalpear.armored_wool.common.entity.SheepVariant;
-import net.digitalpear.armored_wool.init.AWData;
-import net.digitalpear.armored_wool.init.AWEnchantments;
-import net.digitalpear.armored_wool.init.AWItems;
-import net.digitalpear.armored_wool.init.SheepVariants;
+import net.digitalpear.armored_wool.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
-import net.minecraft.client.render.entity.state.LivingEntityRenderState;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Map;
 
 public class ArmoredWool implements ModInitializer {
 
@@ -90,21 +77,17 @@ public class ArmoredWool implements ModInitializer {
             -Renamed mod to "Armored Wool".
             -Fixed cactus armor item texture being 17x17 instead of 16x16.
             -Sheep armor compatibility is now determined using an entity tag.
+
+        UPDATE 2 CHANGELOG:
+            -Ported to 1.21.5.
+            -Removed sheep armor entirely.
+            -All texture fields have been moved to the "assets" field.
+            -It is now necessary to add the ".png" file extension to the texture paths.
      */
 
-    /*
-        Colors associated with each enchantment.
-        Guide for compat with mods like Colorful Books.
-     */
-    private static final Map<RegistryKey<Enchantment>, Item> enchantDyes = Map.ofEntries(
-            Map.entry(AWEnchantments.TRIMMING, Items.GREEN_DYE),
-            Map.entry(AWEnchantments.WOOLSPLOSION, Items.ORANGE_DYE)
-    );
 
     @Override
     public void onInitialize() {
-        AutoConfig.register(ArmoredWoolConfig.class, PartitioningSerializer.wrap(GsonConfigSerializer::new));
-
         TrackedDataHandlerRegistry.register(SHEEP_VARIANT);
 
         DynamicRegistries.registerSynced(AWRegistryKeys.SHEEP_VARIANT, SheepVariant.CODEC);
@@ -112,16 +95,7 @@ public class ArmoredWool implements ModInitializer {
         AWRegistryKeys.init();
         AWItems.init();
         AWData.init();
-        AWEnchantments.init();
+        AWDataComponentTypes.init();
         SheepVariants.init();
-    }
-
-
-    public static String hasValidName(LivingEntityRenderState state){
-        ArmoredWoolConfig config = AutoConfig.getConfigHolder(ArmoredWoolConfig.class).getConfig();
-        if (state.customName != null && config.clientConfig.easterEggVariants.containsKey(state.customName.getString())){
-            return config.clientConfig.easterEggVariants.get(state.customName.getString());
-        }
-        return null;
     }
 }
